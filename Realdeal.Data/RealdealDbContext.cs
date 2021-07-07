@@ -11,6 +11,15 @@ namespace Realdeal.Data
         {
         }
 
+
+        public DbSet<Advert> Adverts { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<ОbservedAdvert> ObservedAdverts { get; set; }
+
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -19,10 +28,11 @@ namespace Realdeal.Data
             }
             base.OnConfiguring(optionsBuilder);
         }
-        protected override void OnModelCreating(ModelBuilder mb)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ОbservedAdvert>().HasKey(x => new { x.AdvertId, x.UserId });
 
-            base.OnModelCreating(mb);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
