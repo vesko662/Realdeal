@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,9 @@ namespace Realdeal.Data.Models
         public string CreatorId { get; set; }
         public  ApplicationUser Creator { get; set; }
 
-        public string CommenterId { get; set; }
-        public ApplicationUser Commenter { get; set; }
+
+        public string CommentedId { get; set; }
+        public ApplicationUser Commented { get; set; }
 
         [Required]
         public DateTime CreatedOn { get; private set; }

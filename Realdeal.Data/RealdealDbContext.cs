@@ -32,6 +32,7 @@ namespace Realdeal.Data
         {
             modelBuilder.Entity<ОbservedAdvert>().HasKey(x => new { x.AdvertId, x.UserId });
 
+
             base.OnModelCreating(modelBuilder);
         }
     }

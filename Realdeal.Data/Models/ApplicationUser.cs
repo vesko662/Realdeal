@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Realdeal.Data.Models
 {
@@ -31,7 +32,9 @@ namespace Realdeal.Data.Models
 
         public ICollection<Advert> Adverts { get; set; }
 
+        [InverseProperty("Commented")]
         public ICollection<Comment> Comments { get; set; }
+
 
         public ICollection<ОbservedAdvert> ОbservedAdverts { get; set; }
 

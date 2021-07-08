@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Realdeal.Data.Models
 {
@@ -45,7 +46,9 @@ namespace Realdeal.Data.Models
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
 
+
         public ICollection<Message> Messages { get; set; }
+
 
         public ICollection<ОbservedAdvert> ОbservedAdverts { get; set; }
 
