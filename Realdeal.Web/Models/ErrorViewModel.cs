@@ -1,6 +1,6 @@
 using System;
 
-namespace Realdeal.Models
+namespace Realdeal.Web.Models
 {
     public class ErrorViewModel
     {

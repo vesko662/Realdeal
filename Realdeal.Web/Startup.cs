@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Realdeal.Data;
 using Realdeal.Data.Models;
 
-namespace Realdeal
+namespace Realdeal.Web
 {
     public class Startup
     {
@@ -19,7 +19,6 @@ namespace Realdeal
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<RealdealDbContext>(options =>
@@ -28,13 +27,16 @@ namespace Realdeal
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddEntityFrameworkStores<RealdealDbContext>();
+            services.AddDefaultIdentity<ApplicationUser>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            })
+            .AddEntityFrameworkStores<RealdealDbContext>();
 
             services.AddControllersWithViews();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -45,7 +47,6 @@ namespace Realdeal
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();

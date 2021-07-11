@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Realdeal.Models;
+using Realdeal.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Realdeal.Controllers
+namespace Realdeal.Web.Controllers
 {
     public class HomeController : Controller
     {
