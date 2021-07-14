@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,16 +12,15 @@ namespace Realdeal.Web
     public class Startup
     {
         public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+          => Configuration = configuration;
+
 
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<RealdealDbContext>(options =>
-                options.UseSqlServer(
+            services.AddDbContext<RealdealDbContext>(options
+               => options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
@@ -49,15 +47,20 @@ namespace Realdeal.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
-            app.UseRouting();
+            app
+                .UseHttpsRedirection()
+                .UseStaticFiles()
+                .UseRouting()
+                .UseAuthentication();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app
+                .UseAuthentication()
+                .UseAuthorization();
+
+            app.UseEndpoints(endpoints
+            =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
