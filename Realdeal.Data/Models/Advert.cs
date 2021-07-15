@@ -28,9 +28,6 @@ namespace Realdeal.Data.Models
         public string Description { get; set; }
 
         [Required]
-        public string Number { get; set; }
-
-        [Required]
         public DateTime CreatedOn { get; set; }
 
         [Required]
@@ -40,7 +37,13 @@ namespace Realdeal.Data.Models
         public bool IsDeleted { get; set; }
 
         [Required]
+        public decimal Price { get; set; }
+
+        [Required]
         public bool IsАrchived { get; set; }
+
+        public string CategoryId { get; set; }
+        public Category Category { get; set; }
 
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
