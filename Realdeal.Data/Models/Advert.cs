@@ -42,8 +42,8 @@ namespace Realdeal.Data.Models
         [Required]
         public bool IsАrchived { get; set; }
 
-        public string CategoryId { get; set; }
-        public Category Category { get; set; }
+        public string SubCategoryId { get; set; }
+        public SubCategory SubCategory { get; set; }
 
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }

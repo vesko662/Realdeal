@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Realdeal.Data.Models
 {
-    public class Category
+    public class SubCategory
     {
-        public Category()
+        public SubCategory()
         {
             this.Id = Guid.NewGuid().ToString();
             this.Adverts = new HashSet<Advert>();
@@ -23,15 +23,19 @@ namespace Realdeal.Data.Models
         [MaxLength(50)]
         public string Name { get; set; }
 
-        public ICollection<Advert> Adverts { get; set; }
-
         [Required]
         public DateTime CreatedOn { get;  set; }
 
         [Required]
-        public bool IsDeleted { get; }
+        public bool IsDeleted { get; set; }
 
         [Required]
         public DateTime ModifiedOn { get;  set; }
+
+        public string MainCategoryId { get; set; }
+
+        public  MainCategory MainCategory { get; set; }
+
+        public ICollection<Advert> Adverts { get; set; }
     }
 }

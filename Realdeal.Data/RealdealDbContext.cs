@@ -13,11 +13,12 @@ namespace Realdeal.Data
 
 
         public DbSet<Advert> Adverts { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<ОbservedAdvert> ObservedAdverts { get; set; }
-
+        public DbSet<MainCategory> MainCategories { get; set; }
+        
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

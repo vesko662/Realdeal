@@ -16,8 +16,10 @@
                     <div class="form-group">
                         <label asp-for="CategoryId">Example select</label>
                         <select asp-for="CategoryId" class="form-select js-example-basic-single">
-                            <option value="AL">Alabama</option>
-                            <option value="WY">Wyoming</option>
+                            <optgroup label="US State">
+                                <option value="AK">Alaska</option>
+                                <option value="HI">Hawaii</option>
+                            </optgroup>
                         </select>
                     </div>
                 </form>
