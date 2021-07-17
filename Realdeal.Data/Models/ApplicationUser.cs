@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static Realdeal.Data.DataConstants;
 
 namespace Realdeal.Data.Models
 {
@@ -21,13 +22,11 @@ namespace Realdeal.Data.Models
         public string ProfilePhotoUrl { get; set; }
 
         [Required]
-        [MinLength(3)]
-        [MaxLength(20)]
+        [MaxLength(userDefaultMaxLenght)]
         public string Firstname { get; set; }
 
         [Required]
-        [MinLength(3)]
-        [MaxLength(20)]
+        [MaxLength(userDefaultMaxLenght)]
         public string Lastname { get; set; }
 
         public ICollection<Advert> Adverts { get; set; }

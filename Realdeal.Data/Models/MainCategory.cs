@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using static Realdeal.Data.DataConstants;
 
 namespace Realdeal.Data.Models
 {
@@ -17,8 +18,7 @@ namespace Realdeal.Data.Models
         public string Id { get; set; }
 
         [Required]
-        [MinLength(3)]
-        [MaxLength(50)]
+        [MaxLength(categoryNameMaxLenght)]
         public string Name { get; set; }
 
         [Required]
