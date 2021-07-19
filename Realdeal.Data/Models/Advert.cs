@@ -41,6 +41,8 @@ namespace Realdeal.Data.Models
         public decimal Price { get; set; }
 
         [Required]
+        public string ImgUrl { get; set; }
+        [Required]
         public bool IsАrchived { get; set; }
 
         public string SubCategoryId { get; set; }

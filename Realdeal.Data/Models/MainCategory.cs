@@ -12,6 +12,9 @@ namespace Realdeal.Data.Models
         {
             this.Id = Guid.NewGuid().ToString();
             this.SubCategories = new HashSet<SubCategory>();
+            this.CreatedOn = DateTime.UtcNow;
+            this.IsDeleted = false;
+            this.ModifiedOn = DateTime.UtcNow;
         }
 
         [Key]

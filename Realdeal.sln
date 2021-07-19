@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realdeal.Web", "Realdeal.Web\Realdeal.Web.csproj", "{C1DD6E32-C5D2-4CB5-8B87-D1847A9B8BFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Realdeal.Web", "Realdeal.Web\Realdeal.Web.csproj", "{C1DD6E32-C5D2-4CB5-8B87-D1847A9B8BFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realdeal.Data", "Realdeal.Data\Realdeal.Data.csproj", "{371888F6-9D94-45B1-81FB-16444FC154A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Realdeal.Data", "Realdeal.Data\Realdeal.Data.csproj", "{371888F6-9D94-45B1-81FB-16444FC154A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realdeal.Service", "Realdeal.Service\Realdeal.Service.csproj", "{BEB92B9F-FF7E-44C1-9C6E-36BC2E116383}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{371888F6-9D94-45B1-81FB-16444FC154A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{371888F6-9D94-45B1-81FB-16444FC154A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{371888F6-9D94-45B1-81FB-16444FC154A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEB92B9F-FF7E-44C1-9C6E-36BC2E116383}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEB92B9F-FF7E-44C1-9C6E-36BC2E116383}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEB92B9F-FF7E-44C1-9C6E-36BC2E116383}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEB92B9F-FF7E-44C1-9C6E-36BC2E116383}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

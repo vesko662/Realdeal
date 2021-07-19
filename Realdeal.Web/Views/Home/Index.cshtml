@@ -1,7 +1,12 @@
-﻿@{
+﻿@using System;
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <p> <span class="fw-bold">Here something</span></p>
+    @for (int i = 0; i < 10; i++)
+    {
+        <p> <span class="fw-bold">@Guid.NewGuid().ToString() - @DateTime.UtcNow</span></p>
+    }
+
 </div>
