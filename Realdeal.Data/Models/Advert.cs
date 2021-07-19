@@ -25,6 +25,7 @@ namespace Realdeal.Data.Models
         public string Name { get; set; }
 
         [Required]
+        [MaxLength(advertDescriptionMaxLenght)]
         public string Description { get; set; }
 
         [Required]
