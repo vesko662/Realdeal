@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Realdeal.Data;
 using Realdeal.Data.Models;
 using Realdeal.Models.Advert;
+using Realdeal.Service.Advert;
+using Realdeal.Service.Category;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -11,16 +12,18 @@ namespace Realdeal.Web.Controllers
 {
     public class AdvertController : Controller
     {
-        private readonly RealdealDbContext context;
+        private readonly IAdvertService advertService;
+        private readonly ICategoryService categoryService;
 
-        public AdvertController(RealdealDbContext context)
+        public AdvertController(IAdvertService advertService, ICategoryService categoryService)
         {
-            this.context = context;
+            this.advertService = advertService;
+            this.categoryService = categoryService;
         }
 
         [Authorize]
         public IActionResult Create()
-        => View(new AdvertFormModel { Categories = GetAllCategories() });
+        => View(new AdvertFormModel { Categories = categoryService.GetAllCategories() });
 
         [HttpPost]
         [Authorize]
@@ -28,44 +31,21 @@ namespace Realdeal.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                advert.Categories = this.GetAllCategories();
+                advert.Categories = categoryService.GetAllCategories();
 
                 return View(advert);
             }
 
-            if (!this.context.SubCategories.Any(c => c.Id == advert.CategoryId))
+            if (!categoryService.DoesCategoryExist(advert.CategoryId))
             {
                 this.ModelState.AddModelError(nameof(advert.CategoryId), "Category does not exist.");
             }
 
+            advertService.CreateAdvert(advert, this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-
-            var carData = new Advert
-            {
-                Name = advert.Name,
-                Description = advert.Description,
-                SubCategoryId = advert.CategoryId,
-                ImgUrl = advert.ImgUrl,
-                Price = advert.Price,
-                UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value
-            };
 
             return RedirectToAction("Index", "Home");
         }
 
-        private Dictionary<string, IEnumerable<AdvertCategoryViewModel>> GetAllCategories()
-        {
-            return context.MainCategories
-                .Select(s => new
-                {
-                    Name = s.Name,
-                    SubCategories = s.SubCategories.Select(c => new AdvertCategoryViewModel
-                    {
-                        Id = c.Id,
-                        Name = c.Name
-                    })
-                })
-                .ToDictionary(x => x.Name, s => s.SubCategories);
-        }
     }
 }

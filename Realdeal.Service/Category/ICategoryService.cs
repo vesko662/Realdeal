@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Realdeal.Models.Advert;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Realdeal.Service.Category
 {
-    class ICategoryService
+    public interface ICategoryService
     {
+        Dictionary<string, IEnumerable<AdvertCategoryViewModel>> GetAllCategories();
+
+        bool DoesCategoryExist(string categoryId);
     }
 }

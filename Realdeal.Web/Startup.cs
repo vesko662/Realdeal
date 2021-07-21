@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Realdeal.Data;
 using Realdeal.Data.Models;
+using Realdeal.Service.Advert;
+using Realdeal.Service.Category;
 
 namespace Realdeal.Web
 {
@@ -33,6 +35,9 @@ namespace Realdeal.Web
             .AddEntityFrameworkStores<RealdealDbContext>();
 
             services.AddControllersWithViews();
+
+            services.AddTransient<IAdvertService, AdvertService>();
+            services.AddTransient<ICategoryService, CategoryServise>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
