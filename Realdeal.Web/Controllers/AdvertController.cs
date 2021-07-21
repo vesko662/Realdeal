@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Realdeal.Data;
 using Realdeal.Data.Models;
-using Realdeal.Web.Models.Advert;
+using Realdeal.Models.Advert;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -49,11 +49,6 @@ namespace Realdeal.Web.Controllers
                 Price = advert.Price,
                 UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value
             };
-
-
-            //this.data.Cars.Add(carData);
-            //this.data.SaveChanges();
-
 
             return RedirectToAction("Index", "Home");
         }

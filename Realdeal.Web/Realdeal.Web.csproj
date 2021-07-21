@@ -21,6 +21,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Realdeal.Data\Realdeal.Data.csproj" />
+    <ProjectReference Include="..\Realdeal.Models\Realdeal.Models.csproj" />
+    <ProjectReference Include="..\Realdeal.Service\Realdeal.Service.csproj" />
   </ItemGroup>
 
 </Project>

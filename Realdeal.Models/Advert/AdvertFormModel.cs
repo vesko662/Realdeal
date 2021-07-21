@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using static Realdeal.Data.DataConstants;
 
-namespace Realdeal.Web.Models.Advert
+namespace Realdeal.Models.Advert
 {
     public class AdvertFormModel
     {
