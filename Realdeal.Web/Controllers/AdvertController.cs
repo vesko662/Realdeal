@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Realdeal.Data.Models;
 using Realdeal.Models.Advert;
 using Realdeal.Service.Advert;
 using Realdeal.Service.Category;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 
 namespace Realdeal.Web.Controllers
@@ -45,6 +42,13 @@ namespace Realdeal.Web.Controllers
 
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult All()
+        {
+
+
+            return View();
         }
 
     }

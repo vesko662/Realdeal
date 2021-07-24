@@ -1,1 +1,29 @@
-﻿
+﻿.card {
+    border-radius: 20px;
+    transition: transform .3s;
+}
+
+.card:hover{
+    transform:translateY(-15px);
+    transition:transform .3s;
+}
+
+.text1{
+    font-size: 13px;
+}
+
+.info{
+    line-height: 17px;
+}
+
+.cost span {
+    color: #593196;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.shoe {
+    background-color: #593196;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
