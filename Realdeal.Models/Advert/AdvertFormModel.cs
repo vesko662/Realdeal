@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using static Realdeal.Data.DataConstants;
+using Microsoft.AspNetCore.Http;
 
 namespace Realdeal.Models.Advert
 {
@@ -19,9 +20,8 @@ namespace Realdeal.Models.Advert
         public string CategoryId { get; set; }
 
         [Required]
-        [Url]
-        [Display(Name = "Image URL")]
-        public string ImgUrl { get; set; }
+        [Display(Name = "Images")]
+        public IEnumerable<IFormFile> Images{ get; set; }
 
         [Required]
         [Range(typeof(decimal), advertPriceMinValue, advertPriceMaxValue, ErrorMessage = "The advert price is invalid")]

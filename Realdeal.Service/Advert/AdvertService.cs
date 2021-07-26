@@ -20,7 +20,6 @@ namespace Realdeal.Service.Advert
                 Name = advertModel.Name,
                 Description = advertModel.Description,
                 SubCategoryId = advertModel.CategoryId,
-                ImgUrl = advertModel.ImgUrl,
                 Price = advertModel.Price,
                 UserId = userId
             };
