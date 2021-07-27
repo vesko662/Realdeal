@@ -24,7 +24,7 @@ namespace Realdeal.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Create([FromForm] AdvertFormModel advert)
+        public IActionResult Create(AdvertFormModel advert)
         {
             if (!ModelState.IsValid)
             {
@@ -32,7 +32,6 @@ namespace Realdeal.Web.Controllers
 
                 return View(advert);
             }
-
 
             if (!categoryService.DoesCategoryExist(advert.CategoryId))
             {
