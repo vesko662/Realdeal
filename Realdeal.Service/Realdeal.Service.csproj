@@ -13,4 +13,8 @@
     <Folder Include="User\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.15.2" />
+  </ItemGroup>
+
 </Project>

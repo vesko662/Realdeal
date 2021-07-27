@@ -9,6 +9,7 @@ using Realdeal.Data;
 using Realdeal.Data.Models;
 using Realdeal.Service.Advert;
 using Realdeal.Service.Category;
+using Realdeal.Service.CloudinaryCloud;
 
 namespace Realdeal.Web
 {
@@ -48,6 +49,9 @@ namespace Realdeal.Web
             Cloudinary cloudinary = new Cloudinary(cloudinaryCredentials);
 
             services.AddSingleton(cloudinary);
+
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
