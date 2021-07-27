@@ -1,3 +1,4 @@
+using CloudinaryDotNet;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,15 @@ namespace Realdeal.Web
 
             services.AddTransient<IAdvertService, AdvertService>();
             services.AddTransient<ICategoryService, CategoryServise>();
+
+            Account cloudinaryCredentials = new Account(
+                this.Configuration["Cloudinary:CloudName"],
+                this.Configuration["Cloudinary:ApiKey"],
+                this.Configuration["Cloudinary:ApiSecret"]);
+
+            Cloudinary cloudinary = new Cloudinary(cloudinaryCredentials);
+
+            services.AddSingleton(cloudinary);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
