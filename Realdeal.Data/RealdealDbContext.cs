@@ -18,7 +18,7 @@ namespace Realdeal.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<ОbservedAdvert> ObservedAdverts { get; set; }
         public DbSet<MainCategory> MainCategories { get; set; }
-        
+        public DbSet<AdvertImage> AdvertImages { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

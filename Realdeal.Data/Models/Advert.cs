@@ -15,7 +15,8 @@ namespace Realdeal.Data.Models
             this.IsDeleted = false;
             this.IsАrchived = false;
             this.Messages = new HashSet<Message>();
-
+            this.ОbservedAdverts = new HashSet<ОbservedAdvert>();
+            this.AdvertImages = new HashSet<AdvertImage>();
         }
         [Key]
         public string Id { get; set; }
@@ -41,8 +42,6 @@ namespace Realdeal.Data.Models
         public decimal Price { get; set; }
 
         [Required]
-        public string ImgUrl { get; set; }
-        [Required]
         public bool IsАrchived { get; set; }
 
         public string SubCategoryId { get; set; }
@@ -57,5 +56,6 @@ namespace Realdeal.Data.Models
 
         public ICollection<ОbservedAdvert> ОbservedAdverts { get; set; }
 
+        public ICollection<AdvertImage> AdvertImages { get; set; }
     }
 }
