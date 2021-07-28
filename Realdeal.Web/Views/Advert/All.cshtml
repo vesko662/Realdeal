@@ -1,94 +1,30 @@
-﻿<div class="mt-4 mb-5 container">
+﻿@model List<AdvertShowingViewModel>
+
+<div class="mt-4 mb-5 container">
     <div class="row">
+        @foreach (var advert in Model)
+        {
+            <a asp-controller="Advert" asp-action="Detail" asp-route-advertId="@advert.Id">
+                <div class="col-md-4 mt-2">
+                    <div class="card mt-3">
+                        <div class="product align-items-center p-2 text-center">
+                            <img src="@advert.ImageURL" alt="@advert.Name" class="img-fluid" />
+                            <h5 class="mt-2">@advert.Name</h5>
+                            <div class="mt-2 info">
+                                <span class="text1 d-block">@advert.Description</span>
+                            </div>
+                            <div class="cost mt-3 text-dark">
+                                <span>@advert.Price $</span>
+                            </div>
+                        </div>
+                        <div class="p-3  text-white text-center shoe">
+                            <span class="text-uppercase">More info</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
 
-        <div class="col-md-4 mt-2">
-            <div class="card mt-3">
-                <div class="product align-items-center p-2 text-center">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlu-5sicFuHii8BAVf-lwWzS0D4bOJ00mHAQ&usqp=CAU" alt="Alternate Text" class="img-fluid" />
-                    <h5 class="mt-2">Advert</h5>
-                    <div class="mt-2 info">
-                        <span class="text1 d-block">lorem ipsum dolor</span>
-                    </div>
-                    <div class="cost mt-3 text-dark">
-                        <span>43534</span>
-                    </div>
-                </div>
-                <div class="p-3  text-white text-center shoe">
-                    <span class="text-uppercase">More info</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 mt-2">
-            <div class="card mt-3">
-                <div class="product align-items-center p-2 text-center">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlu-5sicFuHii8BAVf-lwWzS0D4bOJ00mHAQ&usqp=CAU" alt="Alternate Text" class="img-fluid" />
-                    <h5 class="mt-2">Advert</h5>
-                    <div class="mt-2 info">
-                        <span class="text1 d-block">lorem ipsum dolor</span>
-                    </div>
-                    <div class="cost mt-3 text-dark">
-                        <span>43534</span>
-                    </div>
-                </div>
-                <div class="p-3  text-white text-center shoe">
-                    <span class="text-uppercase">More info</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 mt-2">
-            <div class="card mt-3">
-                <div class="product align-items-center p-2 text-center">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlu-5sicFuHii8BAVf-lwWzS0D4bOJ00mHAQ&usqp=CAU" alt="Alternate Text" class="img-fluid" />
-                    <h5 class="mt-2">Advert</h5>
-                    <div class="mt-2 info">
-                        <span class="text1 d-block">lorem ipsum dolor</span>
-                    </div>
-                    <div class="cost mt-3 text-dark">
-                        <span>43534</span>
-                    </div>
-                </div>
-                <div class="p-3  text-white text-center shoe">
-                    <span class="text-uppercase">More info</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 mt-2">
-            <div class="card mt-3">
-                <div class="product align-items-center p-2 text-center">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlu-5sicFuHii8BAVf-lwWzS0D4bOJ00mHAQ&usqp=CAU" alt="Alternate Text" class="img-fluid" />
-                    <h5 class="mt-2">Advert</h5>
-                    <div class="mt-2 info">
-                        <span class="text1 d-block">lorem ipsum dolor</span>
-                    </div>
-                    <div class="cost mt-3 text-dark">
-                        <span>43534</span>
-                    </div>
-                </div>
-                <div class="p-3  text-white text-center shoe">
-                    <span class="text-uppercase">More info</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 mt-2">
-            <div class="card mt-3">
-                <div class="product align-items-center p-2 text-center">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlu-5sicFuHii8BAVf-lwWzS0D4bOJ00mHAQ&usqp=CAU" alt="Alternate Text" class="img-fluid" />
-                    <h5 class="mt-2">Advert</h5>
-                    <div class="mt-2 info">
-                        <span class="text1 d-block">lorem ipsum dolor</span>
-                    </div>
-                    <div class="cost mt-3 text-dark">
-                        <span>43534</span>
-                    </div>
-                </div>
-                <div class="p-3  text-white text-center shoe">
-                    <span class="text-uppercase">More info</span>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
+

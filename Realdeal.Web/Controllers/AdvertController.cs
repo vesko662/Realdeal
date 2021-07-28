@@ -46,7 +46,13 @@ namespace Realdeal.Web.Controllers
 
         public IActionResult All()
         {
+            var adverst=advertService
 
+            return View();
+        }
+
+        public IActionResult Detail(string advertId)
+        {
 
             return View();
         }

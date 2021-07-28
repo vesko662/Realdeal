@@ -2,6 +2,7 @@
 using Realdeal.Data.Models;
 using Realdeal.Models.Advert;
 using Realdeal.Service.CloudinaryCloud;
+using System.Collections.Generic;
 
 namespace Realdeal.Service.Advert
 {
@@ -27,15 +28,18 @@ namespace Realdeal.Service.Advert
                 UserId = userId
             };
 
-            foreach (var item in advertModel.Images)
+            foreach (var image in advertModel.Images)
             {
-                var a = cloudinary.UploadPhoto(item, "advertImages");
+                advert.AdvertImages.Add(new AdvertImage() { ImageUrl = cloudinary.UploadPhoto(image, "advertImages") });
             }
-
-            #warning Add photo to db
 
             context.Adverts.Add(advert);
             context.SaveChanges();
+        }
+
+        public IEnumerable<AdvertShowingViewModel> GetAllAdvers()
+        {
+            return null;
         }
     }
 }
