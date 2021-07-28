@@ -90,11 +90,12 @@ namespace Realdeal.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { 
-                    UserName = Input.Username, 
-                    Email = Input.Email ,
-                    Firstname=Input.FirsName,
-                    Lastname=Input.Lastname
+                var user = new ApplicationUser {
+                    UserName = Input.Username,
+                    Email = Input.Email,
+                    Firstname = Input.FirsName,
+                    Lastname = Input.Lastname,
+                    ProfilePhotoUrl = "https://i.imgur.com/HYIVDH0.jpg",
                 };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
