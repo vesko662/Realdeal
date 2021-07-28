@@ -3,6 +3,7 @@ using Realdeal.Data.Models;
 using Realdeal.Models.Advert;
 using Realdeal.Service.CloudinaryCloud;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Realdeal.Service.Advert
 {
@@ -39,7 +40,16 @@ namespace Realdeal.Service.Advert
 
         public IEnumerable<AdvertShowingViewModel> GetAllAdvers()
         {
-            return null;
+            return context.Adverts
+                .Select(x => new AdvertShowingViewModel
+                {
+                    Name = x.Name,
+                    Id = x.Id,
+                    Description = x.Description.Substring(0,20) +" "+"....",
+                    ImageURL = x.AdvertImages.FirstOrDefault().ImageUrl,
+                    Price = x.Price
+                })
+                .ToList();
         }
     }
 }
