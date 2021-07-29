@@ -1,10 +1,58 @@
-﻿@model List<AdvertShowingViewModel>
+﻿@model AllAdvertsQueryModel
 
+
+<form method="get">
+    <div class="row">
+        <div class="form-group col-md-6 p-0">
+            <div class="form-group">
+                <label asp-for="Search">Search</label>
+                <input asp-for="Search" class="form-control" placeholder="What are you searching for?">
+            </div>
+        </div>
+        <div class="form-group col-md-2 p-0">
+            <div class="form-group">
+                <label asp-for="CategoryId">Category</label>
+                <select asp-for="CategoryId" class="form-control">
+                    <option value="" selected>All categories</option>
+                    @foreach (var mainCat in Model.Categories)
+                    {
+                        <optgroup label="@mainCat.Key">
+                            @foreach (var category in mainCat.Value)
+                            {
+                                <option value="@category.Id">@category.Name</option>
+                            }
+                        </optgroup>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-2 p-0">
+            <div class="form-group">
+                <label asp-for="AdvertSorting">Sort</label>
+                <select asp-for="AdvertSorting" class="form-control">
+                    <option value="" selected>None</option>
+                    <option value="1">Name ascending</option>
+                    <option value="2">Name descending</option>
+                    <option value="3">Priece ascending</option>
+                    <option value="4">Price descending</option>
+                    <option value="5">Date Created</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-2 p-0">
+            <div class="form-group">
+                <label></label>
+                <button class="btn btn-primary form-control">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
 
 
 <div class="mt-4 mb-5 container">
     <div class="row justify-content-center flex">
-        @foreach (var advert in Model)
+        @foreach (var advert in Model.Advers)
         {
             <div class="col-md-4 mt-2">
                 <a class="text-decoration-none" asp-controller="Advert" asp-action="Detail" asp-route-advertId="@advert.Id">
@@ -13,7 +61,7 @@
                             <img src="@advert.ImageURL" alt="@advert.Name" class="img-fluid" />
                             <h5 class="mt-2">@advert.Name</h5>
                             <div class="mt-2 info">
-                                <span class="text1 d-block">@advert.Description</span>
+                                <span class="text1 d-block">@(advert.Description.Length > 20 ? advert.Description.Substring(0,20) + " ..." : advert.Description )</span>
                             </div>
                             <div class="cost mt-3 text-dark">
                                 <span>@advert.Price $</span>

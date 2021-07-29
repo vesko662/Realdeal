@@ -44,9 +44,12 @@ namespace Realdeal.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult All()
+        public IActionResult All([FromQuery] AllAdvertsQueryModel queryAdverts)
         {
-            var adverst = advertService.GetAllAdvers();
+
+            var adverst = advertService.GetAllAdverts(queryAdverts);
+
+            adverst.Categories = categoryService.GetAllCategories();
 
             return View(adverst);
         }
