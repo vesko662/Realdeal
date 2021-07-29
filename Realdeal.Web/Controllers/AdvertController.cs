@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Realdeal.Models.Advert;
 using Realdeal.Service.Advert;
 using Realdeal.Service.Category;
+using System.Collections.Generic;
 using System.Security.Claims;
 
 namespace Realdeal.Web.Controllers
@@ -33,15 +35,40 @@ namespace Realdeal.Web.Controllers
                 return View(advert);
             }
 
+            foreach (var image in advert.Images)
+            {
+                if (image.Length > 3 * 1024 * 1024)
+                {
+                    this.ModelState.AddModelError(nameof(advert.Images), "Maximum image size is 3 mb.");
+
+                    advert.Categories = categoryService.GetAllCategories();
+
+                    return View(advert);
+                }
+            }
+
+            if (advert.Images.Count > 5)
+            {
+                this.ModelState.AddModelError(nameof(advert.Images), "Images can not be more than 5.");
+
+                advert.Categories = categoryService.GetAllCategories();
+
+                return View(advert);
+            }
+
             if (!categoryService.DoesCategoryExist(advert.CategoryId))
             {
                 this.ModelState.AddModelError(nameof(advert.CategoryId), "Category does not exist.");
+
+                advert.Categories = categoryService.GetAllCategories();
+
+                return View(advert);
             }
 
             advertService.CreateAdvert(advert, this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(All));
         }
 
         public IActionResult All([FromQuery] AllAdvertsQueryModel queryAdverts)
@@ -56,8 +83,7 @@ namespace Realdeal.Web.Controllers
 
         public IActionResult Detail(string advertId)
         {
-
-            return View();
+            return View(advertService.GetAdvertById(advertId));
         }
 
     }

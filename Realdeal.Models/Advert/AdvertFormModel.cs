@@ -21,7 +21,7 @@ namespace Realdeal.Models.Advert
 
         [Required]
         [Display(Name = "Images")]
-        public IEnumerable<IFormFile> Images{ get; set; }
+        public List<IFormFile> Images{ get; set; }
 
         [Required]
         [Range(typeof(decimal), advertPriceMinValue, advertPriceMaxValue, ErrorMessage = "The advert price is invalid")]

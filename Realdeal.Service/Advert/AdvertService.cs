@@ -1,10 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Realdeal.Data;
+﻿using Realdeal.Data;
 using Realdeal.Data.Models;
 using Realdeal.Models.Advert;
 using Realdeal.Models.Advert.Enum;
 using Realdeal.Service.CloudinaryCloud;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Realdeal.Service.Advert
@@ -42,7 +40,7 @@ namespace Realdeal.Service.Advert
 
         public AllAdvertsQueryModel GetAllAdverts(AllAdvertsQueryModel queryAdverts)
         {
-            var adverQuery = context.Adverts.AsQueryable();
+            var adverQuery = context.Adverts.Where(x=>x.IsDeleted==false && x.IsАrchived==false).AsQueryable();
 
             if (!string.IsNullOrEmpty(queryAdverts.Search))
             {
@@ -75,6 +73,19 @@ namespace Realdeal.Service.Advert
             }).ToList();
 
             return queryAdverts;
+        }
+
+        public AdvertDetailViewModel GetAdvertById(string advertId)
+        {
+            return context.Adverts.Where(x=>x.Id==advertId).Select(s=>new AdvertDetailViewModel
+            {
+                Name=s.Name,
+                CreatedOn=s.CreatedOn,
+                Description=s.Description,
+                Id=advertId,
+                Images=s.AdvertImages.Select(i=>i.ImageUrl).ToList(),
+                Price=s.Price,
+            }).FirstOrDefault();
         }
     }
 }
