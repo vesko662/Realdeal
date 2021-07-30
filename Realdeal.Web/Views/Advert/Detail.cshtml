@@ -1,10 +1,11 @@
 ﻿@model AdvertDetailViewModel
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        @foreach (var item in Model.Images)
+
+<div id="carouselExampleControls" class="carousel slide"  data-bs-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+        @foreach (var image in Model.Images)
         {
-            <div class="carousel-item active">
-                <img src="@item" class="d-block w-100" alt="...">
+            <div class="carousel-item @(Model.Images.First() == image ? "active":" ")">
+                <img src="@image" class="d-block w-100" alt="...">
             </div>
         }
     </div>

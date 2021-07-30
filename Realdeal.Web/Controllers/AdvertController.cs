@@ -83,7 +83,9 @@ namespace Realdeal.Web.Controllers
 
         public IActionResult Detail(string advertId)
         {
-            return View(advertService.GetAdvertById(advertId));
+            var advert = advertService.GetAdvertById(advertId);
+
+            return View(advert);
         }
 
     }

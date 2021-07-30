@@ -37,7 +37,7 @@ namespace Realdeal.Service.CloudinaryCloud
                 uploadResult = this.cloudinary.Upload(uploadParams);
             }
 
-            return uploadResult?.SecureUrl.AbsoluteUri;
+            return uploadResult?.SecureUri.AbsoluteUri;
         }
     }
 }
