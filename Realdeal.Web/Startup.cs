@@ -10,6 +10,7 @@ using Realdeal.Data.Models;
 using Realdeal.Service.Advert;
 using Realdeal.Service.Category;
 using Realdeal.Service.CloudinaryCloud;
+using Realdeal.Service.User;
 
 namespace Realdeal.Web
 {
@@ -51,6 +52,7 @@ namespace Realdeal.Web
             services.AddSingleton(cloudinary);
 
             services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IUserService, UserService>();
 
         }
 

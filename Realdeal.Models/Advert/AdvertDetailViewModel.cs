@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Realdeal.Models.User;
+using System;
 using System.Collections.Generic;
 
 namespace Realdeal.Models.Advert
@@ -12,11 +13,6 @@ namespace Realdeal.Models.Advert
         public IEnumerable<string> Images { get; set; }
         public DateTime CreatedOn { get; set; }
 
-
-        public string UserFirstname { get; set; }
-        public string UserLastname { get; set; }
-        public string Username { get; set; }
-        public DateTime UserSince { get; set; }
-
+        public UserInformationModel User { get; set; }
     }
 }

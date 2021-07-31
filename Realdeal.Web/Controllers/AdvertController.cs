@@ -65,7 +65,7 @@ namespace Realdeal.Web.Controllers
                 return View(advert);
             }
 
-            advertService.CreateAdvert(advert, this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            advertService.CreateAdvert(advert);
 
 
             return RedirectToAction(nameof(All));

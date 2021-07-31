@@ -15,6 +15,7 @@ namespace Realdeal.Data.Models
             this.Adverts = new HashSet<Advert>();
             this.Comments = new HashSet<Comment>();
             this.ОbservedAdverts = new HashSet<ОbservedAdvert>();
+            this.CreteOn = DateTime.UtcNow;
         }
 
         public string ProfilePhotoUrl { get; set; }
@@ -25,7 +26,10 @@ namespace Realdeal.Data.Models
 
         [Required]
         [MaxLength(userDefaultMaxLenght)]
-        public string Lastname { get; set; }
+        public string Lastname { get; set; }]
+
+        [Required]
+        public DateTime CreteOn { get; set; }
 
         public ICollection<Advert> Adverts { get; set; }
 

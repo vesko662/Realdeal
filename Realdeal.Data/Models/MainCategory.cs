@@ -33,7 +33,8 @@ namespace Realdeal.Data.Models
         [Required]
         public DateTime ModifiedOn { get; set; }
 
-
+        [Required]
+        public string CategoryImage { get; set; }
         public ICollection<SubCategory> SubCategories { get; set; }
     }
 }

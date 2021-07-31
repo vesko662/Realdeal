@@ -3,6 +3,7 @@ using Realdeal.Data.Models;
 using Realdeal.Models.Advert;
 using Realdeal.Models.Advert.Enum;
 using Realdeal.Service.CloudinaryCloud;
+using Realdeal.Service.User;
 using System.Linq;
 
 namespace Realdeal.Service.Advert
@@ -11,14 +12,16 @@ namespace Realdeal.Service.Advert
     {
         private readonly RealdealDbContext context;
         private readonly ICloudinaryService cloudinary;
+        private readonly IUserService userService;
 
-        public AdvertService(RealdealDbContext context, ICloudinaryService cloudinary)
+        public AdvertService(RealdealDbContext context, ICloudinaryService cloudinary,IUserService userService)
         {
             this.context = context;
             this.cloudinary = cloudinary;
+            this.userService = userService;
         }
 
-        public void CreateAdvert(AdvertFormModel advertModel, string userId)
+        public void CreateAdvert(AdvertFormModel advertModel)
         {
             var advert = new Data.Models.Advert
             {
@@ -26,7 +29,7 @@ namespace Realdeal.Service.Advert
                 Description = advertModel.Description,
                 SubCategoryId = advertModel.CategoryId,
                 Price = advertModel.Price,
-                UserId = userId
+                UserId = userService.GetUserId(),
             };
 
             foreach (var image in advertModel.Images)
