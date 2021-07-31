@@ -26,7 +26,7 @@ namespace Realdeal.Data.Models
 
         [Required]
         [MaxLength(userDefaultMaxLenght)]
-        public string Lastname { get; set; }]
+        public string Lastname { get; set; }
 
         [Required]
         public DateTime CreteOn { get; set; }

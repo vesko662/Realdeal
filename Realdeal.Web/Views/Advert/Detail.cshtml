@@ -31,7 +31,7 @@
             <div class="mb-3">
                 <h3>@Model.Name</h3>
             </div>
-            <div class="mb-3 mt-3 text-dark" style="font-size:20px">
+            <div class="mb-3 mt-3 text-dark fw-bold" style="font-size:20px">
                 <span>@Model.Price $</span>
             </div>
             <div class="mb-2 mt-3">
@@ -46,9 +46,24 @@
     </div>
     <div class="row mt-4">
         <div class="bg-light offset-md-2 col-md-8 p-2 border border-primary rounded">
-            <img src="@Model.User.UserProfilePictureURL"
-                 alt="Profile Picture" class="img-responsive img-rounded"
-                 style="max-height: 50px; max-width: 50px;">
+            <h4>User</h4>
+            <div class="row">
+                <div class="col-md-1">
+                    <img src="https://i.imgur.com/HYIVDH0.jpg" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;">
+                </div>
+                <div class="col-md-4">
+                    <p class="mb-0 text-dark fw-bold text-break">@Model.User.Firstname @Model.User.Lastname</p>
+                    <p class="m-0 text-dark text-muted text-break">User since  @Model.User.UserSince.ToString("MM/dd/yyyy") </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 p-0">
+                    <a class="btn btn-link link-primary text-decoration-none" asp-controller="Advert" asp-action="User">See all adverts from this user</a>
+                </div>
+                <div class="col-md-2 p-0">
+                    <a class="btn btn-link link-primary text-decoration-none" asp-controller="Messege" asp-action="Send">Send message</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

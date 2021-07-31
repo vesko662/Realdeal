@@ -17,21 +17,22 @@ namespace Realdeal.Service.User
             this.contextAccessor = contextAccessor;
         }
 
-        public string GetUserId()
+        public string GetCurrentUserId()
          => this.contextAccessor
                 .HttpContext.User
                 .FindFirst(ClaimTypes.NameIdentifier)
                 .Value;
 
-        public UserInformationModel GetUserInfo()
-        => context.Users.Where(x=>x.Id== GetUserId()).Select(s=>new UserInformationModel
+        public string GetUserIdByAdvertId(string advertId)
+            => context.Adverts.FirstOrDefault(x => x.Id == advertId).UserId;
+        public UserInformationModel GetUserInfo(string userId)
+        => context.Users.Where(x => x.Id == userId).Select(s => new UserInformationModel
         {
-            Firstname=s.Firstname,
+            Firstname = s.Firstname,
             Lastname = s.Lastname,
             Username = s.UserName,
             UserProfilePictureURL = s.ProfilePhotoUrl,
-            UserSince=s.
-
-        })
+            UserSince = s.CreteOn,
+        }).FirstOrDefault();
     }
 }

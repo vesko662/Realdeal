@@ -29,7 +29,7 @@ namespace Realdeal.Service.Advert
                 Description = advertModel.Description,
                 SubCategoryId = advertModel.CategoryId,
                 Price = advertModel.Price,
-                UserId = userService.GetUserId(),
+                UserId = userService.GetCurrentUserId(),
             };
 
             foreach (var image in advertModel.Images)
@@ -80,14 +80,15 @@ namespace Realdeal.Service.Advert
 
         public AdvertDetailViewModel GetAdvertById(string advertId)
         {
-            return context.Adverts.Where(x=>x.Id==advertId).Select(s=>new AdvertDetailViewModel
+            return context.Adverts.Where(x => x.Id == advertId).Select(s => new AdvertDetailViewModel
             {
-                Name=s.Name,
-                CreatedOn=s.CreatedOn,
-                Description=s.Description,
-                Id=advertId,
-                Images=s.AdvertImages.Select(i=>i.ImageUrl).ToList(),
-                Price=s.Price,
+                Name = s.Name,
+                CreatedOn = s.CreatedOn,
+                Description = s.Description,
+                Id = advertId,
+                Images = s.AdvertImages.Select(i => i.ImageUrl).ToList(),
+                Price = s.Price,
+                User = userService.GetUserInfo(userService.GetUserIdByAdvertId(advertId)),
             }).FirstOrDefault();
         }
     }
