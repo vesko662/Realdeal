@@ -46,7 +46,23 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
-    /* Set the fixed height of the footer here */
     height: 60px;
     border-top: 3px solid #F37A1D;
+}
+.card-img-top {
+    width: 100%;
+    height: 30vh;
+    object-fit: contain;
+}
+.carousel-inner .carousel-item img {
+    min-height: 200px;
+}
+
+@media(max-width:768px) {
+    .carousel .carousel-inner {
+    }
+}
+.carousel-inner > .carousel-item > img {
+    width: 400px;
+    height: 583px;
 }

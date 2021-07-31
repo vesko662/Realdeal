@@ -15,8 +15,6 @@ namespace Realdeal.Data.Models
             this.Adverts = new HashSet<Advert>();
             this.Comments = new HashSet<Comment>();
             this.ОbservedAdverts = new HashSet<ОbservedAdvert>();
-              #warning TODO:
-            // this.ProfilePhotoUrl = deafaultPhotoUrl
         }
 
         public string ProfilePhotoUrl { get; set; }

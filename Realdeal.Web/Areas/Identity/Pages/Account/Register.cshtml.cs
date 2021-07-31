@@ -69,12 +69,12 @@ namespace Realdeal.Web.Areas.Identity.Pages.Account
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
-            [Display(Name = "FirsName")]
+            [Display(Name = "Firs name")]
             public string FirsName { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
-            [Display(Name = "Lastname")]
+            [Display(Name = "Last name")]
             public string Lastname { get; set; }
         }
 
@@ -127,6 +127,10 @@ namespace Realdeal.Web.Areas.Identity.Pages.Account
                 }
                 foreach (var error in result.Errors)
                 {
+                    if (error.Code== "DuplicateUserName")
+                    {
+                        ModelState.AddModelError("Input.Username", error.Description);
+                    }
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }

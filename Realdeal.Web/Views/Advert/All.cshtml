@@ -58,7 +58,7 @@
                 <a class="text-decoration-none" asp-controller="Advert" asp-action="Detail" asp-route-advertId="@advert.Id">
                     <div class="card mt-3">
                         <div class="product align-items-center p-2 text-center">
-                            <img src="@advert.ImageURL" alt="@advert.Name" class="img-fluid" />
+                            <img src="@advert.ImageURL" alt="@advert.Name" class=" card-img-top"/>
                             <h5 class="mt-2">@advert.Name</h5>
                             <div class="mt-2 info">
                                 <span class="text1 d-block">@(advert.Description.Length > 20 ? advert.Description.Substring(0,20) + " ..." : advert.Description )</span>
