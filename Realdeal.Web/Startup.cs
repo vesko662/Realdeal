@@ -1,6 +1,7 @@
 using CloudinaryDotNet;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +36,7 @@ namespace Realdeal.Web
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
             })
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<RealdealDbContext>();
 
             services.AddControllersWithViews();

@@ -34,5 +34,8 @@ namespace Realdeal.Service.User
             UserProfilePictureURL = s.ProfilePhotoUrl,
             UserSince = s.CreteOn,
         }).FirstOrDefault();
+
+        public bool IsUserAdmin()
+        => contextAccessor.HttpContext.User.IsInRole("Administrator");
     }
 }
