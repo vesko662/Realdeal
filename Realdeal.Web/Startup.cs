@@ -70,7 +70,6 @@ namespace Realdeal.Web
                 app.UseHsts();
             }
 
-
             app.UseHttpsRedirection()
                .UseStaticFiles()
                .UseRouting();

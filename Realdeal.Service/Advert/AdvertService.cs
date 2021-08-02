@@ -91,5 +91,12 @@ namespace Realdeal.Service.Advert
                 User = userService.GetUserInfo(userService.GetUserIdByAdvertId(advertId)),
             }).FirstOrDefault();
         }
+
+        public bool DeleteAdvert(string advertId)
+        {
+            var adver = context.Adverts.Find(advertId);
+            adver.IsDeleted = true;
+            return context.SaveChanges() > 0 ? true : false;
+        }
     }
 }

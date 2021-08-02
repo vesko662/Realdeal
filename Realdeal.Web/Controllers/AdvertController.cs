@@ -4,8 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Realdeal.Models.Advert;
 using Realdeal.Service.Advert;
 using Realdeal.Service.Category;
-using System.Collections.Generic;
-using System.Security.Claims;
+using Realdeal.Service.User;
 
 namespace Realdeal.Web.Controllers
 {
@@ -13,11 +12,13 @@ namespace Realdeal.Web.Controllers
     {
         private readonly IAdvertService advertService;
         private readonly ICategoryService categoryService;
+        private readonly IUserService userService;
 
-        public AdvertController(IAdvertService advertService, ICategoryService categoryService)
+        public AdvertController(IAdvertService advertService, ICategoryService categoryService,IUserService userService)
         {
             this.advertService = advertService;
             this.categoryService = categoryService;
+            this.userService = userService;
         }
 
         [Authorize]
@@ -86,6 +87,23 @@ namespace Realdeal.Web.Controllers
             var advert = advertService.GetAdvertById(advertId);
 
             return View(advert);
+        }
+
+        [Authorize]
+        public IActionResult Delete(string advertId)
+        {
+            bool isSuccessful = false;
+           if(userService.IsUserAdmin() || userService.GetCurrentUserId() == userService.GetUserIdByAdvertId(advertId))
+            {
+                isSuccessful= advertService.DeleteAdvert(advertId);
+            }
+
+            if (isSuccessful)
+            {
+              return  RedirectToAction("MyAdverts", "User");
+            }
+#warning i dont know is it working
+            return RedirectToAction("Error","Home");
         }
 
     }
