@@ -41,9 +41,6 @@ namespace Realdeal.Web
 
             services.AddControllersWithViews();
 
-            services.AddTransient<IAdvertService, AdvertService>();
-            services.AddTransient<ICategoryService, CategoryServise>();
-
             Account cloudinaryCredentials = new Account(
                 this.Configuration["Cloudinary:CloudName"],
                 this.Configuration["Cloudinary:ApiKey"],
@@ -55,6 +52,8 @@ namespace Realdeal.Web
 
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IAdvertService, AdvertService>();
+            services.AddTransient<ICategoryService, CategoryServise>();
 
         }
 
@@ -71,16 +70,13 @@ namespace Realdeal.Web
                 app.UseHsts();
             }
 
-            app
-                .UseHttpsRedirection()
-                .UseStaticFiles()
-                .UseRouting()
-                .UseAuthentication();
 
+            app.UseHttpsRedirection()
+               .UseStaticFiles()
+               .UseRouting();
 
-            app
-                .UseAuthentication()
-                .UseAuthorization();
+            app.UseAuthentication()
+               .UseAuthorization();
 
             app.UseEndpoints(endpoints
             =>

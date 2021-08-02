@@ -18,11 +18,19 @@ namespace Realdeal.Service.User
         }
 
         public string GetCurrentUserId()
-         => this.contextAccessor
+        {
+            var user = contextAccessor
                 .HttpContext.User
-                .FindFirst(ClaimTypes.NameIdentifier)
-                .Value;
+                .FindFirst(ClaimTypes.NameIdentifier);
 
+            if(user==null)
+            {
+                return string.Empty;
+            }
+
+            return user.Value;
+        }
+        
         public string GetUserIdByAdvertId(string advertId)
             => context.Adverts.FirstOrDefault(x => x.Id == advertId).UserId;
         public UserInformationModel GetUserInfo(string userId)

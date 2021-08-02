@@ -1,7 +1,22 @@
 ﻿@model AdvertDetailViewModel
+@inject IUserService userService
 
+@if (userService.IsUserAdmin() || userService.GetCurrentUserId()==userService.GetUserIdByAdvertId(Model.Id))
+{
+<div class="row mt-4">
+    <div class="offset-md-5 col-md-1">
+        <a class="text-white text-decoration-none btn btn-link btn-danger" asp-controller="Advert" asp-action="Delete">Delete</a>
+    </div>
+    <div class="col-md-1">
+        <a class="text-white text-decoration-none btn btn-link btn-info" asp-controller="Advert" asp-action="Edit">Edit</a>
+    </div>
+    <div class="col-md-1">
+        <a class="text-white text-decoration-none btn btn-link btn-warning" asp-controller="Archive" asp-action="AddToArchive">Archive</a>
+    </div>
+</div>
+}
 <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-4">
         <div class="offset-md-2 col-md-8 border border-primary rounded p-0">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner" role="listbox">
@@ -58,7 +73,7 @@
             </div>
             <div class="row">
                 <div class="col-md-4 p-0">
-                    <a class="btn btn-link link-primary text-decoration-none" asp-controller="Advert" asp-action="User">See all adverts from this user</a>
+                    <a class="btn btn-link link-primary text-decoration-none" asp-controller="User" asp-action="Adverts">See all adverts from this user</a>
                 </div>
                 <div class="col-md-2 p-0">
                     <a class="btn btn-link link-primary text-decoration-none" asp-controller="Messege" asp-action="Send">Send message</a>
