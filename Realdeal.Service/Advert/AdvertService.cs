@@ -1,4 +1,5 @@
-﻿using Realdeal.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Realdeal.Data;
 using Realdeal.Data.Models;
 using Realdeal.Models.Advert;
 using Realdeal.Models.Advert.Enum;
@@ -14,7 +15,7 @@ namespace Realdeal.Service.Advert
         private readonly ICloudinaryService cloudinary;
         private readonly IUserService userService;
 
-        public AdvertService(RealdealDbContext context, ICloudinaryService cloudinary,IUserService userService)
+        public AdvertService(RealdealDbContext context, ICloudinaryService cloudinary, IUserService userService)
         {
             this.context = context;
             this.cloudinary = cloudinary;
@@ -43,7 +44,7 @@ namespace Realdeal.Service.Advert
 
         public AllAdvertsQueryModel GetAllAdverts(AllAdvertsQueryModel queryAdverts)
         {
-            var adverQuery = context.Adverts.Where(x=>x.IsDeleted==false && x.IsАrchived==false).AsQueryable();
+            var adverQuery = context.Adverts.Where(x => x.IsDeleted == false && x.IsАrchived == false).AsQueryable();
 
             if (!string.IsNullOrEmpty(queryAdverts.Search))
             {
@@ -78,7 +79,7 @@ namespace Realdeal.Service.Advert
             return queryAdverts;
         }
 
-        public AdvertDetailViewModel GetAdvertById(string advertId)
+        public AdvertDetailViewModel GetAdvertDetailsById(string advertId)
         {
             return context.Adverts.Where(x => x.Id == advertId).Select(s => new AdvertDetailViewModel
             {
@@ -95,8 +96,56 @@ namespace Realdeal.Service.Advert
         public bool DeleteAdvert(string advertId)
         {
             var adver = context.Adverts.Find(advertId);
+
+            if (adver == null)
+            {
+                return false;
+            }
+
             adver.IsDeleted = true;
-            return context.SaveChanges() > 0 ? true : false;
+            context.SaveChanges();
+
+            return true;
+        }
+
+        public AdvertEditFormModel FindAdvertToEdit(string advertId)
+        => context.Adverts.Where(x => x.Id == advertId).Select(s => new AdvertEditFormModel
+        {
+            Id = s.Id,
+            CategoryId = s.SubCategoryId,
+            Description = s.Description,
+            Name = s.Name,
+            Price = s.Price,
+        })
+            .FirstOrDefault();
+
+        public bool EditAdvert(AdvertEditFormModel advertEdit)
+        {
+            var advert = context.Adverts.Include(x => x.AdvertImages).FirstOrDefault(x => x.Id == advertEdit.Id);
+
+            if (advert == null)
+            {
+                return false;
+            }
+
+            advert.Name = advertEdit.Name;
+            advert.Description = advertEdit.Description;
+            advert.SubCategoryId = advertEdit.CategoryId;
+            advert.Price = advertEdit.Price;
+
+            if (advertEdit.Images != null)
+            {
+                advert.AdvertImages.Clear();
+
+                foreach (var image in advertEdit.Images)
+                {
+                    advert.AdvertImages.Add(new AdvertImage() { ImageUrl = cloudinary.UploadPhoto(image, "advertImages") });
+                }
+            }
+
+            context.SaveChanges();
+
+            return true;
         }
     }
 }

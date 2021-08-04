@@ -1,19 +1,23 @@
 ﻿@model AdvertDetailViewModel
 @inject IUserService userService
 
-@if (userService.IsUserAdmin() || userService.GetCurrentUserId()==userService.GetUserIdByAdvertId(Model.Id))
+@{
+    ViewData["Title"] = "Detail";
+}
+
+@if (userService.IsUserAdmin() || userService.GetCurrentUserId() == userService.GetUserIdByAdvertId(Model.Id))
 {
-<div class="row mt-4">
-    <div class="offset-md-5 col-md-1">
-        <a class="text-white text-decoration-none btn btn-link btn-danger" asp-controller="Advert" asp-action="Delete" asp-route-advertId="@Model.Id">Delete</a>
+    <div class="row mt-4">
+        <div class="offset-md-5 col-md-1">
+            <a class="text-white text-decoration-none btn btn-link btn-danger" asp-controller="Advert" asp-action="Delete" asp-route-advertId="@Model.Id">Delete</a>
+        </div>
+        <div class="col-md-1">
+            <a class="text-white text-decoration-none btn btn-link btn-info" asp-controller="Advert" asp-action="Edit" asp-route-advertId="@Model.Id">Edit</a>
+        </div>
+        <div class="col-md-1">
+            <a class="text-white text-decoration-none btn btn-link btn-warning" asp-controller="Archive" asp-action="AddToArchive" asp-route-advertId="@Model.Id">Archive</a>
+        </div>
     </div>
-    <div class="col-md-1">
-        <a class="text-white text-decoration-none btn btn-link btn-info" asp-controller="Advert" asp-action="Edit" asp-route-advertId="@Model.Id">Edit</a>
-    </div>
-    <div class="col-md-1">
-        <a class="text-white text-decoration-none btn btn-link btn-warning" asp-controller="Archive" asp-action="AddToArchive" asp-route-advertId="@Model.Id">Archive</a>
-    </div>
-</div>
 }
 <div class="container">
     <div class="row mt-4">

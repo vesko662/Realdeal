@@ -8,6 +8,8 @@ namespace Realdeal.Service.Advert
         bool DeleteAdvert(string advertId);
 
         AllAdvertsQueryModel GetAllAdverts(AllAdvertsQueryModel queryAdverts);
-        public AdvertDetailViewModel GetAdvertById(string advertId);
+        public AdvertDetailViewModel GetAdvertDetailsById(string advertId);
+        public AdvertEditFormModel FindAdvertToEdit(string advertId);
+        public bool EditAdvert(AdvertEditFormModel advertEdit);
     }
 }
