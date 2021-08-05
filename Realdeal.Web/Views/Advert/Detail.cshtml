@@ -14,9 +14,12 @@
         <div class="col-md-1">
             <a class="text-white text-decoration-none btn btn-link btn-info" asp-controller="Advert" asp-action="Edit" asp-route-advertId="@Model.Id">Edit</a>
         </div>
-        <div class="col-md-1">
-            <a class="text-white text-decoration-none btn btn-link btn-warning" asp-controller="Archive" asp-action="AddToArchive" asp-route-advertId="@Model.Id">Archive</a>
-        </div>
+        @if (userService.GetCurrentUserId() == userService.GetUserIdByAdvertId(Model.Id))
+        {
+            <div class="col-md-1">
+                <a class="text-white text-decoration-none btn btn-link btn-warning" asp-controller="Archive" asp-action="Add" asp-route-advertId="@Model.Id">Archive</a>
+            </div>
+        }
     </div>
 }
 <div class="container">
