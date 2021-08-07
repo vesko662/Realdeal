@@ -8,11 +8,14 @@ namespace Realdeal.Web.Controllers
     {
         public IActionResult Add(string advertId)
         {
-
             return RedirectToAction(nameof(All));
         }
 
         public IActionResult All()
+        {
+            return View();
+        }
+        public IActionResult Detail()
         {
             return View();
         }

@@ -52,33 +52,12 @@
 
 <div class="mt-4 mb-5 container">
     <div class="row justify-content-center flex">
-        @foreach (var advert in Model.Advers)
-        {
-            <div class="col-md-4 mt-2">
-                <a class="text-decoration-none" asp-controller="Advert" asp-action="Detail" asp-route-advertId="@advert.Id">
-                    <div class="card mt-3">
-                        <div class="product align-items-center p-2 text-center">
-                            <img src="@advert.ImageURL" alt="@advert.Name" class=" card-img-top"/>
-                            <h5 class="mt-2">@advert.Name</h5>
-                            <div class="mt-2 info">
-                                <span class="text1 d-block">@(advert.Description.Length > 20 ? advert.Description.Substring(0,20) + " ..." : advert.Description )</span>
-                            </div>
-                            <div class="cost mt-3 text-dark">
-                                <span>@advert.Price $</span>
-                            </div>
-                        </div>
-                        <div class="p-3  text-white text-center shoe">
-                            <span class="text-uppercase">More info</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        }
+        <partial name="_AdvertCardPartialView" model="@Model.Advers" />
     </div>
 </div>
 
-@if (Model.Advers.Count()==0)
+@if (!Model.Advers.Any())
 {
-<h3 class="text-center text-primary">No adverts found!</h3>
+    <h3 class="text-center text-primary">No adverts found!</h3>
 }
 
