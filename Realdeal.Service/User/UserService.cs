@@ -32,7 +32,16 @@ namespace Realdeal.Service.User
         }
         
         public string GetUserIdByAdvertId(string advertId)
-            => context.Adverts.FirstOrDefault(x => x.Id == advertId).UserId;
+        {
+            var useAdvert = context.Adverts.FirstOrDefault(x => x.Id == advertId);
+
+            if (useAdvert==null)
+            {
+                return string.Empty;
+            }
+
+            return useAdvert.UserId;
+        }
         public UserInformationModel GetUserInfo(string userId)
         => context.Users.Where(x => x.Id == userId).Select(s => new UserInformationModel
         {
