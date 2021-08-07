@@ -78,20 +78,19 @@ namespace Realdeal.Web.Controllers
         [Authorize]
         public IActionResult Delete(string advertId)
         {
-            bool isSuccessful = false;
-
             if (userService.IsUserAdmin() || userService.GetCurrentUserId() == userService.GetUserIdByAdvertId(advertId))
             {
-                isSuccessful = advertService.DeleteAdvert(advertId);
+
+                if (advertService.DeleteAdvert(advertId))
+                {
+#warning ToDo
+                    return RedirectToAction("nameof(MyAdverts)");
+                }
+
+                return RedirectToAction(nameof(HomeController.Error), nameof(HomeController));
             }
 
-#warning
-            if (isSuccessful)
-            {
-                return RedirectToAction("MyAdverts", "User");
-            }
-
-            return RedirectToAction(nameof(HomeController.Error), nameof(HomeController));
+            return Unauthorized();
         }
 
         [Authorize]
@@ -104,45 +103,50 @@ namespace Realdeal.Web.Controllers
                 return View(advert);
             }
 
-            return RedirectToAction(nameof(HomeController.Error), nameof(HomeController));
+            return Unauthorized();
         }
 
         [HttpPost]
         [Authorize]
         public IActionResult Edit(string id, AdvertEditFormModel advert)
         {
-            if (!ModelState.IsValid)
+            if (userService.IsUserAdmin() || userService.GetCurrentUserId() == userService.GetUserIdByAdvertId(id))
             {
-                advert.Categories = categoryService.GetAllCategories();
-
-                return View(advert);
-            }
-
-            if (!categoryService.DoesCategoryExist(advert.CategoryId))
-            {
-                this.ModelState.AddModelError(nameof(advert.CategoryId), "Category does not exist.");
-
-                advert.Categories = categoryService.GetAllCategories();
-
-                return View(advert);
-            }
-
-            if (advert.Images != null)
-            {
-                if (ValidateImages(advert.Images) != null)
+                if (!ModelState.IsValid)
                 {
-                    this.ModelState.AddModelError(nameof(advert.Images), ValidateImages(advert.Images));
                     advert.Categories = categoryService.GetAllCategories();
+
                     return View(advert);
                 }
+
+                if (!categoryService.DoesCategoryExist(advert.CategoryId))
+                {
+                    this.ModelState.AddModelError(nameof(advert.CategoryId), "Category does not exist.");
+
+                    advert.Categories = categoryService.GetAllCategories();
+
+                    return View(advert);
+                }
+
+                if (advert.Images != null)
+                {
+                    if (ValidateImages(advert.Images) != null)
+                    {
+                        this.ModelState.AddModelError(nameof(advert.Images), ValidateImages(advert.Images));
+                        advert.Categories = categoryService.GetAllCategories();
+                        return View(advert);
+                    }
+                }
+
+                if (!advertService.EditAdvert(advert))
+                {
+                    return RedirectToAction(nameof(HomeController.Error), nameof(HomeController));
+                }
+
+                return RedirectToAction(nameof(All));
             }
 
-            if (!advertService.EditAdvert(advert))
-            {
-                return RedirectToAction(nameof(HomeController.Error), nameof(HomeController));
-            }
-
-            return RedirectToAction(nameof(All));
+            return Unauthorized();
         }
 
         private string ValidateImages(List<IFormFile> images)
