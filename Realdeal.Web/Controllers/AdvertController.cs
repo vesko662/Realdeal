@@ -72,6 +72,11 @@ namespace Realdeal.Web.Controllers
         {
             var advert = advertService.GetAdvertDetailsById(advertId);
 
+            if (advert==null)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
             return View(advert);
         }
 

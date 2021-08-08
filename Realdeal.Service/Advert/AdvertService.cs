@@ -82,7 +82,7 @@ namespace Realdeal.Service.Advert
 
         public AdvertDetailViewModel GetAdvertDetailsById(string advertId)
         {
-            return context.Adverts.Where(x => x.Id == advertId).Select(s => new AdvertDetailViewModel
+            return context.Adverts.Where(x => x.Id == advertId && x.IsDeleted==false && x.IsАrchived==false).Select(s => new AdvertDetailViewModel
             {
                 Name = s.Name,
                 CreatedOn = s.CreatedOn,

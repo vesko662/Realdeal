@@ -1,16 +1,25 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Realdeal.Service.Archive;
 
 namespace Realdeal.Web.Controllers
 {
     [Authorize]
     public class ArchiveController : Controller
     {
-        public IActionResult Add(string advertId)
+        private readonly IArchiveService archiveService;
+
+        public ArchiveController(IArchiveService archiveService)
         {
-            return RedirectToAction(nameof(All));
+            this.archiveService = archiveService;
         }
 
+        public IActionResult Add(string advertId)
+        {
+            archiveService.AddAdvertToArchive(advertId);
+
+            return RedirectToAction(nameof(All));
+        }
         public IActionResult All()
         {
             return View();

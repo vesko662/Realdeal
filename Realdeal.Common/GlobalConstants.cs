@@ -4,7 +4,7 @@
     {
         public const int advertsPerPage = 6;
 
-        public const int maxArchiveAdverts = 9;
+        public const int maxArchiveAdvertsPerUser = 9;
 
         public const string adminRole = "Administrator";
 
