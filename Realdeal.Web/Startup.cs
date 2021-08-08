@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Realdeal.Data;
 using Realdeal.Data.Models;
 using Realdeal.Service.Advert;
+using Realdeal.Service.Archive;
 using Realdeal.Service.Category;
 using Realdeal.Service.CloudinaryCloud;
 using Realdeal.Service.User;
@@ -45,12 +46,12 @@ namespace Realdeal.Web
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
 
-            Account cloudinaryCredentials = new Account(
+            Account cloudinaryAccount = new Account(
                 this.Configuration["Cloudinary:CloudName"],
                 this.Configuration["Cloudinary:ApiKey"],
                 this.Configuration["Cloudinary:ApiSecret"]);
 
-            Cloudinary cloudinary = new Cloudinary(cloudinaryCredentials);
+            Cloudinary cloudinary = new Cloudinary(cloudinaryAccount);
 
             services.AddSingleton(cloudinary);
 
@@ -58,6 +59,7 @@ namespace Realdeal.Web
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAdvertService, AdvertService>();
             services.AddTransient<ICategoryService, CategoryServise>();
+            services.AddTransient<IArchiveService, ArchiveService>();
 
         }
 

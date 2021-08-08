@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Realdeal.Common\Realdeal.Common.csproj" />
     <ProjectReference Include="..\Realdeal.Data\Realdeal.Data.csproj" />
     <ProjectReference Include="..\Realdeal.Models\Realdeal.Models.csproj" />
   </ItemGroup>

@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Realdeal.Data", "Realdeal.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Realdeal.Service", "Realdeal.Service\Realdeal.Service.csproj", "{BEB92B9F-FF7E-44C1-9C6E-36BC2E116383}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realdeal.Models", "Realdeal.Models\Realdeal.Models.csproj", "{4EFF1F26-9AAD-4D8E-B475-2A6A51B06F26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Realdeal.Models", "Realdeal.Models\Realdeal.Models.csproj", "{4EFF1F26-9AAD-4D8E-B475-2A6A51B06F26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realdeal.Common", "Realdeal.Common\Realdeal.Common.csproj", "{88776FC5-22E7-4CA2-830B-75D29044DB34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{4EFF1F26-9AAD-4D8E-B475-2A6A51B06F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EFF1F26-9AAD-4D8E-B475-2A6A51B06F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EFF1F26-9AAD-4D8E-B475-2A6A51B06F26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88776FC5-22E7-4CA2-830B-75D29044DB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88776FC5-22E7-4CA2-830B-75D29044DB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88776FC5-22E7-4CA2-830B-75D29044DB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88776FC5-22E7-4CA2-830B-75D29044DB34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

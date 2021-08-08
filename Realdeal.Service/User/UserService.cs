@@ -3,6 +3,7 @@ using Realdeal.Data;
 using Realdeal.Models.User;
 using System.Linq;
 using System.Security.Claims;
+using static Realdeal.Common.GlobalConstants;
 
 namespace Realdeal.Service.User
 {
@@ -53,6 +54,6 @@ namespace Realdeal.Service.User
         }).FirstOrDefault();
 
         public bool IsUserAdmin()
-        => contextAccessor.HttpContext.User.IsInRole("Administrator");
+        => contextAccessor.HttpContext.User.IsInRole(adminRole);
     }
 }

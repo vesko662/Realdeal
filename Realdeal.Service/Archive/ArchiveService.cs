@@ -1,4 +1,5 @@
 ﻿using Realdeal.Data;
+using static Realdeal.Common.GlobalConstants;
 using System;
 
 namespace Realdeal.Service.Archive
@@ -24,6 +25,12 @@ namespace Realdeal.Service.Archive
             advert.IsАrchived = true;
             context.SaveChanges();
 
+            return true;
+        }
+
+        public bool IsArchiveFull()
+        {
+          var a =  maxArchiveAdverts;
             return true;
         }
 

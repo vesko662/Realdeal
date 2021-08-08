@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using static Realdeal.Common.GlobalConstants;
 using Realdeal.Data;
 using Realdeal.Data.Models;
 using Realdeal.Models.Advert;
@@ -35,7 +36,7 @@ namespace Realdeal.Service.Advert
 
             foreach (var image in advertModel.Images)
             {
-                advert.AdvertImages.Add(new AdvertImage() { ImageUrl = cloudinary.UploadPhoto(image, "advertImages") });
+                advert.AdvertImages.Add(new AdvertImage() { ImageUrl = cloudinary.UploadPhoto(image, cloudFolderForAdvertImages)});
             }
 
             context.Adverts.Add(advert);
@@ -139,7 +140,7 @@ namespace Realdeal.Service.Advert
 
                 foreach (var image in advertEdit.Images)
                 {
-                    advert.AdvertImages.Add(new AdvertImage() { ImageUrl = cloudinary.UploadPhoto(image, "advertImages") });
+                    advert.AdvertImages.Add(new AdvertImage() { ImageUrl = cloudinary.UploadPhoto(image, cloudFolderForAdvertImages)});
                 }
             }
 
