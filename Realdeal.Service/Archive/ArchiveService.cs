@@ -1,8 +1,9 @@
 ﻿using Realdeal.Data;
 using static Realdeal.Common.GlobalConstants;
-using System;
 using Realdeal.Service.User;
 using System.Linq;
+using System.Collections.Generic;
+using Realdeal.Models.Advert;
 
 namespace Realdeal.Service.Archive
 {
@@ -31,19 +32,35 @@ namespace Realdeal.Service.Archive
 
             return true;
         }
+        public IEnumerable<AdvertShowingViewModel> GetArchiveAdverts()
+        {
+            var userArchiev = context.Adverts
+                 .Where(x => x.UserId == userService.GetCurrentUserId() && x.IsАrchived == true && x.IsDeleted == false)
+                 .Select(s => new AdvertShowingViewModel
+                 {
+                     Id = s.Id,
+                     Description = s.Description,
+                     ImageURL = s.AdvertImages.First().ImageUrl,
+                     Name = s.Name,
+                     Price = s.Price,
+                 })
+                 .ToList();
 
+            return userArchiev;
+        }
         public bool IsArchiveFull()
         {
             var archivedAdverts = context.Adverts
-                .Where(x => x.UserId == userService.GetCurrentUserId() && x.IsАrchived == true)
+                .Where(x => x.UserId == userService.GetCurrentUserId() && x.IsАrchived == true && x.IsDeleted==false)
+                .Select(x=>x.Name)
                 .ToList();
 
-            if (archivedAdverts.Count > maxArchiveAdvertsPerUser)
+            if (archivedAdverts.Count == maxArchiveAdvertsPerUser)
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         public bool UploadAdvert(string advertId)

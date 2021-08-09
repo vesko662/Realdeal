@@ -14,15 +14,22 @@ namespace Realdeal.Web.Controllers
             this.archiveService = archiveService;
         }
 
-        public IActionResult Add(string advertId)
+        public IActionResult AddInArchive(string advertId)
         {
+            if (archiveService.IsArchiveFull())
+            {
+                return RedirectToAction(nameof(All));
+            }
+
             archiveService.AddAdvertToArchive(advertId);
 
             return RedirectToAction(nameof(All));
         }
         public IActionResult All()
         {
-            return View();
+            var archive = archiveService.GetArchiveAdverts();
+
+            return View(archive);
         }
         public IActionResult Detail()
         {

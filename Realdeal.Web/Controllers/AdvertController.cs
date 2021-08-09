@@ -81,6 +81,12 @@ namespace Realdeal.Web.Controllers
         }
 
         [Authorize]
+        public IActionResult MyAdverts()
+        {
+            return View();
+        }
+
+       [Authorize]
         public IActionResult Delete(string advertId)
         {
             if (userService.IsUserAdmin() || userService.GetCurrentUserId() == userService.GetUserIdByAdvertId(advertId))
@@ -88,8 +94,7 @@ namespace Realdeal.Web.Controllers
 
                 if (advertService.DeleteAdvert(advertId))
                 {
-#warning ToDo
-                    return RedirectToAction("nameof(MyAdverts)");
+                    return RedirectToAction(nameof(MyAdverts));
                 }
 
                 return RedirectToAction(nameof(HomeController.Error), nameof(HomeController));

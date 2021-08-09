@@ -17,7 +17,7 @@
         @if (userService.GetCurrentUserId() == userService.GetUserIdByAdvertId(Model.Id))
         {
             <div class="col-md-1">
-                <a class="text-white text-decoration-none btn btn-link btn-warning" asp-controller="Archive" asp-action="Add" asp-route-advertId="@Model.Id">Archive</a>
+                <a class="text-white text-decoration-none btn btn-link btn-warning" asp-controller="Archive" asp-action="AddInArchive" asp-route-advertId="@Model.Id">Archive</a>
             </div>
         }
     </div>
@@ -60,7 +60,7 @@
                 <h4>Description</h4>
                 <p class="lead text-break">@Model.Description</p>
             </div>
-            <div class="border border-top border-dark">
+            <div class="border-top border-dark">
                 <a class="btn btn-link link-info float-start text-decoration-none" asp-controller="Observe" asp-action="All" asp-route-advertId="@Model.Id">Observe</a>
                 <a class="btn btn-link link-danger float-end text-decoration-none" asp-controller="Report" asp-action="Advert" asp-route-advertId="@Model.Id">Report</a>
             </div>
