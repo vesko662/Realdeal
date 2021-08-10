@@ -7,6 +7,7 @@ using Realdeal.Models.Advert.Enum;
 using Realdeal.Service.CloudinaryCloud;
 using Realdeal.Service.User;
 using System.Linq;
+using System;
 
 namespace Realdeal.Service.Advert
 {
@@ -22,7 +23,6 @@ namespace Realdeal.Service.Advert
             this.cloudinary = cloudinary;
             this.userService = userService;
         }
-
         public void CreateAdvert(AdvertFormModel advertModel)
         {
             var advert = new Data.Models.Advert
@@ -36,7 +36,7 @@ namespace Realdeal.Service.Advert
 
             foreach (var image in advertModel.Images)
             {
-                advert.AdvertImages.Add(new AdvertImage() { ImageUrl = cloudinary.UploadPhoto(image, cloudFolderForAdvertImages)});
+                advert.AdvertImages.Add(new AdvertImage() { ImageUrl = cloudinary.UploadPhoto(image, cloudFolderForAdvertImages) });
             }
 
             context.Adverts.Add(advert);
@@ -82,7 +82,7 @@ namespace Realdeal.Service.Advert
 
         public AdvertDetailViewModel GetAdvertDetailsById(string advertId)
         {
-            return context.Adverts.Where(x => x.Id == advertId && x.IsDeleted==false && x.IsАrchived==false).Select(s => new AdvertDetailViewModel
+            var advert = context.Adverts.Where(x => x.Id == advertId && x.IsDeleted == false && x.IsАrchived == false).Select(s => new AdvertDetailViewModel
             {
                 Name = s.Name,
                 CreatedOn = s.CreatedOn,
@@ -92,6 +92,15 @@ namespace Realdeal.Service.Advert
                 Price = s.Price,
                 User = userService.GetUserInfo(userService.GetUserIdByAdvertId(advertId)),
             }).FirstOrDefault();
+
+            if (advert==null)
+            {
+                return null;
+            }
+
+            UpdateViewsOnAdvert(advertId);
+
+            return advert;
         }
 
         public bool DeleteAdvert(string advertId)
@@ -104,6 +113,7 @@ namespace Realdeal.Service.Advert
             }
 
             adver.IsDeleted = true;
+            adver.ModifiedOn = DateTime.UtcNow;
             context.SaveChanges();
 
             return true;
@@ -133,6 +143,7 @@ namespace Realdeal.Service.Advert
             advert.Description = advertEdit.Description;
             advert.SubCategoryId = advertEdit.CategoryId;
             advert.Price = advertEdit.Price;
+            advert.ModifiedOn = DateTime.UtcNow;
 
             if (advertEdit.Images != null)
             {
@@ -140,13 +151,22 @@ namespace Realdeal.Service.Advert
 
                 foreach (var image in advertEdit.Images)
                 {
-                    advert.AdvertImages.Add(new AdvertImage() { ImageUrl = cloudinary.UploadPhoto(image, cloudFolderForAdvertImages)});
+                    advert.AdvertImages.Add(new AdvertImage() { ImageUrl = cloudinary.UploadPhoto(image, cloudFolderForAdvertImages) });
                 }
             }
 
             context.SaveChanges();
 
             return true;
+        }
+
+        private void UpdateViewsOnAdvert(string advertId)
+        {
+            var advert = context.Adverts.Find(advertId);
+
+            advert.Viewed += 1;
+
+            context.SaveChanges();
         }
     }
 }

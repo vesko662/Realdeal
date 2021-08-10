@@ -40,6 +40,8 @@ namespace Realdeal.Data.Models
 
         [Required]
         public decimal Price { get; set; }
+        [Required]
+        public int Viewed { get; set; }
 
         [Required]
         public bool IsАrchived { get; set; }

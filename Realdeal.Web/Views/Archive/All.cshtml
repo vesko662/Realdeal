@@ -4,6 +4,13 @@
     ViewData["Title"] = "Archive";
 }
 
+@if (Model.Count() == 9)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Archive maximum capacity is 9 adverts. To empty space upload or delete advert.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
 
 <h2 class="text-center">@ViewData["Title"]</h2>
 
@@ -19,7 +26,7 @@
                                 <img src="@advert.ImageURL" alt="@advert.Name" class=" card-img-top" />
                                 <h5 class="mt-2">@advert.Name</h5>
                                 <div class="mt-2 info">
-                                    <span class="text1 d-block">@(advert.Description.Length > 20 ? advert.Description.Substring(0,20) + " ..." : advert.Description )</span>
+                                    <span class="text1 d-block">@(advert.Description.Length > 20 ? advert.Description.Substring(0,20) + " ..." : advert.Description)</span>
                                 </div>
                                 <div class="cost mt-3 text-dark">
                                     <span>@advert.Price $</span>

@@ -4,6 +4,7 @@ using Realdeal.Service.User;
 using System.Linq;
 using System.Collections.Generic;
 using Realdeal.Models.Advert;
+using System;
 
 namespace Realdeal.Service.Archive
 {
@@ -28,6 +29,7 @@ namespace Realdeal.Service.Archive
             }
 
             advert.IsАrchived = true;
+            advert.ModifiedOn = DateTime.UtcNow;
             context.SaveChanges();
 
             return true;
@@ -73,6 +75,7 @@ namespace Realdeal.Service.Archive
             }
 
             advert.IsАrchived = false;
+            advert.ModifiedOn = DateTime.UtcNow;
             context.SaveChanges();
 
             return true;
