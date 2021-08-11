@@ -21,7 +21,9 @@ namespace Realdeal.Service.Archive
 
         public bool AddAdvertToArchive(string advertId)
         {
-            var advert = context.Adverts.Find(advertId);
+            var advert = context.Adverts
+                .Where(x => x.Id == advertId && x.UserId==userService.GetCurrentUserId())
+                .FirstOrDefault();
 
             if (advert == null)
             {
@@ -53,8 +55,8 @@ namespace Realdeal.Service.Archive
         public bool IsArchiveFull()
         {
             var archivedAdverts = context.Adverts
-                .Where(x => x.UserId == userService.GetCurrentUserId() && x.IsАrchived == true && x.IsDeleted==false)
-                .Select(x=>x.Name)
+                .Where(x => x.UserId == userService.GetCurrentUserId() && x.IsАrchived == true && x.IsDeleted == false)
+                .Select(x => x.Name)
                 .ToList();
 
             if (archivedAdverts.Count == maxArchiveAdvertsPerUser)
@@ -67,7 +69,9 @@ namespace Realdeal.Service.Archive
 
         public bool UploadAdvert(string advertId)
         {
-            var advert = context.Adverts.Find(advertId);
+            var advert = context.Adverts
+                .Where(x => x.Id == advertId && x.UserId == userService.GetCurrentUserId())
+                .FirstOrDefault(); ;
 
             if (advert == null)
             {
@@ -80,5 +84,6 @@ namespace Realdeal.Service.Archive
 
             return true;
         }
+
     }
 }

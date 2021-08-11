@@ -20,7 +20,7 @@
             @foreach (var advert in Model)
             {
                 <div class="col-md-4 mt-2">
-                    <a class="text-decoration-none" asp-controller="Archive" asp-action="Detail" asp-route-advertId="@advert.Id">
+                    <a class="text-decoration-none" asp-controller="Archive" asp-action="AllTimeStatistics" asp-route-advertId="@advert.Id">
                         <div class="card mt-3">
                             <div class="product align-items-center p-2 text-center">
                                 <img src="@advert.ImageURL" alt="@advert.Name" class=" card-img-top" />
@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                             <div class="p-3  text-white text-center shoe">
-                                <span class="text-uppercase">More info</span>
+                                <span class="text-uppercase">More info and statistics</span>
                             </div>
                         </div>
                     </a>

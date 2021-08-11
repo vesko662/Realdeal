@@ -80,7 +80,7 @@
             </div>
             <div class="row">
                 <div class="col-md-4 p-0">
-                    <a class="btn btn-link link-primary text-decoration-none" asp-controller="User" asp-action="Adverts" asp-route-advertId="@Model.Id">See all adverts from this user</a>
+                    <a class="btn btn-link link-primary text-decoration-none" asp-controller="Advert" asp-action="UserAdverts" asp-route-advertId="@Model.Id">See all adverts from this user</a>
                 </div>
                 <div class="col-md-2 p-0">
                     <a class="btn btn-link link-primary text-decoration-none" asp-controller="Messege" asp-action="Send" asp-route-advertId="@Model.Id">Send message</a>
