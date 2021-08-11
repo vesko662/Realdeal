@@ -72,12 +72,8 @@ namespace Realdeal.Web.Controllers
         {
             var advert = advertService.GetAdvertDetailsById(advertId);
 
-            if (advert==null)
-            {
-                return RedirectToAction(nameof(All));
-            }
-
-            return View(advert);
+            return advert == null ? RedirectToAction(nameof(All))
+               : View(advert);
         }
 
         [Authorize]
@@ -97,7 +93,7 @@ namespace Realdeal.Web.Controllers
                     return RedirectToAction(nameof(UserAdverts));
                 }
 
-                return RedirectToAction(nameof(HomeController.Error), nameof(HomeController));
+                return RedirectToAction(nameof(HomeController.Error), "Home");
             }
 
             return Unauthorized();
@@ -150,7 +146,7 @@ namespace Realdeal.Web.Controllers
 
                 if (!advertService.EditAdvert(advert))
                 {
-                    return RedirectToAction(nameof(HomeController.Error), nameof(HomeController));
+                    return RedirectToAction(nameof(HomeController.Error), "Home");
                 }
 
                 return RedirectToAction(nameof(All));

@@ -23,6 +23,11 @@ namespace Realdeal.Web.Controllers
 
             var isSuccessful = archiveService.AddAdvertToArchive(advertId);
 
+            if (!isSuccessful)
+            {
+                return RedirectToAction(nameof(HomeController.Error), "Home");
+            }
+
             return RedirectToAction(nameof(All));
         }
         public IActionResult All()
@@ -33,18 +38,25 @@ namespace Realdeal.Web.Controllers
         }
         public IActionResult AllTimeStatistics(string advertId)
         {
-            return View();
+            var advert = archiveService.GetArchivedAdvert(advertId);
+
+            if (advert == null)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            return View(advert);
         }
         public IActionResult Upload(string advertId)
         {
-           var isSuccessful = archiveService.UploadAdvert(advertId);
+            var isSuccessful = archiveService.UploadAdvert(advertId);
 
             if (!isSuccessful)
             {
-                
+                return RedirectToAction(nameof(HomeController.Error), "Home");
             }
 
-            return RedirectToAction(nameof(AdvertController),nameof(AdvertController.All));
+            return RedirectToAction(nameof(AdvertController.All), "Advert");
         }
     }
 }

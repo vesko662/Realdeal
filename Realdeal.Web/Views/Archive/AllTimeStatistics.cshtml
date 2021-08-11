@@ -1,1 +1,77 @@
-﻿
+﻿@model ArchiveAdvertDetailModel
+@inject IUserService userService
+
+@{
+    ViewData["Title"] = "All Time Statistics";
+}
+
+@if (userService.GetCurrentUserId() == userService.GetUserIdByAdvertId(Model.Id))
+{
+    <div class="row mt-4">
+        <div class="offset-md-5 col-md-1">
+            <a class="text-white text-decoration-none btn btn-link btn-danger" asp-controller="Advert" asp-action="Delete" asp-route-advertId="@Model.Id">Delete</a>
+        </div>
+        <div class="col-md-1">
+            <a class="text-white text-decoration-none btn btn-link btn-success" asp-controller="Archive" asp-action="Upload" asp-route-advertId="@Model.Id">Upload</a>
+        </div>
+    </div>
+}
+
+<div class="container">
+    <div class="row mt-4 bg-primary text-white text-center p-3 fs-5 border rounded">
+        <div class="col-4 border-end border-2">
+            <span class="fw-bold">Total views:</span><br />
+            <span>@Model.Statistics.TotalView</span>
+        </div>
+        <div class="col-4 border-end border-2">
+            <span class="fw-bold">Followed by:</span><br />
+            <span>@Model.Statistics.FollowedBy</span>
+        </div>
+        <div class="col-4">
+            <span class="fw-bold">Intrested people:</span><br />
+            <span>@Model.Statistics.IntrestedPeople</span>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mt-4">
+        <div class="offset-md-2 col-md-8 border border-primary rounded p-0">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    @foreach (var image in Model.Images)
+                    {
+                        <div class="carousel-item @(Model.Images.FirstOrDefault() == image ? "active":" ")">
+                            <img src="@image" class="d-block w-100" alt="...">
+                        </div>
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="bg-light offset-md-2 col-md-8 p-2 border border-primary rounded">
+            <div class="small text-muted mb-2">
+                <span>Added on @Model.CreatedOn.ToString("MM/dd/yyyy")</span>
+            </div>
+            <div class="mb-3">
+                <h3>@Model.Name</h3>
+            </div>
+            <div class="mb-3 mt-3 text-dark fw-bold" style="font-size:20px">
+                <span>@Model.Price $</span>
+            </div>
+            <div class="mb-2 mt-3">
+                <h4>Description</h4>
+                <p class="lead text-break">@Model.Description</p>
+            </div>
+        </div>
+    </div>
+</div>

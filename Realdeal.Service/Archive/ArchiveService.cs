@@ -5,6 +5,8 @@ using System.Linq;
 using System.Collections.Generic;
 using Realdeal.Models.Advert;
 using System;
+using Realdeal.Models.Archive;
+using Microsoft.EntityFrameworkCore;
 
 namespace Realdeal.Service.Archive
 {
@@ -22,8 +24,9 @@ namespace Realdeal.Service.Archive
         public bool AddAdvertToArchive(string advertId)
         {
             var advert = context.Adverts
-                .Where(x => x.Id == advertId && x.UserId==userService.GetCurrentUserId())
-                .FirstOrDefault();
+                   .Where(x => x.Id == advertId && x.UserId == userService.GetCurrentUserId())
+                   .Where(x => x.IsАrchived == false && x.IsDeleted == false)
+                   .FirstOrDefault();
 
             if (advert == null)
             {
@@ -70,8 +73,9 @@ namespace Realdeal.Service.Archive
         public bool UploadAdvert(string advertId)
         {
             var advert = context.Adverts
-                .Where(x => x.Id == advertId && x.UserId == userService.GetCurrentUserId())
-                .FirstOrDefault(); ;
+                   .Where(x => x.Id == advertId && x.UserId == userService.GetCurrentUserId())
+                   .Where(x => x.IsАrchived == true && x.IsDeleted == false)
+                   .FirstOrDefault();
 
             if (advert == null)
             {
@@ -84,6 +88,47 @@ namespace Realdeal.Service.Archive
 
             return true;
         }
+
+        public ArchiveAdvertDetailModel GetArchivedAdvert(string advertId)
+        {
+            var advert = context.Adverts
+                   .Where(x => x.Id == advertId && x.UserId == userService.GetCurrentUserId())
+                   .Where(x => x.IsАrchived == true && x.IsDeleted == false)
+                   .Include(x => x.AdvertImages)
+                   .FirstOrDefault();
+
+            if (advert == null)
+            {
+                return null;
+            }
+
+            var archiveAdvert = new ArchiveAdvertDetailModel
+            {
+                Id = advert.Id,
+                Name = advert.Name,
+                Description = advert.Description,
+                CreatedOn = advert.CreatedOn,
+                Price = advert.Price,
+                Images = advert.AdvertImages.Select(s => s.ImageUrl).ToList(),
+            };
+
+            var advertStatistics = new ArchiveAdvertStatisticsMode
+            {
+                TotalView = advert.Viewed,
+                FollowedBy = GetFollowers(advertId),
+                IntrestedPeople = GetIntrestedPeople(advertId),
+            };
+
+            archiveAdvert.Statistics = advertStatistics;
+
+            return archiveAdvert;
+        }
+
+        private int GetFollowers(string advertId)
+        => context.Adverts.Find(advertId).ОbservedAdverts.Count;
+
+        private int GetIntrestedPeople(string advertId)
+       => context.Adverts.Find(advertId).Messages.GroupBy(x=>x.SenderId).ToList().Count;
 
     }
 }
