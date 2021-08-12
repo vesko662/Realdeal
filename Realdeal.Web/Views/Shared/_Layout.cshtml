@@ -41,9 +41,10 @@
         </main>
     </div>
 
-    <footer class="p-2 border-top footer bottom-0 text-muted">
+    <footer class="p-2 border-top footer bottom-0 bg-primary text-white">
         <div class="container">
-            <span>© Realdeal - @DateTime.UtcNow.Year </span>
+            <span>© Realdeal - @DateTime.UtcNow.Year </span><br />
+            <a class="btn btn-link text-white text-decoration-none" asp-controller="Report" asp-action="Feedback">Feedback</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

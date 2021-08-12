@@ -77,9 +77,9 @@ namespace Realdeal.Web.Controllers
         }
 
         [Authorize]
-        public IActionResult UserAdverts()
+        public IActionResult UserAdverts(string username)
         {
-            return View();
+            return View(advertService.GetUserAdvert(username));
         }
 
        [Authorize]

@@ -93,7 +93,7 @@ namespace Realdeal.Service.Advert
                 User = userService.GetUserInfo(userService.GetUserIdByAdvertId(advertId)),
             }).FirstOrDefault();
 
-            if (advert==null)
+            if (advert == null)
             {
                 return null;
             }
@@ -167,6 +167,34 @@ namespace Realdeal.Service.Advert
             advert.Viewed += 1;
 
             context.SaveChanges();
+        }
+
+        public UserAdvertsModel GetUserAdvert(string username)
+        {
+            var userId = userService.GetUserIdByUsername(username);
+
+
+            var adverts = context.Adverts.Where(x => x.UserId == userId)
+                .Select(s => new AdvertShowingViewModel()
+                {
+                    Id = s.Id,
+                    Description = s.Description,
+                    ImageURL = s.AdvertImages.FirstOrDefault().ImageUrl,
+                    Name = s.Name,
+                    Price = s.Price,
+                })
+                .ToList();
+
+            if (adverts == null)
+            {
+                return null;
+            }
+
+            return new UserAdvertsModel()
+            {
+                Adverts = adverts,
+                User = userService.GetUserInfo(userId),
+            };
         }
     }
 }

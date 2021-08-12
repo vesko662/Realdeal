@@ -1,5 +1,47 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model UserAdvertsModel
+
+<div class="container">
+    <div class="row mt-4 fs-5">
+        <div class="bg-light offset-md-2 col-md-8 p-2 border border-primary rounded">
+            <div class="row">
+                <div class="col-md-1">
+                    <img src="@Model.User.UserProfilePictureURL" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;">
+                </div>
+                <div class="col-md-4">
+                    <p class="mb-0 text-dark fw-bold text-break">@Model.User.Firstname @Model.User.Lastname</p>
+                    <p class="m-0 text-dark text-muted text-break small">User since  @Model.User.UserSince.ToString("MM/dd/yyyy") </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="border-bottom border-primary mt-2">
+        <span class="fs-3 fw-bold">Adverts</span>
+    </div>
+
+    <div class="mt-3 mb-5 container">
+        <div class="row justify-content-center flex">
+            @foreach (var advert in Model.Adverts)
+            {
+                <div class="col-md-4 mt-2">
+                    <a class="text-decoration-none" asp-controller="Advert" asp-action="Detail" asp-route-advertId="@advert.Id">
+                        <div class="card mt-3">
+                            <div class="product align-items-center p-2 text-center">
+                                <img src="@advert.ImageURL" alt="@advert.Name" class=" card-img-top" />
+                                <h5 class="mt-2">@advert.Name</h5>
+                                <div class="mt-2 info">
+                                    <span class="text1 d-block">@(advert.Description.Length > 20 ? advert.Description.Substring(0,20) + " ..." : advert.Description )</span>
+                                </div>
+                                <div class="cost mt-3 text-dark">
+                                    <span>@advert.Price $</span>
+                                </div>
+                            </div>
+                            <div class="p-3  text-white text-center shoe">
+                                <span class="text-uppercase">More info</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -6,7 +6,7 @@ namespace Realdeal.Service.User
     {
         public string GetCurrentUserId();
         public bool IsUserAdmin();
-
+        public string GetUserIdByUsername(string username);
         public string GetUserIdByAdvertId(string advertId);
         public UserInformationModel GetUserInfo(string userId);
     }

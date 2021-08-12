@@ -43,6 +43,19 @@ namespace Realdeal.Service.User
 
             return useAdvert.UserId;
         }
+
+        public string GetUserIdByUsername(string username)
+        {
+            var user = context.Users.FirstOrDefault(x => x.UserName == username);
+
+            if (user == null)
+            {
+                return string.Empty;
+            }
+
+            return user.Id;
+        }
+
         public UserInformationModel GetUserInfo(string userId)
         => context.Users.Where(x => x.Id == userId).Select(s => new UserInformationModel
         {
