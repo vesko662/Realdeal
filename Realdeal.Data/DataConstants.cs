@@ -17,5 +17,8 @@
         //Category
         public const int categoryNameMaxLenght = 50;
 
+        //Report
+        public const int reportDescriptionMinLenght = 10;
+        public const int reportDescriptionMaxLenght = 3000;
     }
 }

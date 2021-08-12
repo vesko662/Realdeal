@@ -17,6 +17,7 @@ namespace Realdeal.Data.Models
             this.Messages = new HashSet<Message>();
             this.ОbservedAdverts = new HashSet<ОbservedAdvert>();
             this.AdvertImages = new HashSet<AdvertImage>();
+            this.AdvertReports = new HashSet<AdvertReport>();
         }
         [Key]
         public string Id { get; set; }
@@ -55,9 +56,10 @@ namespace Realdeal.Data.Models
 
         public ICollection<Message> Messages { get; set; }
 
-
         public ICollection<ОbservedAdvert> ОbservedAdverts { get; set; }
 
         public ICollection<AdvertImage> AdvertImages { get; set; }
+        public ICollection<AdvertReport> AdvertReports { get; set; }
+
     }
 }

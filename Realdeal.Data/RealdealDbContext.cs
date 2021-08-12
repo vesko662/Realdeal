@@ -19,7 +19,8 @@ namespace Realdeal.Data
         public DbSet<ОbservedAdvert> ObservedAdverts { get; set; }
         public DbSet<MainCategory> MainCategories { get; set; }
         public DbSet<AdvertImage> AdvertImages { get; set; }
-
+        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<AdvertReport> ReporedAdverts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

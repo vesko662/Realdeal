@@ -10,7 +10,6 @@ namespace Realdeal.Data.Models
         [Required]
         public string ImageUrl { get; set; }
 
-
         public string AdvertId { get; set; }
         public Advert Advert { get; set; }
     }

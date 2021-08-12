@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Realdeal.Data;
 
 namespace Realdeal.Data.Migrations
 {
     [DbContext(typeof(RealdealDbContext))]
-    partial class RealdealDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210812132812_AddedUserReports")]
+    partial class AddedUserReports
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,8 +234,7 @@ namespace Realdeal.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(3000)
-                        .HasColumnType("nvarchar(3000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDone")
                         .HasColumnType("bit");
@@ -368,8 +369,7 @@ namespace Realdeal.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(3000)
-                        .HasColumnType("nvarchar(3000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDone")
                         .HasColumnType("bit");
@@ -464,6 +464,39 @@ namespace Realdeal.Data.Migrations
                     b.HasIndex("MainCategoryId");
 
                     b.ToTable("SubCategories");
+                });
+
+            modelBuilder.Entity("Realdeal.Data.Models.UserReport", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ReportedUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReportedUserUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserMakerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReportedUserUserId");
+
+                    b.HasIndex("UserMakerId");
+
+                    b.ToTable("ReporedUsers");
                 });
 
             modelBuilder.Entity("Realdeal.Data.Models.ОbservedAdvert", b =>
@@ -620,6 +653,21 @@ namespace Realdeal.Data.Migrations
                         .HasForeignKey("MainCategoryId");
 
                     b.Navigation("MainCategory");
+                });
+
+            modelBuilder.Entity("Realdeal.Data.Models.UserReport", b =>
+                {
+                    b.HasOne("Realdeal.Data.Models.ApplicationUser", "ReportedUserUser")
+                        .WithMany()
+                        .HasForeignKey("ReportedUserUserId");
+
+                    b.HasOne("Realdeal.Data.Models.Advert", "UserMaker")
+                        .WithMany()
+                        .HasForeignKey("UserMakerId");
+
+                    b.Navigation("ReportedUserUser");
+
+                    b.Navigation("UserMaker");
                 });
 
             modelBuilder.Entity("Realdeal.Data.Models.ОbservedAdvert", b =>
