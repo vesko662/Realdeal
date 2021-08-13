@@ -13,6 +13,8 @@ using Realdeal.Service.Advert;
 using Realdeal.Service.Archive;
 using Realdeal.Service.Category;
 using Realdeal.Service.CloudinaryCloud;
+using Realdeal.Service.EmailSender;
+using Realdeal.Service.EmailSender.Configuration;
 using Realdeal.Service.Observe;
 using Realdeal.Service.Report;
 using Realdeal.Service.User;
@@ -57,6 +59,13 @@ namespace Realdeal.Web
 
             services.AddSingleton(cloudinary);
 
+            var emailConfiguration = Configuration
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+
+            services.AddSingleton(emailConfiguration);
+
+            services.AddTransient<IEmailSenderService,EmailSenderService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAdvertService, AdvertService>();
