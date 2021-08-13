@@ -13,6 +13,7 @@ using Realdeal.Service.Advert;
 using Realdeal.Service.Archive;
 using Realdeal.Service.Category;
 using Realdeal.Service.CloudinaryCloud;
+using Realdeal.Service.Observe;
 using Realdeal.Service.Report;
 using Realdeal.Service.User;
 
@@ -62,7 +63,7 @@ namespace Realdeal.Web
             services.AddTransient<ICategoryService, CategoryServise>();
             services.AddTransient<IArchiveService, ArchiveService>();
             services.AddTransient<IReportService, ReportService>();
-
+            services.AddTransient<IObserveService, ObserveService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

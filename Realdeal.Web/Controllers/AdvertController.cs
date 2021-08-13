@@ -76,7 +76,6 @@ namespace Realdeal.Web.Controllers
                : View(advert);
         }
 
-        [Authorize]
         public IActionResult UserAdverts(string username)
         {
             return View(advertService.GetUserAdvert(username));
@@ -153,6 +152,12 @@ namespace Realdeal.Web.Controllers
             }
 
             return Unauthorized();
+        }
+
+        [Authorize]
+        public IActionResult MyAdverts()
+        {
+            return View();
         }
 
         private string ValidateImages(List<IFormFile> images)

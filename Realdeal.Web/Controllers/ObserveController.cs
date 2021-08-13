@@ -1,16 +1,38 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Realdeal.Service.Observe;
 
 namespace Realdeal.Web.Controllers
 {
+    [Authorize]
     public class ObserveController : Controller
     {
-        public IActionResult Index()
+        private readonly IObserveService observeService;
+
+        public ObserveController(IObserveService observeService)
         {
-            return View();
+            this.observeService = observeService;
+        }
+        public IActionResult StartObserving(string advertId)
+        {
+            if (observeService.IsAdvertObserved(advertId))
+                return RedirectToAction(nameof(Observing));
+
+            bool isSuccessful = observeService.StartObservingAdvert(advertId);
+
+            if (!isSuccessful)
+                return RedirectToAction(nameof(HomeController.Error), "Home");
+
+            return RedirectToAction(nameof(Observing));
+        }
+        public IActionResult Observing()
+        {
+            return View(observeService.GetAllObservingAdverts());
+        }
+        public IActionResult StopObserving(string advertId)
+        {
+
+            return Redirect("/");
         }
     }
 }

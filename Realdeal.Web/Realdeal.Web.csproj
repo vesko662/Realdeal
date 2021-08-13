@@ -49,8 +49,4 @@
     <ProjectReference Include="..\Realdeal.Service\Realdeal.Service.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\User\" />
-  </ItemGroup>
-
 </Project>

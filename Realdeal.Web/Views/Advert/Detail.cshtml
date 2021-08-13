@@ -61,7 +61,7 @@
                 <p class="lead text-break">@Model.Description</p>
             </div>
             <div class="border-top border-dark">
-                <a class="btn btn-link link-info float-start text-decoration-none" asp-controller="Observe" asp-action="All" asp-route-advertId="@Model.Id">Observe</a>
+                <a class="btn btn-link link-info float-start text-decoration-none" asp-controller="Observe" asp-action="StartObserving" asp-route-advertId="@Model.Id">Observe</a>
                 <a class="btn btn-link link-danger float-end text-decoration-none" asp-controller="Report" asp-action="AdvertReport" asp-route-advertId="@Model.Id" asp-route-advertName="@Model.Name">Report</a>
             </div>
         </div>

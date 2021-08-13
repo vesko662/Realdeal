@@ -78,10 +78,10 @@
             </div>
         }
     </div>
+    @if (!Model.Advers.Any())
+    {
+        <h3 class="text-center text-primary">No adverts found!</h3>
+    }
 </div>
 
-@if (!Model.Advers.Any())
-{
-    <h3 class="text-center text-primary">No adverts found!</h3>
-}
 

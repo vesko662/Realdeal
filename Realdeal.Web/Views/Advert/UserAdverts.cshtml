@@ -1,5 +1,9 @@
 ﻿@model UserAdvertsModel
 
+@{
+    ViewData["Title"] = Model.User.Firstname + " adverts";
+}
+
 <div class="container">
     <div class="row mt-4 fs-5">
         <div class="bg-light offset-md-2 col-md-8 p-2 border border-primary rounded">
@@ -44,4 +48,11 @@
             }
         </div>
     </div>
+    @if (!Model.Adverts.Any())
+    {
+        <div class="text-primary align-items-center text-center">
+            <h3 class="">@Model.User.Firstname has no adverts uploaded!</h3>
+            <a class="btn btn-link text-decoration-none " asp-controller="Advert" asp-action="All">Return to all adverts</a>
+        </div>
+    }
 </div>
