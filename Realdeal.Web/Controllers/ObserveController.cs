@@ -13,12 +13,12 @@ namespace Realdeal.Web.Controllers
         {
             this.observeService = observeService;
         }
-        public IActionResult StartObserving(string advertId)
+        public IActionResult StartObserving(string advertId,bool emailNothification=false)
         {
             if (observeService.IsAdvertObserved(advertId))
                 return RedirectToAction(nameof(Observing));
 
-            bool isSuccessful = observeService.StartObservingAdvert(advertId);
+            bool isSuccessful = observeService.StartObservingAdvert(advertId, emailNothification);
 
             if (!isSuccessful)
                 return RedirectToAction(nameof(HomeController.Error), "Home");

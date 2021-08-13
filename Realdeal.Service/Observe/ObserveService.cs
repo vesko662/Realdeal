@@ -45,7 +45,7 @@ namespace Realdeal.Service.Observe
             throw new NotImplementedException();
         }
 
-        public bool StartObservingAdvert(string advertId)
+        public bool StartObservingAdvert(string advertId, bool emailNothification)
         {
             var advert = context.Adverts
                    .Where(x => x.Id == advertId)
@@ -61,6 +61,7 @@ namespace Realdeal.Service.Observe
             {
                 AdvertId = advertId,
                 UserId = userService.GetCurrentUserId(),
+                SendEmailOnUpdate=emailNothification,
             };
 
             advert.ОbservedAdverts.Add(observe);

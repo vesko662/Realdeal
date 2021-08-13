@@ -5,7 +5,7 @@ namespace Realdeal.Service.Observe
 {
     public interface IObserveService
     {
-        public bool StartObservingAdvert(string advertId);
+        public bool StartObservingAdvert(string advertId,bool emailNothification);
         public bool StopObservingAdvert(string advertId);
         public IEnumerable<AdvertShowingViewModel> GetAllObservingAdverts();
         public void RemoveAllObservingUsers(string advertId);
