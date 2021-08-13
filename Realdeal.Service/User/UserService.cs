@@ -31,7 +31,7 @@ namespace Realdeal.Service.User
 
             return user.Value;
         }
-        
+
         public string GetUserIdByAdvertId(string advertId)
         {
             var useAdvert = context.Adverts.FirstOrDefault(x => x.Id == advertId);

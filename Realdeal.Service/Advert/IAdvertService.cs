@@ -11,7 +11,6 @@ namespace Realdeal.Service.Advert
         public AdvertDetailViewModel GetAdvertDetailsById(string advertId);
         public AdvertEditFormModel FindAdvertToEdit(string advertId);
         public bool EditAdvert(AdvertEditFormModel advertEdit);
-        public UserAdvertsModel GetUserAdvert(string username);
-
+        public UserAdvertsModel GetUserAdvertById(string userId);
     }
 }

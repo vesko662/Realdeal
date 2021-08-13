@@ -78,7 +78,9 @@ namespace Realdeal.Web.Controllers
 
         public IActionResult UserAdverts(string username)
         {
-            return View(advertService.GetUserAdvert(username));
+            var userId = userService.GetUserIdByUsername(username);
+
+            return View(advertService.GetUserAdvertById(userId));
         }
 
        [Authorize]
@@ -89,7 +91,7 @@ namespace Realdeal.Web.Controllers
 
                 if (advertService.DeleteAdvert(advertId))
                 {
-                    return RedirectToAction(nameof(UserAdverts));
+                    return RedirectToAction(nameof(All));
                 }
 
                 return RedirectToAction(nameof(HomeController.Error), "Home");
@@ -157,7 +159,8 @@ namespace Realdeal.Web.Controllers
         [Authorize]
         public IActionResult MyAdverts()
         {
-            return View();
+            var userId = userService.GetCurrentUserId();
+            return View(advertService.GetUserAdvertById(userId).Adverts);
         }
 
         private string ValidateImages(List<IFormFile> images)

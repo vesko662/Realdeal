@@ -1,15 +1,7 @@
 ﻿@model IEnumerable<AdvertShowingViewModel>
 
 @{
-    ViewData["Title"] = "Observed adverts";
-}
-
-@if (Model.Any())
-{
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        Observed advert will be<strong> automatically removed when advert is deleted!</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    ViewData["Title"] = "My adverts";
 }
 
 <h2 class="text-center">@ViewData["Title"]</h2>
@@ -43,6 +35,6 @@
     </div>
     @if (!Model.Any())
     {
-        <h3 class="text-center text-primary">Currently no observing adverts!</h3>
+        <h3 class="text-center text-primary">Currently no active adverts!</h3>
     }
 </div>

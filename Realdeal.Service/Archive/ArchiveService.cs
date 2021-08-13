@@ -7,6 +7,7 @@ using Realdeal.Models.Advert;
 using System;
 using Realdeal.Models.Archive;
 using Microsoft.EntityFrameworkCore;
+using Realdeal.Service.Observe;
 
 namespace Realdeal.Service.Archive
 {
@@ -14,11 +15,15 @@ namespace Realdeal.Service.Archive
     {
         private readonly RealdealDbContext context;
         private readonly IUserService userService;
+        private readonly IObserveService observeService;
 
-        public ArchiveService(RealdealDbContext context, IUserService userService)
+        public ArchiveService(RealdealDbContext context,
+            IUserService userService,
+            IObserveService observeService)
         {
             this.context = context;
             this.userService = userService;
+            this.observeService = observeService;
         }
 
         public bool AddAdvertToArchive(string advertId)
@@ -35,7 +40,10 @@ namespace Realdeal.Service.Archive
 
             advert.IsАrchived = true;
             advert.ModifiedOn = DateTime.UtcNow;
+
             context.SaveChanges();
+
+            observeService.SendEmailOUpdate(advertId, emailTitle, emailAdvertArchiveContent);
 
             return true;
         }
@@ -84,7 +92,10 @@ namespace Realdeal.Service.Archive
 
             advert.IsАrchived = false;
             advert.ModifiedOn = DateTime.UtcNow;
+
             context.SaveChanges();
+
+            observeService.SendEmailOUpdate(advertId, emailTitle, emailAdvertReUploadContent);
 
             return true;
         }
@@ -128,7 +139,7 @@ namespace Realdeal.Service.Archive
         => context.Adverts.Find(advertId).ОbservedAdverts.Count;
 
         private int GetIntrestedPeople(string advertId)
-       => context.Adverts.Find(advertId).Messages.GroupBy(x=>x.SenderId).ToList().Count;
+       => context.Adverts.Find(advertId).Messages.GroupBy(x => x.SenderId).ToList().Count;
 
     }
 }

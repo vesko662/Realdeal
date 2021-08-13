@@ -61,9 +61,15 @@
                 <p class="lead text-break">@Model.Description</p>
             </div>
             <div class="border-top border-dark">
-                <a class="btn btn-link link-info float-start text-decoration-none"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">Observe</a>
+                @if (Model.IsObserved)
+                {
+                    <a class="btn btn-link link-info float-start text-decoration-none" asp-controller="Observe" asp-action="StopObserving" asp-route-advertId="@Model.Id" >Stop observing</a>
+                }
+                else
+                {
+                    <a class="btn btn-link link-info float-start text-decoration-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Observe</a>
+                }
                 <a class="btn btn-link link-danger float-end text-decoration-none" asp-controller="Report" asp-action="AdvertReport" asp-route-advertId="@Model.Id" asp-route-advertName="@Model.Name">Report</a>
-                <partial name="_ModalReceiveEmailOnUpdatePartial.cshtml" model="@Model.Id"/>
             </div>
         </div>
     </div>
@@ -90,4 +96,4 @@
         </div>
     </div>
 </div>
-
+<partial name="_ModalReceiveEmailOnUpdatePartial" model="@Model.Id" />

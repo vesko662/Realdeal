@@ -17,6 +17,8 @@ namespace Realdeal.Service.EmailSender
         public void SendEmail(Message message)
         {
             var emailMessage = CreateEmailMessage(message);
+
+            Send(emailMessage);
         }
 
         private MimeMessage CreateEmailMessage(Message message)
@@ -45,7 +47,6 @@ namespace Realdeal.Service.EmailSender
                 catch (System.Exception)
                 {
 
-                    throw;
                 }
                 finally
                 {

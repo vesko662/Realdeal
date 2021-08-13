@@ -17,6 +17,7 @@ namespace Realdeal.Web.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 

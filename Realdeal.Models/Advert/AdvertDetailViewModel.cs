@@ -12,6 +12,7 @@ namespace Realdeal.Models.Advert
         public decimal Price { get; set; }
         public IEnumerable<string> Images { get; set; }
         public DateTime CreatedOn { get; set; }
+        public bool IsObserved { get; set; }
 
         public UserInformationModel User { get; set; }
     }

@@ -8,6 +8,7 @@ using Realdeal.Service.CloudinaryCloud;
 using Realdeal.Service.User;
 using System.Linq;
 using System;
+using Realdeal.Service.Observe;
 
 namespace Realdeal.Service.Advert
 {
@@ -16,12 +17,17 @@ namespace Realdeal.Service.Advert
         private readonly RealdealDbContext context;
         private readonly ICloudinaryService cloudinary;
         private readonly IUserService userService;
+        private readonly IObserveService observeService;
 
-        public AdvertService(RealdealDbContext context, ICloudinaryService cloudinary, IUserService userService)
+        public AdvertService(RealdealDbContext context,
+            ICloudinaryService cloudinary,
+            IUserService userService,
+            IObserveService observeService)
         {
             this.context = context;
             this.cloudinary = cloudinary;
             this.userService = userService;
+            this.observeService = observeService;
         }
         public void CreateAdvert(AdvertFormModel advertModel)
         {
@@ -82,16 +88,20 @@ namespace Realdeal.Service.Advert
 
         public AdvertDetailViewModel GetAdvertDetailsById(string advertId)
         {
-            var advert = context.Adverts.Where(x => x.Id == advertId && x.IsDeleted == false && x.IsАrchived == false).Select(s => new AdvertDetailViewModel
-            {
-                Name = s.Name,
-                CreatedOn = s.CreatedOn,
-                Description = s.Description,
-                Id = advertId,
-                Images = s.AdvertImages.Select(i => i.ImageUrl).ToList(),
-                Price = s.Price,
-                User = userService.GetUserInfo(userService.GetUserIdByAdvertId(advertId)),
-            }).FirstOrDefault();
+            var advert = context.Adverts
+                .Where(x => x.Id == advertId && x.IsDeleted == false && x.IsАrchived == false)
+                .Select(s => new AdvertDetailViewModel
+                {
+                    Name = s.Name,
+                    CreatedOn = s.CreatedOn,
+                    Description = s.Description,
+                    Id = advertId,
+                    Images = s.AdvertImages.Select(i => i.ImageUrl).ToList(),
+                    Price = s.Price,
+                    IsObserved = s.ОbservedAdverts.Contains(new ОbservedAdvert { UserId = userService.GetCurrentUserId(), AdvertId = advertId }),
+                    User = userService.GetUserInfo(userService.GetUserIdByAdvertId(advertId)),
+                })
+                .FirstOrDefault();
 
             if (advert == null)
             {
@@ -114,7 +124,11 @@ namespace Realdeal.Service.Advert
 
             adver.IsDeleted = true;
             adver.ModifiedOn = DateTime.UtcNow;
+
             context.SaveChanges();
+
+            observeService.SendEmailOUpdate(advertId, emailTitle, emailAdvertDeleteContent);
+            observeService.RemoveAllObservingUsers(advertId);
 
             return true;
         }
@@ -157,6 +171,8 @@ namespace Realdeal.Service.Advert
 
             context.SaveChanges();
 
+            observeService.SendEmailOUpdate(advertEdit.Id, emailTitle, emailAdvertUpdateContent);
+
             return true;
         }
 
@@ -169,12 +185,11 @@ namespace Realdeal.Service.Advert
             context.SaveChanges();
         }
 
-        public UserAdvertsModel GetUserAdvert(string username)
+        public UserAdvertsModel GetUserAdvertById(string userId)
         {
-            var userId = userService.GetUserIdByUsername(username);
-
-
-            var adverts = context.Adverts.Where(x => x.UserId == userId)
+            var adverts = context.Adverts
+                .Where(x => x.UserId == userId)
+                .Where(x => x.IsDeleted == false && x.IsАrchived == false)
                 .Select(s => new AdvertShowingViewModel()
                 {
                     Id = s.Id,

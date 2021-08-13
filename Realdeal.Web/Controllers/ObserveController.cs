@@ -31,8 +31,13 @@ namespace Realdeal.Web.Controllers
         }
         public IActionResult StopObserving(string advertId)
         {
+            bool isSuccessful = observeService.StopObservingAdvert(advertId);
 
-            return Redirect("/");
+            if (!isSuccessful)
+                return RedirectToAction(nameof(HomeController.Error), "Home");
+
+            return RedirectToAction(nameof(Observing));
+
         }
     }
 }
