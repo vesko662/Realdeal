@@ -39,6 +39,18 @@ namespace Realdeal.Service.Message
             return message;
         }
 
+        public void DeleteAllMessagesToAdvert(string advertId)
+        {
+            if (context.Adverts.Any(x=>x.Id==advertId))
+            {
+                var messages = context.Messages.Where(x => x.AdvertId == advertId).ToList();
+
+                context.Messages.RemoveRange(messages);
+
+                context.SaveChanges();
+            }
+        }
+
         public IEnumerable<InboxMessageViewModel> GetInboxMessages()
         {
             var inboxMessages = new List<InboxMessageViewModel>();

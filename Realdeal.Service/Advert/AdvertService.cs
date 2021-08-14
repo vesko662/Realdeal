@@ -9,6 +9,7 @@ using Realdeal.Service.User;
 using System.Linq;
 using System;
 using Realdeal.Service.Observe;
+using Realdeal.Service.Message;
 
 namespace Realdeal.Service.Advert
 {
@@ -18,16 +19,19 @@ namespace Realdeal.Service.Advert
         private readonly ICloudinaryService cloudinary;
         private readonly IUserService userService;
         private readonly IObserveService observeService;
+        private readonly IMessageService messageService;
 
         public AdvertService(RealdealDbContext context,
             ICloudinaryService cloudinary,
             IUserService userService,
-            IObserveService observeService)
+            IObserveService observeService,
+            IMessageService messageService)
         {
             this.context = context;
             this.cloudinary = cloudinary;
             this.userService = userService;
             this.observeService = observeService;
+            this.messageService = messageService;
         }
         public void CreateAdvert(AdvertFormModel advertModel)
         {
@@ -129,6 +133,7 @@ namespace Realdeal.Service.Advert
 
             observeService.SendEmailOUpdate(advertId, emailTitle, emailAdvertDeleteContent);
             observeService.RemoveAllObservingUsers(advertId);
+            messageService.DeleteAllMessagesToAdvert(advertId);
 
             return true;
         }
