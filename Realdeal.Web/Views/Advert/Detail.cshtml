@@ -63,7 +63,7 @@
             <div class="border-top border-dark">
                 @if (Model.IsObserved)
                 {
-                    <a class="btn btn-link link-info float-start text-decoration-none" asp-controller="Observe" asp-action="StopObserving" asp-route-advertId="@Model.Id" >Stop observing</a>
+                    <a class="btn btn-link link-info float-start text-decoration-none" asp-controller="Observe" asp-action="StopObserving" asp-route-advertId="@Model.Id">Stop observing</a>
                 }
                 else
                 {
@@ -89,9 +89,12 @@
                 <div class="col-md-4 p-0">
                     <a class="btn btn-link link-primary text-decoration-none" asp-controller="Advert" asp-action="UserAdverts" asp-route-username="@Model.User.Username">See all adverts from this user</a>
                 </div>
-                <div class="col-md-3 p-0">
-                    <a class="btn btn-link link-primary text-decoration-none" asp-controller="Messege" asp-action="Send" asp-route-advertId="@Model.Id">Send message</a>
-                </div>
+                @if (!(userService.GetCurrentUserId() == userService.GetUserIdByAdvertId(Model.Id)))
+                {
+                    <div class="col-md-3 p-0">
+                        <a class="btn btn-link link-primary text-decoration-none" asp-controller="Message" asp-action="Chat" asp-route-advertId="@Model.Id" asp-route-senderId="@userService.GetCurrentUserId()" asp-route-recieverId="@userService.GetUserIdByAdvertId(Model.Id)">Send message</a>
+                    </div>
+                }
             </div>
         </div>
     </div>
