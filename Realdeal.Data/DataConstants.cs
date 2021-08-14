@@ -11,7 +11,7 @@
         public const int advertNameMaxLenght = 60;
         public const int advertDescriptionMaxLenght = 9000;
         public const int advertDescriptionMinLenght = 40;
-        public const string advertPriceMaxValue = "79228162514264337593543950335"; 
+        public const string advertPriceMaxValue = "79228162514264337593543950335";
         public const string advertPriceMinValue = "1";
 
         //Category
@@ -20,5 +20,8 @@
         //Report
         public const int reportDescriptionMinLenght = 10;
         public const int reportDescriptionMaxLenght = 3000;
+
+        //Message
+        public const int messageMaxLenght = 400;
     }
 }

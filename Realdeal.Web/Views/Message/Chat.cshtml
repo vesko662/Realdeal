@@ -1,0 +1,43 @@
+﻿@model MessageChatViewModel
+@inject IUserService userService
+
+@{
+    ViewData["Title"] = $"Chat - {Model.RecieverName}";
+    var currentUsr = userService.GetCurrentUserId();
+    }
+
+<h3 class="text-center mb-4"><a class=" text-decoration-none" asp-controller="Advert" asp-action="Detail" asp-route-advertId="@Model.AdvertId">@Model.AdvertName</a></h3>
+
+<div class="container">
+    <div id="messages">
+        @if (Model.Messages.Any())
+        {
+            @foreach (var message in Model.Messages)
+            {
+              <div class="row">
+                  <div class="mb-2 offset-md-2 col-md-8 border border-1 border-dark">
+                      <div class="row">
+                          <div style="background-color:silver" class="col-md-2 text-center text-break border-end border-2 border-dark"><p class="float-end">@message.SenderName</p></div>
+                          <div class="col-md-8 text-break"><span class="float-sm-end float-md-none float-end">@message.Content</span></div>
+                          <div class="col-md-2 text-center"><span class="float-end">@message.CreatedOn</span></div>
+                      </div>
+                  </div>
+              </div>
+            }
+        }
+    </div>
+    <div>
+        <textarea id="messageInput" asp-for="@Model.InputModel.Content" class="form-control"></textarea>
+
+        <input id="advertId" asp-for="@Model.InputModel.AdvertId" type="hidden" value="@Model.AdvertId" />
+        <input id="senderId" asp-for="@Model.InputModel.SenderId" type="hidden" value="@currentUsr" />
+        <input id="recieverId" asp-for="@Model.InputModel.RecieverId" type="hidden" value="@(currentUsr==Model.SenderId?Model.RecieverId:Model.SenderId)" />
+
+        <button id="sendButton" type="submit" class="btn btn-primary">Send</button>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/lib/signalr/signalr.js"></script>
+    <script src="~/js/chat.js"></script>
+}

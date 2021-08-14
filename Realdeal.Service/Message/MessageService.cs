@@ -16,6 +16,29 @@ namespace Realdeal.Service.Message
             this.userService = userService;
             this.context = context;
         }
+
+        public Data.Models.Message CreateMessage(string senderId, string recieverId, string advertId, string content)
+        {
+            var advers = context.Adverts.ToList();
+            if (!advers.Any(x => x.Id == advertId))
+            {
+                return null;
+            }
+
+            var message = new Data.Models.Message
+            {
+                SenderId = senderId,
+                ReciverId = recieverId,
+                AdvertId = advertId,
+                Content = content,
+            };
+
+            context.Messages.Add(message);
+            context.SaveChanges();
+
+            return message;
+        }
+
         public IEnumerable<InboxMessageViewModel> GetInboxMessages()
         {
             var inboxMessages = new List<InboxMessageViewModel>();
@@ -41,7 +64,9 @@ namespace Realdeal.Service.Message
                     Content=lastMsg.Content,
                     LastMessageDate = lastMsg.CreatedOn.ToString("MM/dd hh:mm tt"),
                     Sender=userService.GetUsernameById(lastMsg.SenderId),
+                    SenderId=lastMsg.SenderId,
                     Resiever = userService.GetUsernameById(lastMsg.ReciverId),
+                    ResieverId=lastMsg.ReciverId,
                     LastMessageSender=userService.GetUserFullName(lastMsg.SenderId),
                 };
 
@@ -49,6 +74,45 @@ namespace Realdeal.Service.Message
             }
 
             return inboxMessages;
+        }
+
+        public IEnumerable<MessageViewModel> GetMessagesForAdvert(string advertId, string senderId, string recieverId)
+        {
+            var advert = context.Adverts.Find(advertId);
+            var advertOwnerId = advert.UserId;
+
+            var messages = context.Messages
+                .Where(x => x.AdvertId == advertId && (x.SenderId == senderId || x.SenderId == advertOwnerId || x.ReciverId == senderId) &&
+                (x.ReciverId == recieverId || x.ReciverId == advertOwnerId || x.SenderId == recieverId))
+                .OrderBy(date => date.CreatedOn)
+                .Select(s => new MessageViewModel
+                {
+                    AdvertId = advertId,
+                    Content = s.Content,
+                    CreatedOn = s.CreatedOn.ToString("MM/dd hh:mm tt"),
+                    RecieverId = recieverId,
+                    SenderId = senderId,
+                    SenderName = userService.GetUserFullName(s.SenderId)
+                })
+                .ToList();
+
+           // messages
+                //.ForEach(x => x.Content = HttpUtility.HtmlDecode(x.Content));
+
+            return messages;
+        }
+
+        public MessageViewModel GetMessageViewModel(string advertId, string senderId, string recieverId)
+        {
+            var messageViewModel = new MessageViewModel()
+            {
+                SenderId = senderId,
+                RecieverId = recieverId,
+                AdvertId = advertId,
+                SenderName = userService.GetUserFullName(senderId),
+            };
+
+            return messageViewModel;
         }
     }
 }

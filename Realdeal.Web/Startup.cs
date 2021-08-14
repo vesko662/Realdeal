@@ -19,6 +19,7 @@ using Realdeal.Service.Message;
 using Realdeal.Service.Observe;
 using Realdeal.Service.Report;
 using Realdeal.Service.User;
+using Realdeal.Web.Hubs;
 
 namespace Realdeal.Web
 {
@@ -50,6 +51,8 @@ namespace Realdeal.Web
             {
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
+
+            services.AddSignalR();
 
             Account cloudinaryAccount = new Account(
                 this.Configuration["Cloudinary:CloudName"],
@@ -100,6 +103,7 @@ namespace Realdeal.Web
             app.UseEndpoints(endpoints
             =>
             {
+                endpoints.MapHub<ChatHub>("/chat");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
