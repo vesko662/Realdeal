@@ -6,7 +6,6 @@ namespace Realdeal.Service.Advert
     {
         void CreateAdvert(AdvertFormModel advert);
         bool DeleteAdvert(string advertId);
-        string GetAdvertName(string advertId);
 
         AllAdvertsQueryModel GetAllAdverts(AllAdvertsQueryModel queryAdverts);
         public AdvertDetailViewModel GetAdvertDetailsById(string advertId);

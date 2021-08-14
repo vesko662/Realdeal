@@ -19,7 +19,7 @@
         <tbody>
             @foreach (var inbox in Model)
             {
-                <tr onclick="location.href='/Message/Chat?advertId=@inbox.AdvertId&senderId=@inbox.SenderId&recieverId=@inbox.ResieverId'" class="table-primary">
+                <tr class="table-primary">
                     <th scope="row">@inbox.AdvertName</th>
                     <td>@inbox.LastMessageSender</td>
                     <td>@inbox.Content</td>

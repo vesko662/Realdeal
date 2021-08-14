@@ -211,17 +211,5 @@ namespace Realdeal.Service.Advert
                 User = userService.GetUserInfo(userId),
             };
         }
-
-        public string GetAdvertName(string advertId)
-        {
-            var advert = context.Adverts.Find(advertId);
-
-            if (advert==null)
-            {
-                return string.Empty;
-            }
-
-            return advert.Name;
-        }
     }
 }
