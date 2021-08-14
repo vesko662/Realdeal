@@ -15,6 +15,7 @@ using Realdeal.Service.Category;
 using Realdeal.Service.CloudinaryCloud;
 using Realdeal.Service.EmailSender;
 using Realdeal.Service.EmailSender.Configuration;
+using Realdeal.Service.Message;
 using Realdeal.Service.Observe;
 using Realdeal.Service.Report;
 using Realdeal.Service.User;
@@ -73,6 +74,7 @@ namespace Realdeal.Web
             services.AddTransient<IArchiveService, ArchiveService>();
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IObserveService, ObserveService>();
+            services.AddTransient<IMessageService, MessageService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -32,6 +32,19 @@ namespace Realdeal.Service.User
             return user.Value;
         }
 
+        public string GetUserFullName(string userId)
+        {
+
+            var user = context.Users.FirstOrDefault(x => x.Id == userId);
+
+            if (user == null)
+            {
+                return string.Empty;
+            }
+
+            return user.Firstname+" "+user.Lastname;
+        }
+
         public string GetUserIdByAdvertId(string advertId)
         {
             var useAdvert = context.Adverts.FirstOrDefault(x => x.Id == advertId);
@@ -65,6 +78,18 @@ namespace Realdeal.Service.User
             UserProfilePictureURL = s.ProfilePhotoUrl,
             UserSince = s.CreteOn,
         }).FirstOrDefault();
+
+        public string GetUsernameById(string userId)
+        {
+            var user = context.Users.FirstOrDefault(x => x.Id == userId);
+
+            if (user == null)
+            {
+                return string.Empty;
+            }
+
+            return user.UserName;
+        }
 
         public bool IsUserAdmin()
         => contextAccessor.HttpContext.User.IsInRole(adminRole);

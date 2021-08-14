@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Realdeal.Models.Category;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,6 +30,6 @@ namespace Realdeal.Models.Advert
         [Range(typeof(decimal), advertPriceMinValue, advertPriceMaxValue, ErrorMessage = "The advert price is invalid")]
         public decimal Price { get; set; }
 
-        public Dictionary<string, IEnumerable<AdvertCategoryViewModel>> Categories { get; set; }
+        public Dictionary<string, IEnumerable<CategoryModel>> Categories { get; set; }
     }
 }

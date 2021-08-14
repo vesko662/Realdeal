@@ -13,7 +13,6 @@ namespace Realdeal.Data.Models
         {
             this.Id = Guid.NewGuid().ToString();
             this.Adverts = new HashSet<Advert>();
-            this.Comments = new HashSet<Comment>();
             this.ОbservedAdverts = new HashSet<ОbservedAdvert>();
             this.AdvertReports = new HashSet<AdvertReport>();
             this.CreteOn = DateTime.UtcNow;
@@ -34,8 +33,6 @@ namespace Realdeal.Data.Models
 
         public ICollection<Advert> Adverts { get; set; }
 
-        [InverseProperty("Commented")]
-        public ICollection<Comment> Comments { get; set; }
         [InverseProperty("User")]
         public ICollection<AdvertReport> AdvertReports { get; set; }
         public ICollection<ОbservedAdvert> ОbservedAdverts { get; set; }

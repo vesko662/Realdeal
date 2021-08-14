@@ -17,7 +17,7 @@ namespace Realdeal.Web.Controllers
 
         public IActionResult Index()
         {
-
+            //keshirane na categoriii na home page
             return View();
         }
 

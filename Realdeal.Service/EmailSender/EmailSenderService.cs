@@ -1,6 +1,6 @@
 ﻿using MimeKit;
 using Realdeal.Service.EmailSender.Configuration;
-using Realdeal.Service.EmailSender.Model;
+using Realdeal.Service.EmailSender;
 using MimeKit.Text;
 using MailKit.Net.Smtp;
 
@@ -14,14 +14,14 @@ namespace Realdeal.Service.EmailSender
         {
             this.emailConfig = emailConfiguration;
         }
-        public void SendEmail(Message message)
+        public void SendEmail(Model.Message message)
         {
             var emailMessage = CreateEmailMessage(message);
 
             Send(emailMessage);
         }
 
-        private MimeMessage CreateEmailMessage(Message message)
+        private MimeMessage CreateEmailMessage(Model.Message message)
         {
             var emailMessage=new MimeMessage();
             emailMessage.From.Add(new MailboxAddress(emailConfig.From));

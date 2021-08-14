@@ -1,11 +1,11 @@
-﻿using Realdeal.Models.Advert;
+﻿using Realdeal.Models.Category;
 using System.Collections.Generic;
 
 namespace Realdeal.Service.Category
 {
     public interface ICategoryService
     {
-        Dictionary<string, IEnumerable<AdvertCategoryViewModel>> GetAllCategories();
+        Dictionary<string, IEnumerable<CategoryModel>> GetAllCategories();
 
         bool DoesCategoryExist(string categoryId);
     }

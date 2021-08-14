@@ -9,5 +9,7 @@ namespace Realdeal.Service.User
         public string GetUserIdByUsername(string username);
         public string GetUserIdByAdvertId(string advertId);
         public UserInformationModel GetUserInfo(string userId);
+        public string GetUsernameById(string userId);
+        public string GetUserFullName(string userId);
     }
 }

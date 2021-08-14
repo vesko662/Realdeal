@@ -1,9 +1,9 @@
-﻿using Realdeal.Service.EmailSender.Model;
+﻿using Realdeal.Service.EmailSender;
 
 namespace Realdeal.Service.EmailSender
 {
     public interface IEmailSenderService
     {
-        void SendEmail(Message message);
+        void SendEmail(Model.Message message);
     }
 }

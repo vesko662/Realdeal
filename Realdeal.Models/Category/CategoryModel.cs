@@ -1,6 +1,6 @@
-﻿namespace Realdeal.Models.Advert
+﻿namespace Realdeal.Models.Category
 {
-    public class AdvertCategoryViewModel
+    public class CategoryModel
     {
         public string Id { get; set; }
         public string Name { get; set; }
