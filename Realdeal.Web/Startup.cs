@@ -20,6 +20,7 @@ using Realdeal.Service.Observe;
 using Realdeal.Service.Report;
 using Realdeal.Service.User;
 using Realdeal.Web.Hubs;
+using Realdeal.Web.Infrastructure;
 
 namespace Realdeal.Web
 {
@@ -70,7 +71,7 @@ namespace Realdeal.Web
 
             services.AddSingleton(emailConfiguration);
 
-            services.AddTransient<IEmailSenderService,EmailSenderService>();
+            services.AddTransient<IEmailSenderService, EmailSenderService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAdvertService, AdvertService>();
@@ -83,6 +84,11 @@ namespace Realdeal.Web
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
+
+            app.PrepDatabaes();
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -94,12 +100,12 @@ namespace Realdeal.Web
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection()
-               .UseStaticFiles()
-               .UseRouting();
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseRouting();
 
-            app.UseAuthentication()
-               .UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseStatusCodePagesWithRedirects("/error/{0}");
 

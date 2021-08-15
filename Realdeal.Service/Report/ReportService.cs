@@ -20,6 +20,7 @@ namespace Realdeal.Service.Report
             var feedback = new Feedback()
             {
                 Description = feedbackModel.Description,
+                MakerId = userService.GetCurrentUserId(),
             };
 
             context.Feedbacks.Add(feedback);

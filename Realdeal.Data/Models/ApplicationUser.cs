@@ -15,6 +15,7 @@ namespace Realdeal.Data.Models
             this.Adverts = new HashSet<Advert>();
             this.ОbservedAdverts = new HashSet<ОbservedAdvert>();
             this.AdvertReports = new HashSet<AdvertReport>();
+            this.Feedbacks = new HashSet<Feedback>();
             this.CreteOn = DateTime.UtcNow;
         }
 
@@ -36,6 +37,6 @@ namespace Realdeal.Data.Models
         [InverseProperty("User")]
         public ICollection<AdvertReport> AdvertReports { get; set; }
         public ICollection<ОbservedAdvert> ОbservedAdverts { get; set; }
-
+        public ICollection<Feedback> Feedbacks { get; set; }
     }
 }

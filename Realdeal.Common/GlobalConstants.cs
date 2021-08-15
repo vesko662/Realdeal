@@ -12,6 +12,8 @@
 
         public const string cloudFolderForAdvertImages = "advertImages";
 
+        public const string cloudFolderFormainCategoryImage = "mainCategoryImages";
+
         public const string cloadFolderForUserProfileImage = "userImages";
 
         public const string emailTitle = "News from Realdeal!";

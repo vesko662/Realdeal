@@ -95,7 +95,7 @@ namespace Realdeal.Web.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     Firstname = Input.FirsName,
                     Lastname = Input.Lastname,
-                    ProfilePhotoUrl = "https://i.imgur.com/HYIVDH0.jpg",
+                    ProfilePhotoUrl = "https://i.imgur.com/HYIVDH0.jpg"
                 };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);

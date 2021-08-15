@@ -34,33 +34,6 @@
         <div class="row justify-content-center flex">
             <span class="text-center text-dark fs-2 mt-1 mb-3">Newest adverts</span>
 
-            @foreach (var advert in Model.NewestAdverts)
-            {
-                <div class="col-md-4 mt-2 pb-3">
-                    <a class="text-decoration-none" asp-controller="Advert" asp-action="Detail" asp-route-advertId="@advert.Id">
-                        <div class="card mt-3">
-                            <div class="product align-items-center p-2 text-center">
-                                <img src="@advert.ImageURL" alt="@advert.Name" class=" card-img-top" />
-                                <h5 class="mt-2">@advert.Name</h5>
-                                <div class="mt-2 info">
-                                    <span class="text1 d-block">@(advert.Description.Length > 20 ? advert.Description.Substring(0,20) + " ..." : advert.Description )</span>
-                                </div>
-                                <div class="cost mt-3 text-dark">
-                                    <span>@advert.Price $</span>
-                                </div>
-                            </div>
-                            <div class="p-3  text-white text-center shoe">
-                                <span class="text-uppercase">More info</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            }
-         <a class="btn btn-link text-decoration-none fs-4" asp-controller="Advert" asp-action="All">See more adverts</a>
-        </div>
-        @if (!Model.NewestAdverts.Any())
-        {
-            <h3 class="text-center text-primary">No adverts found!</h3>
-        }
+            <partial name="_AdvertCardPartialView" model="Model.NewestAdverts" />
     </div>
 </div>

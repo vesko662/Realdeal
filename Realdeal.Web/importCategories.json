@@ -1,0 +1,315 @@
+[
+  {
+    "Name": "Auto",
+    "CategoryImage": "CategoryImage",
+    "SubCategories": [
+      {
+        "Name": "Cars and SUVs"
+      },
+      {
+        "Name": "Buses"
+      },
+      {
+        "Name": "Trucks"
+      },
+      {
+        "Name": "Specialized equipment"
+      },
+      {
+        "Name": "Motorcycles"
+      },
+      {
+        "Name": "Caravans and campers"
+      },
+      {
+        "Name": "Water transport"
+      },
+      {
+        "Name": "Trailers"
+      },
+      {
+        "Name": "Tires and wheels"
+      }
+    ]
+  },
+  {
+    "Name": "Properties",
+    "CategoryImage": "CategoryImage",
+    "SubCategories": [
+      {
+        "Name": "Apartments"
+      },
+      {
+        "Name": "Houses, villas"
+      },
+      {
+        "Name": "Agricultural land"
+      },
+      {
+        "Name": "Business properties"
+      },
+      {
+        "Name": "Garages and parking"
+      }
+    ]
+  },
+  {
+    "Name": "Fashion",
+    "CategoryImage": "CategoryImage",
+    "SubCategories": [
+      {
+        "Name": "Women's clothing"
+      },
+      {
+        "Name": "Men's clothing"
+      },
+      {
+        "Name": "Women's shoes"
+      },
+      {
+        "Name": "Men's shoes"
+      },
+      {
+        "Name": "Perfumery, cosmetics"
+      },
+      {
+        "Name": "Jewelery"
+      },
+      {
+        "Name": "Watches"
+      },
+      {
+        "Name": "Accessories"
+      }
+    ]
+  },
+  {
+    "Name": "Electronics",
+    "CategoryImage": "CategoryImage",
+    "SubCategories": [
+      {
+        "Name": "Phones"
+      },
+      {
+        "Name": "Audio equipment"
+      },
+      {
+        "Name": "TV equipment"
+      },
+      {
+        "Name": "Cameras and Camcorders"
+      },
+      {
+        "Name": "Laptops"
+      },
+      {
+        "Name": "Desktops"
+      },
+      {
+        "Name": "Watches"
+      },
+      {
+        "Name": "Computer Peripherals"
+      },
+      {
+        "Name": "Network equipment"
+      },
+      {
+        "Name": "Tablets"
+      },
+      {
+        "Name": "Games and Consoles"
+      },
+      {
+        "Name": "Video surveillance"
+      },
+      {
+        "Name": "Navigation"
+      },
+      {
+        "Name": "Drones"
+      },
+      {
+        "Name": "Other electronics"
+      }
+    ]
+  },
+  {
+    "Name": "Hobby",
+    "CategoryImage": "CategoryImage",
+    "SubCategories": [
+      {
+        "Name": "Books"
+      },
+      {
+        "Name": "Sporting Goods"
+      },
+      {
+        "Name": "Movies"
+      },
+      {
+        "Name": "Music"
+      },
+      {
+        "Name": "Musical instruments"
+      },
+      {
+        "Name": "Antiques and Collectibles"
+      },
+      {
+        "Name": "Weapons, hunting and fishing"
+      },
+      {
+        "Name": "Camping equipment"
+      },
+      {
+        "Name": "Fun Games"
+      }
+    ]
+  },
+  {
+    "Name": "Home and garden",
+    "CategoryImage": "CategoryImage",
+    "SubCategories": [
+      {
+        "Name": "Furniture"
+      },
+      {
+        "Name": "Home Appliances"
+      },
+      {
+        "Name": "Art and decoration"
+      },
+      {
+        "Name": "Lighting"
+      },
+      {
+        "Name": "Kitchen utensils"
+      },
+      {
+        "Name": "Garden"
+      },
+      {
+        "Name": "Houseplants"
+      },
+      {
+        "Name": "Construction"
+      },
+      {
+        "Name": "Flooring"
+      },
+      {
+        "Name": "Doors"
+      },
+      {
+        "Name": "Tools"
+      },
+      {
+        "Name": "Heating fuels"
+      },
+      {
+        "Name": "Other household goods"
+      }
+
+    ]
+  },
+  {
+    "Name": "Animals",
+    "CategoryImage": "CategoryImage",
+    "SubCategories": [
+      {
+        "Name": "Dogs"
+      },
+      {
+        "Name": "Cats"
+      },
+      {
+        "Name": "Birds"
+      },
+      {
+        "Name": "Ornamental fish"
+      },
+      {
+        "Name": "Rodents and small animals"
+      },
+      {
+        "Name": "Exotic and terrarium"
+      },
+      {
+        "Name": "Agricultural"
+      },
+      {
+        "Name": "Other animals"
+      },
+      {
+        "Name": "Goods for animals"
+      }
+    ]
+  },
+  {
+    "Name": "Business, Machinery, Tools",
+    "CategoryImage": "CategoryImage",
+    "SubCategories": [
+      {
+        "Name": "Commercial equipment"
+      },
+      {
+        "Name": "Hotel and restaurant equipment"
+      },
+      {
+        "Name": "Hairdressing and beauty equipment"
+      },
+      {
+        "Name": "Industrial car equipment"
+      },
+      {
+        "Name": "Agricultural vehicles"
+      },
+      {
+        "Name": "Medical equipment"
+      },
+      {
+        "Name": "Tools"
+      },
+      {
+        "Name": "Machinery and industrial equipment"
+      },
+      {
+        "Name": "Office furniture and materials"
+      }
+    ]
+  },
+  {
+    "Name": "Children and babies",
+    "CategoryImage": "CategoryImage",
+    "SubCategories": [
+      {
+        "Name": "Baby clothes (0-2y)"
+      },
+      {
+        "Name": "Children's clothing"
+      },
+      {
+        "Name": "Shoes"
+      },
+      {
+        "Name": "Toys"
+      },
+      {
+        "Name": "For the children's room"
+      },
+      {
+        "Name": "For a walk with the child"
+      },
+      {
+        "Name": "Baby accessories"
+      },
+      {
+        "Name": "Children's accessories"
+      },
+      {
+        "Name": "Goods for twins"
+      }
+    ]
+  }
+]

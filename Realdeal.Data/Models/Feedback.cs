@@ -19,6 +19,10 @@ namespace Realdeal.Data.Models
         [MaxLength(reportDescriptionMaxLenght)]
         public string Description { get; set; }
 
+        public string MakerId { get; set; }
+        public ApplicationUser Maker { get; set; }
+
+
         [Required]
         public DateTime CreatedOn { get; set; }
 
