@@ -1,9 +1,66 @@
-﻿@using System;
+﻿@model HomeViewModel
+
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-   
+<div class="container">
+    <div class="container bg-light p-3">
+        <div class="row">
+            <span class="text-center text-dark fs-2 mt-1 mb-3">Main categories</span>
+            @foreach (var mainCat in Model.Categories)
+            {
+                <div class="col-md-2 col-sm-6 p-2 d-flex justify-content-center">
+                    <div>
+                        <img class="img-fluid" style="max-height:150px;max-width:150px" src="@mainCat.ImgUrl" alt="@mainCat.Name" />
+                        <div class="dropdown mt-2">
+                            <button style="white-space: normal !important; word-wrap: break-word;max-width:135px" class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                @mainCat.Name
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                @foreach (var subCat in mainCat.SubCategories)
+                                {
+                                    <li><a class="dropdown-item" asp-controller="Advert" asp-action="All" asp-route-categoryId="@subCat.Id">@subCat.Name</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 
+    <div class="mt-4 mb-5 container bg-light">
+        <div class="row justify-content-center flex">
+            <span class="text-center text-dark fs-2 mt-1 mb-3">Newest adverts</span>
+
+            @foreach (var advert in Model.NewestAdverts)
+            {
+                <div class="col-md-4 mt-2 pb-3">
+                    <a class="text-decoration-none" asp-controller="Advert" asp-action="Detail" asp-route-advertId="@advert.Id">
+                        <div class="card mt-3">
+                            <div class="product align-items-center p-2 text-center">
+                                <img src="@advert.ImageURL" alt="@advert.Name" class=" card-img-top" />
+                                <h5 class="mt-2">@advert.Name</h5>
+                                <div class="mt-2 info">
+                                    <span class="text1 d-block">@(advert.Description.Length > 20 ? advert.Description.Substring(0,20) + " ..." : advert.Description )</span>
+                                </div>
+                                <div class="cost mt-3 text-dark">
+                                    <span>@advert.Price $</span>
+                                </div>
+                            </div>
+                            <div class="p-3  text-white text-center shoe">
+                                <span class="text-uppercase">More info</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+         <a class="btn btn-link text-decoration-none fs-4" asp-controller="Advert" asp-action="All">See more adverts</a>
+        </div>
+        @if (!Model.NewestAdverts.Any())
+        {
+            <h3 class="text-center text-primary">No adverts found!</h3>
+        }
+    </div>
 </div>

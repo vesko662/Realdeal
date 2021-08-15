@@ -19,8 +19,8 @@
                     <option value="" selected>All categories</option>
                     @foreach (var mainCat in Model.Categories)
                     {
-                        <optgroup label="@mainCat.Key">
-                            @foreach (var category in mainCat.Value)
+                        <optgroup label="@mainCat.Name">
+                            @foreach (var category in mainCat.SubCategories)
                             {
                                 <option value="@category.Id">@category.Name</option>
                             }

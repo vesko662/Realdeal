@@ -10,6 +10,7 @@ using System.Linq;
 using System;
 using Realdeal.Service.Observe;
 using Realdeal.Service.Message;
+using System.Collections.Generic;
 
 namespace Realdeal.Service.Advert
 {
@@ -221,12 +222,26 @@ namespace Realdeal.Service.Advert
         {
             var advert = context.Adverts.Find(advertId);
 
-            if (advert==null)
+            if (advert == null)
             {
                 return string.Empty;
             }
 
             return advert.Name;
         }
+
+        public IEnumerable<AdvertShowingViewModel> GetNewestAdverts(int count = maxNewAdvertOnHomePage)
+        => context.Adverts
+            .Where(x => x.IsDeleted == false && x.IsАrchived == false)
+            .OrderByDescending(x => x.CreatedOn)
+            .Take(count)
+            .Select(x => new AdvertShowingViewModel
+            {
+                Name = x.Name,
+                Id = x.Id,
+                Description = x.Description,
+                ImageURL = x.AdvertImages.FirstOrDefault().ImageUrl,
+                Price = x.Price
+            }).ToList();
     }
 }

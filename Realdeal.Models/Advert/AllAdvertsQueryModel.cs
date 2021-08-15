@@ -10,6 +10,6 @@ namespace Realdeal.Models.Advert
         public string CategoryId { get; set; }
         public AdvertSorting AdvertSorting { get; set; }
         public IEnumerable<AdvertShowingViewModel> Advers { get; set; }
-        public Dictionary<string, IEnumerable<CategoryModel>> Categories { get; set; }
+        public IEnumerable<MainCategoriesShowingViewModel> Categories { get; set; }
     }
 }

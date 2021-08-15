@@ -1,4 +1,6 @@
 ﻿using Realdeal.Models.Advert;
+using System.Collections.Generic;
+using static Realdeal.Common.GlobalConstants;
 
 namespace Realdeal.Service.Advert
 {
@@ -13,5 +15,6 @@ namespace Realdeal.Service.Advert
         public AdvertEditFormModel FindAdvertToEdit(string advertId);
         public bool EditAdvert(AdvertEditFormModel advertEdit);
         public UserAdvertsModel GetUserAdvertById(string userId);
+        public IEnumerable<AdvertShowingViewModel> GetNewestAdverts(int count = maxNewAdvertOnHomePage);
     }
 }

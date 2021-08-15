@@ -53,6 +53,7 @@ namespace Realdeal.Web
             });
 
             services.AddSignalR();
+            services.AddMemoryCache();
 
             Account cloudinaryAccount = new Account(
                 this.Configuration["Cloudinary:CloudName"],

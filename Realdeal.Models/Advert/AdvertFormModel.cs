@@ -28,6 +28,6 @@ namespace Realdeal.Models.Advert
         [Range(typeof(decimal), advertPriceMinValue, advertPriceMaxValue, ErrorMessage = "The advert price is invalid")]
         public decimal Price { get; set; }
 
-        public Dictionary<string, IEnumerable<CategoryModel>> Categories { get; set; }
+        public IEnumerable<MainCategoriesShowingViewModel> Categories { get; set; }
     }
 }

@@ -1,24 +1,57 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Caching.Memory;
+using Realdeal.Models.Category;
+using Realdeal.Models.Home;
 using Realdeal.Models;
+using Realdeal.Service.Advert;
+using Realdeal.Service.Category;
+using System.Collections.Generic;
 using System.Diagnostics;
-
+using System;
 
 namespace Realdeal.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ICategoryService categoryService;
+        private readonly IAdvertService advertService;
+        private readonly IMemoryCache memoryCache;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ICategoryService categoryService,
+            IAdvertService advertService,
+            IMemoryCache memoryCache
+            )
         {
-            _logger = logger;
+            this.categoryService = categoryService;
+            this.advertService = advertService;
+            this.memoryCache = memoryCache;
         }
 
         public IActionResult Index()
         {
-            //keshirane na categoriii na home page
-            return View();
+
+            var categoryCacheKey ="CategoryCacheKey";
+            var categories = this.memoryCache.Get<IEnumerable<MainCategoriesShowingViewModel>>(categoryCacheKey);
+
+            if (categories==null)
+            {
+                categories = categoryService.GetAllCategories();
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromHours(1));
+
+                this.memoryCache.Set(categoryCacheKey, categories, cacheOptions);
+            }
+
+            var newestAdvert = advertService.GetNewestAdverts();
+
+            var homePageModel = new HomeViewModel()
+            {
+                Categories = categories,
+                NewestAdverts = newestAdvert,
+            };
+
+            return View(homePageModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

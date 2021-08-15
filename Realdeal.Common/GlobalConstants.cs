@@ -6,6 +6,8 @@
 
         public const int maxArchiveAdvertsPerUser = 9;
 
+        public const int maxNewAdvertOnHomePage = 3;
+
         public const string adminRole = "Administrator";
 
         public const string cloudFolderForAdvertImages = "advertImages";
