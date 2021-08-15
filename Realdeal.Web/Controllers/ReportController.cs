@@ -32,7 +32,7 @@ namespace Realdeal.Web.Controllers
 
             if (!isSuccessful)
             {
-                return RedirectToAction(nameof(HomeController.Error), "Home");
+                return RedirectToAction(nameof(ErrorController.Error), "Error");
             }
 
             return Redirect("/");

@@ -21,7 +21,8 @@ namespace Realdeal.Web.Controllers
             bool isSuccessful = observeService.StartObservingAdvert(advertId, emailNothification);
 
             if (!isSuccessful)
-                return RedirectToAction(nameof(HomeController.Error), "Home");
+                return RedirectToAction(nameof(ErrorController.Error), "Error");
+
 
             return RedirectToAction(nameof(Observing));
         }
@@ -34,7 +35,7 @@ namespace Realdeal.Web.Controllers
             bool isSuccessful = observeService.StopObservingAdvert(advertId);
 
             if (!isSuccessful)
-                return RedirectToAction(nameof(HomeController.Error), "Home");
+                return RedirectToAction(nameof(ErrorController.Error), "Error");
 
             return RedirectToAction(nameof(Observing));
 

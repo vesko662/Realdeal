@@ -83,7 +83,7 @@ namespace Realdeal.Web.Controllers
             return View(advertService.GetUserAdvertById(userId));
         }
 
-       [Authorize]
+        [Authorize]
         public IActionResult Delete(string advertId)
         {
             if (userService.IsUserAdmin() || userService.GetCurrentUserId() == userService.GetUserIdByAdvertId(advertId))
@@ -93,8 +93,6 @@ namespace Realdeal.Web.Controllers
                 {
                     return RedirectToAction(nameof(All));
                 }
-
-                return RedirectToAction(nameof(HomeController.Error), "Home");
             }
 
             return Unauthorized();
@@ -106,6 +104,10 @@ namespace Realdeal.Web.Controllers
             if (userService.IsUserAdmin() || userService.GetCurrentUserId() == userService.GetUserIdByAdvertId(advertId))
             {
                 var advert = advertService.FindAdvertToEdit(advertId);
+                if (advert == null)
+                {
+                    return RedirectToAction(nameof(All));
+                }
                 advert.Categories = categoryService.GetAllCategories();
                 return View(advert);
             }
@@ -145,12 +147,10 @@ namespace Realdeal.Web.Controllers
                     }
                 }
 
-                if (!advertService.EditAdvert(advert))
+                if (advertService.EditAdvert(advert))
                 {
-                    return RedirectToAction(nameof(HomeController.Error), "Home");
+                    return RedirectToAction(nameof(All));
                 }
-
-                return RedirectToAction(nameof(All));
             }
 
             return Unauthorized();

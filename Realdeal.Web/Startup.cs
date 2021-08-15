@@ -101,6 +101,8 @@ namespace Realdeal.Web
             app.UseAuthentication()
                .UseAuthorization();
 
+            app.UseStatusCodePagesWithRedirects("/error/{0}");
+
             app.UseEndpoints(endpoints
             =>
             {

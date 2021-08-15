@@ -9,7 +9,7 @@
 <h3 class="text-center mb-4"><a class=" text-decoration-none" asp-controller="Advert" asp-action="Detail" asp-route-advertId="@Model.AdvertId">@Model.AdvertName</a></h3>
 
 <div class="container">
-    <div style="overflow:hidden; max-height:400px; overflow-y:scroll;" class="chat-container">
+    <div style="overflow:hidden; max-height:400px; min-height:400px; overflow-y:scroll;" class="chat-container">
         <div id="messages">
             @if (Model.Messages.Any())
             {

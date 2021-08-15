@@ -91,6 +91,9 @@ namespace Realdeal.Service.User
             return user.UserName;
         }
 
+        public string GetUserProfilePhoto()
+       => context.Users.FirstOrDefault(x => x.Id == GetCurrentUserId()).ProfilePhotoUrl;
+
         public bool IsUserAdmin()
         => contextAccessor.HttpContext.User.IsInRole(adminRole);
     }
