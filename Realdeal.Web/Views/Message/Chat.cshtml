@@ -9,7 +9,7 @@
 <h3 class="text-center mb-4"><a class=" text-decoration-none" asp-controller="Advert" asp-action="Detail" asp-route-advertId="@Model.AdvertId">@Model.AdvertName</a></h3>
 
 <div class="container">
-    <div class="chat-container">
+    <div style="overflow:hidden; max-height:400px; overflow-y:scroll;" class="chat-container">
         <div id="messages">
             @if (Model.Messages.Any())
             {
@@ -29,7 +29,7 @@
         </div>
     </div>
     <div>
-        <div class="row">
+        <div class="row mt-4">
             <div class="offset-2 col-7">
                 <textarea id="messageInput" asp-for="@Model.InputModel.Content" rows="1" class="form-control" placeholder="Enter your message ..."></textarea>
 
