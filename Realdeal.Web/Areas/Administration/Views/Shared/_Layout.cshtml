@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Realdeal - @ViewData["Title"] </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary p-2">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <a class="navbar-brand" asp-action="Index">
                     <img height="50" src="~/logo.png" alt="Realdeal" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,9 +19,15 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-
-                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Categories
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" asp-action="AllCategories">All categories</a>
+                                <a class="dropdown-item" asp-action="CreateMainCategory">Create main category</a>
+                                <a class="dropdown-item" asp-action="CreateSubCategory">Create subcategory</a>
+                            </div>
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -44,12 +49,12 @@
         </main>
     </div>
 
-    <footer class="p-2 border-top footer bottom-0 bg-primary text-white">
+    @*<footer class="p-2 border-top footer bottom-0 bg-primary text-white">
         <div class="container">
             <span>© Realdeal - @DateTime.UtcNow.Year </span><br />
             <a class="btn btn-link text-white text-decoration-none" asp-controller="Report" asp-action="Feedback">Feedback</a>
         </div>
-    </footer>
+    </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

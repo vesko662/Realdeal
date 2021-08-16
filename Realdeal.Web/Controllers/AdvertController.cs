@@ -37,7 +37,7 @@ namespace Realdeal.Web.Controllers
                 return View(advert);
             }
 
-            if (!categoryService.DoesCategoryExist(advert.CategoryId))
+            if (!categoryService.DoesSubCategoryExist(advert.CategoryId))
             {
                 this.ModelState.AddModelError(nameof(advert.CategoryId), "Category does not exist.");
 
@@ -128,7 +128,7 @@ namespace Realdeal.Web.Controllers
                     return View(advert);
                 }
 
-                if (!categoryService.DoesCategoryExist(advert.CategoryId))
+                if (!categoryService.DoesSubCategoryExist(advert.CategoryId))
                 {
                     this.ModelState.AddModelError(nameof(advert.CategoryId), "Category does not exist.");
 

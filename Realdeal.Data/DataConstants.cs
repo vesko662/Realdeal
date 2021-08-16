@@ -2,7 +2,7 @@
 {
     public class DataConstants
     {
-        public const int defaultMinLenght = 3;
+        public const int defaultMinLenght = 4;
 
         //User
         public const int userDefaultMaxLenght = 20;

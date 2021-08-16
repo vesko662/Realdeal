@@ -1,0 +1,27 @@
+﻿@model CreateMainCategoryFormModel
+
+@{
+    ViewData["Title"] = "Create main category";
+}
+<div class="container">
+    <div class="row">
+        <div class="offset-md-4 col-md-4">
+            <h1 class="text-center">@ViewData["Title"]</h1>
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" placeholder="Category name"/>
+                    <span asp-validation-for="Name" class="text-danger small"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CategoryImg"></label>
+                    <input asp-for="CategoryImg" class="form-control" accept="image/heic, image/png, image/jpeg, image/webp" type="file"/>
+                    <span asp-validation-for="CategoryImg" class="text-danger small"></span>
+                </div>
+                <div class="form-group text-center mt-3">
+                    <input class="mt-3 text-center btn btn-primary" type="submit" value="Create"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

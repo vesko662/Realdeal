@@ -6,7 +6,7 @@ namespace Realdeal.Models.Home
 {
     public class HomeViewModel
     {
-        public IEnumerable<MainCategoriesShowingViewModel> Categories { get; set;}
+        public IEnumerable<CategoriesShowingViewModel> Categories { get; set;}
         public IEnumerable<AdvertShowingViewModel> NewestAdverts { get; set;}
     }
     

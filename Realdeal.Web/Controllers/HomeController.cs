@@ -31,14 +31,14 @@ namespace Realdeal.Web.Controllers
         {
 
             var categoryCacheKey ="CategoryCacheKey";
-            var categories = this.memoryCache.Get<IEnumerable<MainCategoriesShowingViewModel>>(categoryCacheKey);
+            var categories = this.memoryCache.Get<IEnumerable<CategoriesShowingViewModel>>(categoryCacheKey);
 
             if (categories==null)
             {
                 categories = categoryService.GetAllCategories();
 
                 var cacheOptions = new MemoryCacheEntryOptions()
-                    .SetAbsoluteExpiration(TimeSpan.FromHours(1));
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(30));
 
                 this.memoryCache.Set(categoryCacheKey, categories, cacheOptions);
             }
