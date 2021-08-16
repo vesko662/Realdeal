@@ -2,13 +2,14 @@
 {
     public class GlobalConstants
     {
-        public const int advertsPerPage = 6;
 
         public const int maxArchiveAdvertsPerUser = 9;
 
         public const int maxNewAdvertOnHomePage = 3;
 
         public const string adminRole = "Administrator";
+
+        public const string userRole = "User";
 
         public const string cloudFolderForAdvertImages = "advertImages";
 

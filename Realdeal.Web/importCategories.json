@@ -1,7 +1,7 @@
 [
   {
     "Name": "Auto",
-    "CategoryImage": "CategoryImage",
+    "CategoryImage": "https://res.cloudinary.com/dzlqshegm/image/upload/v1629108790/mainCategoryImages/Auto.jpg",
     "SubCategories": [
       {
         "Name": "Cars and SUVs"
@@ -34,7 +34,7 @@
   },
   {
     "Name": "Properties",
-    "CategoryImage": "CategoryImage",
+    "CategoryImage": "https://res.cloudinary.com/dzlqshegm/image/upload/v1629108790/mainCategoryImages/Properties.jpg",
     "SubCategories": [
       {
         "Name": "Apartments"
@@ -55,7 +55,7 @@
   },
   {
     "Name": "Fashion",
-    "CategoryImage": "CategoryImage",
+    "CategoryImage": "https://res.cloudinary.com/dzlqshegm/image/upload/v1629108791/mainCategoryImages/Fashion.png",
     "SubCategories": [
       {
         "Name": "Women's clothing"
@@ -85,7 +85,7 @@
   },
   {
     "Name": "Electronics",
-    "CategoryImage": "CategoryImage",
+    "CategoryImage": "https://res.cloudinary.com/dzlqshegm/image/upload/v1629108790/mainCategoryImages/Electronics.png",
     "SubCategories": [
       {
         "Name": "Phones"
@@ -136,7 +136,7 @@
   },
   {
     "Name": "Hobby",
-    "CategoryImage": "CategoryImage",
+    "CategoryImage": "https://res.cloudinary.com/dzlqshegm/image/upload/v1629108791/mainCategoryImages/Hobby.jpg",
     "SubCategories": [
       {
         "Name": "Books"
@@ -169,7 +169,7 @@
   },
   {
     "Name": "Home and garden",
-    "CategoryImage": "CategoryImage",
+    "CategoryImage": "https://res.cloudinary.com/dzlqshegm/image/upload/v1629108790/mainCategoryImages/Home%20and%20garden.png",
     "SubCategories": [
       {
         "Name": "Furniture"
@@ -215,7 +215,7 @@
   },
   {
     "Name": "Animals",
-    "CategoryImage": "CategoryImage",
+    "CategoryImage": "https://res.cloudinary.com/dzlqshegm/image/upload/v1629108790/mainCategoryImages/Animals.jpg",
     "SubCategories": [
       {
         "Name": "Dogs"
@@ -248,7 +248,7 @@
   },
   {
     "Name": "Business, Machinery, Tools",
-    "CategoryImage": "CategoryImage",
+    "CategoryImage": "https://res.cloudinary.com/dzlqshegm/image/upload/v1629108790/mainCategoryImages/Business%2C%20Machinery%2C%20Tools.jpg",
     "SubCategories": [
       {
         "Name": "Commercial equipment"
@@ -281,7 +281,7 @@
   },
   {
     "Name": "Children and babies",
-    "CategoryImage": "CategoryImage",
+    "CategoryImage": "https://res.cloudinary.com/dzlqshegm/image/upload/v1629108775/mainCategoryImages/Children%20and%20babies.jpg",
     "SubCategories": [
       {
         "Name": "Baby clothes (0-2y)"

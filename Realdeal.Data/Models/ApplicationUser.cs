@@ -17,6 +17,7 @@ namespace Realdeal.Data.Models
             this.AdvertReports = new HashSet<AdvertReport>();
             this.Feedbacks = new HashSet<Feedback>();
             this.CreteOn = DateTime.UtcNow;
+            this.ProfilePhotoUrl = "https://i.imgur.com/HYIVDH0.jpg";
         }
 
         public string ProfilePhotoUrl { get; set; }
