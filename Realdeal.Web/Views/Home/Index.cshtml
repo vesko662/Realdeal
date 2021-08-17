@@ -14,7 +14,7 @@
                     <div>
                         <img class="" style="max-height:150px;max-width:150px;min-height:150px;min-width:150px" src="@mainCat.ImgUrl" alt="@mainCat.Name" />
                         <div class="dropdown mt-2 text-center">
-                            <button style="white-space: normal !important; word-wrap: break-word;max-width:135px" class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button style="white-space: normal !important; word-wrap: break-word;max-width:135px" class="btn text-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 @mainCat.Name
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -35,5 +35,6 @@
             <span class="text-center text-dark fs-2 mt-1 mb-3">Newest adverts</span>
 
             <partial name="_AdvertCardPartialView" model="Model.NewestAdverts" />
+        </div>
     </div>
 </div>

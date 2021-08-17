@@ -16,5 +16,9 @@ namespace Realdeal.Service.Advert
         public bool EditAdvert(AdvertEditFormModel advertEdit);
         public UserAdvertsModel GetUserAdvertById(string userId);
         public IEnumerable<AdvertShowingViewModel> GetNewestAdverts(int count = maxNewAdvertOnHomePage);
+
+        public int GetAllAdvertsCount();
+        public int GetNewestAdvertsCount();
+        public int GetDeletedAdvertsCount();
     }
 }

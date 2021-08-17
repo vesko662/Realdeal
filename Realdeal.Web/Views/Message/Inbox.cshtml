@@ -28,4 +28,8 @@
             }
         </tbody>
     </table>
+    @if (!Model.Any())
+    {
+        <h3 class="text-center text-primary">Currently no messages!</h3>
+    }
 </div>

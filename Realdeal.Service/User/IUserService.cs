@@ -12,5 +12,8 @@ namespace Realdeal.Service.User
         public string GetUsernameById(string userId);
         public string GetUserFullName(string userId);
         public string GetUserProfilePhoto();
+        public int GetUsersCount();
+        public int GetNewUsersCount();
+
     }
 }

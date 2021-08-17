@@ -1,1 +1,41 @@
 ﻿@model IEnumerable<FeedbackViewModel>
+
+@{
+    ViewData["Title"] = "Feedbacks";
+}
+
+<div class="container">
+    <div class="row">
+        <h2 class="text-center mb-3">@ViewData["Title"]</h2>
+        <div style="overflow:hidden; max-height:500px; min-height:500px; overflow-y:scroll;">
+            @foreach (var feeback in Model)
+            {
+                <div class="offset-md-3 col-md-6 col-sm-12 border rounded-pill border-5 mb-1">
+                    <div class="row p-2">
+                        <div class="col-md-8 col-sm-8 float-md-start text-break" alin>
+                            <p>
+                                @feeback.Description
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-2 d-flex justify-content-center align-items-center text-center">
+                            <span>
+                                Creator: @feeback.CreatorUsername
+                            </span>
+                        </div>
+                        <div class="col-md-2 col-sm-2 d-flex justify-content-center align-items-center">
+                            <span>
+                                <a class="btn btn-success rounded-pill px-3" asp-action="FeedbackIsDone" asp-route-feedbackId="@feeback.Id">
+                                    Done
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (!Model.Any())
+            {
+                <h3 class="text-center text-primary">Currently no feedbacks!</h3>
+            }
+        </div>
+    </div>
+</div>

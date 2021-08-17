@@ -22,5 +22,8 @@ namespace Realdeal.Service.Category
         IEnumerable<CategoryModel> GetMainCategories();
         void CreateMainCategory(CreateMainCategoryFormModel createMainCategory);
         void CreateSubCategory(CreateSubCategoryFormModel createSubCategory);
+        public IEnumerable<CategoryModel> GetUnassigenedSubCategories();
+
+        public void AssignSubCategory(string mainCatId, string subCatId);
     }
 }

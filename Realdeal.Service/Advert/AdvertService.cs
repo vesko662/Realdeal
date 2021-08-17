@@ -243,5 +243,21 @@ namespace Realdeal.Service.Advert
                 ImageURL = x.AdvertImages.FirstOrDefault().ImageUrl,
                 Price = x.Price
             }).ToList();
+
+        public int GetAllAdvertsCount()
+        => context.Adverts
+            .Where(x => x.IsDeleted == false)
+            .Count();
+
+        public int GetNewestAdvertsCount()
+        => context.Adverts
+            .Where(x => x.IsDeleted == false)
+            .Where(x => x.CreatedOn.Date == DateTime.UtcNow.Date && x.CreatedOn.Year == DateTime.UtcNow.Year)
+            .Count();
+
+        public int GetDeletedAdvertsCount()
+        => context.Adverts
+            .Where(x => x.IsDeleted == true)
+            .Count();
     }
 }

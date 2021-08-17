@@ -21,6 +21,26 @@ namespace Realdeal.Service.Category
             this.cloudinaryService = cloudinaryService;
         }
 
+        public void AssignSubCategory(string mainCatId, string subCatId)
+        {
+            var mainCat = context.MainCategories.Find(mainCatId);
+
+            if (mainCat == null)
+                return;
+
+            var subCat = context.SubCategories.Find(subCatId);
+
+            if (subCat == null)
+                return;
+
+            if (mainCat.SubCategories.Any(x => x.Name == subCat.Name))
+                return;
+
+            subCat.MainCategoryId = mainCat.Id;
+
+            context.SaveChanges();
+        }
+
         public void CreateMainCategory(CreateMainCategoryFormModel createMainCategory)
         {
             var category = new MainCategory()
@@ -40,7 +60,7 @@ namespace Realdeal.Service.Category
             var category = new SubCategory()
             {
                 Name = createSubCategory.Name,
-                MainCategoryId= createSubCategory.MainCategoryId
+                MainCategoryId = createSubCategory.MainCategoryId
             };
 
             context.SubCategories.Add(category);
@@ -150,10 +170,24 @@ namespace Realdeal.Service.Category
             })
             .ToList();
 
+        public IEnumerable<CategoryModel> GetUnassigenedSubCategories()
+        => context.SubCategories
+            .Where(x => x.MainCategoryId == null)
+            .Select(x => new CategoryModel
+            {
+                Name = x.Name,
+                Id = x.Id,
+            })
+            .ToList();
+
         public bool IsMainCategoryNameTaken(string name)
-        => context.MainCategories.Any(x => x.Name == name);
+        => context.MainCategories 
+            .Where(x=>x.IsDeleted==false)
+            .Any(x => x.Name == name);
 
         public bool IsSubCategoryNameTaken(string name)
-        => context.SubCategories.Any(x => x.Name == name);
+        => context.SubCategories
+            .Where(x=>x.IsDeleted==false)
+            .Any(x => x.Name == name);
     }
 }

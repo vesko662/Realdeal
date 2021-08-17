@@ -2,6 +2,9 @@
 using Realdeal.Data.Models;
 using Realdeal.Models.Report;
 using Realdeal.Service.User;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Realdeal.Service.Report
 {
@@ -28,6 +31,55 @@ namespace Realdeal.Service.Report
             context.SaveChanges();
         }
 
+        public void FeedbackIsDone(string feedbackId)
+        {
+            var feedback = context.Feedbacks
+                .Find(feedbackId);
+
+            if (feedback == null)
+                return;
+
+            feedback.IsDone = true;
+
+            context.SaveChanges();
+        }
+
+        public IEnumerable<FeedbackViewModel> GetAllFeedbacks()
+        => context.Feedbacks
+            .Where(x => x.IsDone == false)
+            .Select(s => new FeedbackViewModel()
+            {
+                Id = s.Id,
+                CreatorUsername = s.Maker.UserName,
+                Description = s.Description,
+            })
+            .ToList();
+
+        public IEnumerable<ReportViewModel> GetAllReports()
+        => context.ReporedAdverts
+            .Where(x => x.IsDone == false)
+            .Select(s => new ReportViewModel()
+            {
+                ReportId = s.Id,
+                AdvertId = s.AdvertId,
+                AdvertName = s.Advert.Name,
+                Description = s.Description,
+            })
+            .ToList();
+
+        public int GetNewestFeedbacksCount()
+        => context.Feedbacks
+            .Where(x => x.IsDone == false)
+            .Where(x => x.CreatedOn.Date == DateTime.UtcNow.Date && x.CreatedOn.Year == DateTime.UtcNow.Year)
+            .Count();
+
+        public int GetNewestReportsCount()
+        => context.ReporedAdverts
+            .Where(x => x.IsDone == false)
+            .Where(x => x.CreatedOn.Date == DateTime.UtcNow.Date && x.CreatedOn.Year == DateTime.UtcNow.Year)
+            .Count();
+
+
         public bool ReportAdvert(AdvertReportFormModel advertReport)
         {
             var advert = context.Adverts.Find(advertReport.AdvertId);
@@ -49,6 +101,19 @@ namespace Realdeal.Service.Report
             context.SaveChanges();
 
             return true;
+        }
+
+        public void ReportIsDone(string reportId)
+        {
+            var report = context.ReporedAdverts
+                .Find(reportId);
+
+            if (report == null)
+                return;
+
+            report.IsDone = true;
+
+            context.SaveChanges();
         }
     }
 }

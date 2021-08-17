@@ -12,22 +12,20 @@
         @foreach (var mainCat in Model.Categories)
         {
             <div class="offset-md-3 col-md-6  col-sm-12 border rounded-pill border-5 mb-1">
-
-
                 <div class="row p-1">
-                    <div class="col-md-3 col-sm-3 text-center" alin>
+                    <div class="col-md-3 col-sm-3 text-center d-flex justify-content-center align-items-center">
                         <span>
                             @mainCat.Name
                         </span>
                     </div>
-                    <div class="col-md-3 col-sm-3 text-center">
+                    <div class="col-md-3 col-sm-3 d-flex justify-content-center align-items-center">
                         <span>
                             <button class="btn btn-info rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#@mainCat.Name.Substring(0,4)" aria-expanded="false" aria-controls="@mainCat.Name.Substring(0,4)">
                                 Sub categories
                             </button>
                         </span>
                     </div>
-                    <div class="col-md-3 col-sm-3 text-center">
+                    <div class="col-md-3 col-sm-3 d-flex justify-content-center align-items-center">
                         <span>
                             <a class="btn btn-danger rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#m@(mainCat.Id.Substring(0,4))">
                                 Delete
@@ -35,7 +33,7 @@
                         </span>
                         <partial name="_DeleteMainCategoryPartial" model="@new CategoryModel {Id= mainCat.Id,Name=mainCat.Name }" />
                     </div>
-                    <div class="col-md-3 col-sm-3 text-center">
+                    <div class="col-md-3 col-sm-3 d-flex justify-content-center align-items-center">
                         <span>
                             <a class="btn btn-warning rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#em@(mainCat.Id.Substring(0,4))">
                                 Edit
@@ -44,27 +42,25 @@
                         </span>
                     </div>
                 </div>
-
-
             </div>
             @foreach (var subCat in mainCat.SubCategories)
             {
                 <div class="collapse " id="@mainCat.Name.Substring(0,4)">
                     <div class="card border rounded-pill border-5 card-body offset-md-4 col-md-5 py-0 my-0">
                         <div class="row">
-                            <div class="col-md-4 text-center" alin>
+                            <div class="col-md-4 text-center d-flex justify-content-center align-items-center">
                                 <span>
                                     @subCat.Name
                                 </span>
                             </div>
-                            <div class="col-md-4 text-center">
+                            <div class="col-md-4 d-flex justify-content-center align-items-center">
                                 <span>
                                     <a class="btn btn-danger rounded-pill px-3" asp-action="DeleteSubCategory" asp-route-categoryId="@subCat.Id">
                                         Delete
                                     </a>
                                 </span>
                             </div>
-                            <div class="col-md-4 text-center">
+                            <div class="col-md-4 d-flex justify-content-center align-items-center">
                                 <span>
                                     <a class="btn btn-warning rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#es@(subCat.Id.Substring(0,4))">
                                         Edit
@@ -78,5 +74,52 @@
             }
         }
     </div>
+
+    @if (Model.UnassignedSubCategories.Any())
+    {
+        <h2 class="text-center mb-3 mt-4">Unassigned subcategories</h2>
+        <div class="row">
+            @foreach (var subCat in Model.UnassignedSubCategories)
+            {
+                <div class="border rounded-pill border-5 offset-md-3 col-md-6 py-0 my-0">
+                    <div class="row">
+                        <div class="col-md-3 text-center d-flex justify-content-center align-items-center">
+                            <span>
+                                @subCat.Name
+                            </span>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-center align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-info dropdown-toggle rounded-pill" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Assign to
+                                </button>
+                                <ul class="dropdown-menu">
+                                    @foreach (var mainCat in Model.Categories)
+                                    {
+                                        <li><a class="dropdown-item" asp-action="AssignSubCategory" asp-route-subCatId="@subCat.Id" asp-route-mainCatId="@mainCat.Id">@mainCat.Name</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-center align-items-center">
+                            <span>
+                                <a class="btn btn-danger rounded-pill px-3" asp-action="DeleteSubCategory" asp-route-categoryId="@subCat.Id">
+                                    Delete
+                                </a>
+                            </span>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-center align-items-center">
+                            <span>
+                                <a class="btn btn-warning rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#es@(subCat.Id.Substring(0,4))">
+                                    Edit
+                                </a>
+                            </span>
+                            <partial name="_EditSubCategoryPartial" model="@new CategoryEditFormModel {Id= subCat.Id,Name=subCat.Name }" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
 </div>
 

@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Realdeal.Models.Administration;
 using Realdeal.Models.Category;
+using Realdeal.Service.Advert;
 using Realdeal.Service.Category;
+using Realdeal.Service.Report;
+using Realdeal.Service.User;
 
 namespace Realdeal.Web.Areas.Administration.Controllers
 {
@@ -10,15 +14,34 @@ namespace Realdeal.Web.Areas.Administration.Controllers
     public class AdminController : Controller
     {
         private readonly ICategoryService categoryService;
+        private readonly IReportService reportService;
+        private readonly IUserService userService;
+        private readonly IAdvertService advertService;
 
-        public AdminController(ICategoryService categoryService)
+        public AdminController(ICategoryService categoryService,
+            IReportService reportService,
+            IUserService userService,
+            IAdvertService advertService)
         {
             this.categoryService = categoryService;
+            this.reportService = reportService;
+            this.userService = userService;
+            this.advertService = advertService;
         }
         public IActionResult Index()
         {
-            //total users,total adverts,reports,feedbacks
-            return View();
+            var home = new AdminHomeViewModel()
+            {
+                TotalUsers = userService.GetUsersCount(),
+                RegistratedTodayUsers = userService.GetNewUsersCount(),
+                TotalAdverts = advertService.GetAllAdvertsCount(),
+                CreatetTodayAdverts = advertService.GetNewestAdvertsCount(),
+                TotalDeletedAdverts = advertService.GetDeletedAdvertsCount(),
+                CreatedFeedbackToday = reportService.GetNewestFeedbacksCount(),
+                CreatedReportsToday = reportService.GetNewestReportsCount(),
+            };
+            
+            return View(home);
         }
 
         public IActionResult CreateMainCategory()
@@ -117,26 +140,36 @@ namespace Realdeal.Web.Areas.Administration.Controllers
             var categories = new AdminShowingCategoryModel()
             {
                 Categories = categoryService.GetAllCategories(),
+                UnassignedSubCategories=categoryService.GetUnassigenedSubCategories(),
             };
             return View(categories);
         }
 
         public IActionResult Reports()
         {
-            return View();
+            return View(reportService.GetAllReports());
         }
         public IActionResult ReportIsDone(string reportId)
         {
+            reportService.ReportIsDone(reportId);
             return RedirectToAction(nameof(Reports));
         }
 
         public IActionResult Feedbacks()
         {
-            return View();
+            return View(reportService.GetAllFeedbacks());
         }
         public IActionResult FeedbackIsDone(string feedbackId)
         {
+            reportService.FeedbackIsDone(feedbackId);
             return RedirectToAction(nameof(Feedbacks));
+        }
+
+        public IActionResult AssignSubCategory(string mainCatId,string subCatId)
+        {
+            categoryService.AssignSubCategory(mainCatId, subCatId);
+
+            return RedirectToAction(nameof(AllCategories));
         }
     }
 }

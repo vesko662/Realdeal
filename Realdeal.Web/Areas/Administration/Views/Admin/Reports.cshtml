@@ -1,1 +1,44 @@
 ﻿@model IEnumerable<ReportViewModel>
+
+@{
+    ViewData["Title"] = "Reports";
+}
+
+<div class="container">
+    <div class="row">
+        <h2 class="text-center mb-3">@ViewData["Title"]</h2>
+        <div style="overflow:hidden; max-height:500px; min-height:500px; overflow-y:scroll;">
+            @foreach (var report in Model)
+            {
+                <div class="offset-md-2 col-md-8 col-sm-12 border rounded-pill border-5 mb-1">
+                    <div class="row p-2">
+                        <div class="col-md-3 col-sm-3 d-flex justify-content-center align-items-center text-center">
+                            <span >
+                                <a class="btn btn-primary rounded-pill px-3" style="font-size:14px" asp-area="" asp-controller="Advert" asp-action="Detail" asp-route-advertId="@report.AdvertId">
+                                    Advert: <br />
+                                    @report.AdvertName
+                                </a>
+                            </span>
+                        </div>
+                        <div class="col-md-7 col-sm-7 float-md-start text-break" alin>
+                            <p>
+                                @report.Description
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-2 d-flex justify-content-center align-items-center">
+                            <span>
+                                <a class="btn btn-success rounded-pill px-3" asp-action="ReportIsDone" asp-route-reportId="@report.ReportId">
+                                    Done
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (!Model.Any())
+            {
+                <h3 class="text-center text-primary">Currently no reports!</h3>
+            }
+        </div>
+    </div>
+</div>

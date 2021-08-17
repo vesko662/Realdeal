@@ -1,3 +1,119 @@
-﻿@{
+﻿@model AdminHomeViewModel
+
+@{
     ViewData["Title"] = "Administration";
 }
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+<div class="container">
+    <div class="row">
+
+        <div class="offset-md-0 col-md-4 offset-sm-1 col-sm-10">
+            <div class="card text-white bg-primary mb-3 rounded">
+                <div class="card-body">
+                    <h4 class="card-title">@Model.TotalUsers</h4>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 d-flex justify-content-start align-items-end pb-2">
+                            <span class="card-text fs-5">All users</span>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <span class="card-text float-end"><i class="bi bi-people" style="font-size: 2.5rem; color: white;"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="offset-md-0 offset-md-0 col-md-4 offset-sm-1 col-sm-10">
+            <div class="card text-white bg-success mb-3 rounded">
+                <div class="card-body">
+                    <h4 class="card-title">@Model.RegistratedTodayUsers</h4>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 d-flex justify-content-start align-items-end pb-2">
+                            <span class="card-text fs-5">Registrated today</span>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <span class="card-text float-end"><i class="bi bi-person-plus" style="font-size: 2.5rem; color: white;"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="offset-md-0 col-md-4 offset-sm-1 col-sm-10">
+            <div class="card text-white bg-warning mb-3 rounded">
+                <div class="card-body">
+                    <h4 class="card-title">@Model.TotalAdverts</h4>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 d-flex justify-content-start align-items-end pb-2">
+                            <span class="card-text fs-5">All adverts</span>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <span class="card-text float-end"><i class="bi bi-file-earmark" style="font-size: 2.5rem; color: white;"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="offset-md-0 col-md-4 offset-sm-1 col-sm-10">
+            <div class="card text-white bg-secondary mb-3 rounded">
+                <div class="card-body">
+                    <h4 class="card-title">@Model.CreatetTodayAdverts</h4>
+                    <div class="row">
+                        <div class="col-md-7 col-sm-7 d-flex justify-content-start align-items-end pb-2">
+                            <span class="card-text fs-5">Createt adverts today</span>
+                        </div>
+                        <div class="col-md-5 col-sm-5">
+                            <span class="card-text float-end"><i class="bi bi-file-earmark-arrow-up" style="font-size: 2.5rem; color: white;"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="offset-md-0 col-md-4 offset-sm-1 col-sm-10">
+            <div class="card text-white mb-3 rounded" style="background-color:coral">
+                <div class="card-body">
+                    <h4 class="card-title">@Model.TotalDeletedAdverts</h4>
+                    <div class="row">
+                        <div class="col-md-7 col-sm-7 d-flex justify-content-start align-items-end pb-2">
+                            <span class="card-text fs-5">Deleted adverts</span>
+                        </div>
+                        <div class="col-md-5 col-sm-5">
+                            <span class="card-text float-end"><i class="bi bi bi-trash" style="font-size: 2.5rem; color: white;"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="offset-md-0 col-md-4 offset-sm-1 col-sm-10">
+            <div class="card text-white bg-danger mb-3 rounded">
+                <div class="card-body">
+                    <h4 class="card-title">@Model.CreatedReportsToday</h4>
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 d-flex justify-content-start align-items-end pb-2">
+                            <span class="card-text fs-5">Created reports today</span>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <span class="card-text float-end"><i class="bi bi-flag" style="font-size: 2.5rem; color: white;"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="offset-md-4 col-md-4 offset-sm-1 col-sm-10">
+            <div class="card text-white bg-info mb-3 rounded">
+                <div class="card-body">
+                    <h4 class="card-title">@Model.CreatedFeedbackToday</h4>
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 d-flex justify-content-start align-items-end pb-2">
+                            <span class="card-text fs-5">Created feedback today</span>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <span class="card-text float-end"><i class="bi bi-chat-left-text" style="font-size: 2.5rem; color: white;"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
