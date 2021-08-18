@@ -16,7 +16,6 @@ namespace Realdeal.Service.Category
         void EditMainCategory(CategoryEditFormModel categoryModel);
         void EditSubCategory(CategoryEditFormModel categoryModel);
 
-
         IEnumerable<CategoriesShowingViewModel> GetAllCategories();
 
         IEnumerable<CategoryModel> GetMainCategories();

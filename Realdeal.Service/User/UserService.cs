@@ -76,14 +76,17 @@ namespace Realdeal.Service.User
         }
 
         public UserInformationModel GetUserInfo(string userId)
-        => context.Users.Where(x => x.Id == userId).Select(s => new UserInformationModel
-        {
-            Firstname = s.Firstname,
-            Lastname = s.Lastname,
-            Username = s.UserName,
-            UserProfilePictureURL = s.ProfilePhotoUrl,
-            UserSince = s.CreteOn,
-        }).FirstOrDefault();
+        => context.Users
+            .Where(x => x.Id == userId)
+            .Select(s => new UserInformationModel
+            {
+                Firstname = s.Firstname,
+                Lastname = s.Lastname,
+                Username = s.UserName,
+                UserProfilePictureURL = s.ProfilePhotoUrl,
+                UserSince = s.CreteOn,
+            })
+            .FirstOrDefault();
 
         public string GetUsernameById(string userId)
         {

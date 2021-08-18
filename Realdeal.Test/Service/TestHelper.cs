@@ -4,7 +4,7 @@ using System;
 
 namespace Realdeal.Test.Service
 {
-   public class TestHelper
+   public  class TestHelper
     {
         public  RealdealDbContext CreateDbInMemory()
         {

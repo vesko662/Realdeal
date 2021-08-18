@@ -17,7 +17,6 @@
                             </div>
                           </div>
                         </div>`;
-            console.log(chatInfo)
             var messagesList = document.getElementById("messages");
             messagesList.innerHTML += chatInfo;
             document.getElementById("messageInput").value = "";
@@ -44,6 +43,5 @@
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
     }
-
 };
 setup();

@@ -79,14 +79,16 @@ namespace Realdeal.Service.Advert
             };
 
 
-            queryAdverts.Advers = adverQuery.Select(x => new AdvertShowingViewModel
-            {
-                Name = x.Name,
-                Id = x.Id,
-                Description = x.Description,
-                ImageURL = x.AdvertImages.FirstOrDefault().ImageUrl,
-                Price = x.Price
-            }).ToList();
+            queryAdverts.Advers = adverQuery
+                .Select(x => new AdvertShowingViewModel
+                {
+                    Name = x.Name,
+                    Id = x.Id,
+                    Description = x.Description,
+                    ImageURL = x.AdvertImages.FirstOrDefault().ImageUrl,
+                    Price = x.Price
+                })
+                .ToList();
 
             return queryAdverts;
         }
@@ -103,8 +105,7 @@ namespace Realdeal.Service.Advert
                     Id = advertId,
                     Images = s.AdvertImages.Select(i => i.ImageUrl).ToList(),
                     Price = s.Price,
-                    IsObserved = s.ОbservedAdverts.Contains(new ОbservedAdvert { UserId = userService.GetCurrentUserId(), AdvertId = advertId }),
-                    User = userService.GetUserInfo(userService.GetUserIdByAdvertId(advertId)),
+                   
                 })
                 .FirstOrDefault();
 
@@ -112,6 +113,9 @@ namespace Realdeal.Service.Advert
             {
                 return null;
             }
+
+            advert.IsObserved = context.ObservedAdverts.Contains(new ОbservedAdvert { UserId = userService.GetCurrentUserId(), AdvertId = advertId });
+            advert.User = userService.GetUserInfo(userService.GetUserIdByAdvertId(advertId));
 
             UpdateViewsOnAdvert(advertId);
 
@@ -140,19 +144,24 @@ namespace Realdeal.Service.Advert
         }
 
         public AdvertEditFormModel FindAdvertToEdit(string advertId)
-        => context.Adverts.Where(x => x.Id == advertId).Select(s => new AdvertEditFormModel
-        {
-            Id = s.Id,
-            CategoryId = s.SubCategoryId,
-            Description = s.Description,
-            Name = s.Name,
-            Price = s.Price,
-        })
+        => context.Adverts
+            .Where(x => x.Id == advertId)
+            .Select(s => new AdvertEditFormModel
+            {
+                Id = s.Id,
+                CategoryId = s.SubCategoryId,
+                Description = s.Description,
+                Name = s.Name,
+                Price = s.Price,
+            })
             .FirstOrDefault();
 
         public bool EditAdvert(AdvertEditFormModel advertEdit)
         {
-            var advert = context.Adverts.Include(x => x.AdvertImages).FirstOrDefault(x => x.Id == advertEdit.Id);
+            var advert = context
+                .Adverts
+                .Include(x => x.AdvertImages)
+                .FirstOrDefault(x => x.Id == advertEdit.Id);
 
             if (advert == null)
             {

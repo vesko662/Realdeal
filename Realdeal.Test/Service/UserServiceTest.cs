@@ -6,6 +6,7 @@ using Moq;
 using Realdeal.Data;
 using Microsoft.AspNetCore.Http;
 using Realdeal.Data.Models;
+using Realdeal.Models.User;
 
 namespace Realdeal.Test.Service
 {
@@ -16,7 +17,7 @@ namespace Realdeal.Test.Service
 
         public UserServiceTest()
         {
-            context = new TestHelper().CreateDbInMemory();
+            context =new TestHelper().CreateDbInMemory();
             var moqHttpContextAccessor = new Mock<IHttpContextAccessor>();
             userService = new UserService(context, moqHttpContextAccessor.Object);
         }
@@ -218,6 +219,32 @@ namespace Realdeal.Test.Service
 
             // Assert
             Assert.NotEqual(expexted, userFullName);
+        }
+        [Fact]
+        public void GetUserInfo_ShouldReturnUserInformationModelWithUserData()
+        {
+            //Arange
+            var userId = Guid.NewGuid().ToString();
+            var userName = "user";
+
+            var user = new ApplicationUser()
+            {
+                Id = userId,
+                UserName = userName,
+                ProfilePhotoUrl=null,
+            };
+
+            var expected = new UserInformationModel() { Username = userName };
+
+            //Act
+            context.Users.Add(user);
+
+            context.SaveChanges();
+
+            var userInf = this.userService.GetUserInfo(userId);
+
+            // Assert
+            Assert.Equal(expected.Username, userInf.Username);
         }
     }
 }
