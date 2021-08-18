@@ -13,7 +13,8 @@ namespace Realdeal.Service.Report
         private readonly RealdealDbContext context;
         private readonly IUserService userService;
 
-        public ReportService(RealdealDbContext context, IUserService userService)
+        public ReportService(RealdealDbContext context,
+            IUserService userService)
         {
             this.context = context;
             this.userService = userService;

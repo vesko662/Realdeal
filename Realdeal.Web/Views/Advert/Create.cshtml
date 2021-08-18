@@ -20,12 +20,12 @@
                     <select asp-for="CategoryId" class="form-select">
                         @foreach (var mainCat in Model.Categories)
                         {
-                        <optgroup label="@mainCat.Name">
-                            @foreach (var category in mainCat.SubCategories)
-                            {
-                                <option value="@category.Id" selected="@(category.Id==Model.CategoryId)")>@category.Name</option>
-                            }
-                        </optgroup>
+                            <optgroup label="@mainCat.Name">
+                                @foreach (var category in mainCat.SubCategories)
+                                {
+                                    <option value="@category.Id" selected="@(category.Id==Model.CategoryId)" )>@category.Name</option>
+                                }
+                            </optgroup>
                         }
                     </select>
                     <span asp-validation-for="CategoryId" class="text-danger small"></span>
@@ -53,4 +53,7 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
 

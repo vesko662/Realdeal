@@ -13,7 +13,8 @@ namespace Realdeal.Service.User
         private readonly RealdealDbContext context;
         private readonly IHttpContextAccessor contextAccessor;
 
-        public UserService(RealdealDbContext context, IHttpContextAccessor contextAccessor)
+        public UserService(RealdealDbContext context,
+            IHttpContextAccessor contextAccessor)
         {
             this.context = context;
             this.contextAccessor = contextAccessor;
@@ -41,7 +42,8 @@ namespace Realdeal.Service.User
         public string GetUserFullName(string userId)
         {
 
-            var user = context.Users.FirstOrDefault(x => x.Id == userId);
+            var user = context.Users
+                .FirstOrDefault(x => x.Id == userId);
 
             if (user == null)
             {
@@ -53,7 +55,8 @@ namespace Realdeal.Service.User
 
         public string GetUserIdByAdvertId(string advertId)
         {
-            var useAdvert = context.Adverts.FirstOrDefault(x => x.Id == advertId);
+            var useAdvert = context.Adverts
+                .FirstOrDefault(x => x.Id == advertId);
 
             if (useAdvert == null)
             {
@@ -65,7 +68,8 @@ namespace Realdeal.Service.User
 
         public string GetUserIdByUsername(string username)
         {
-            var user = context.Users.FirstOrDefault(x => x.UserName == username);
+            var user = context.Users
+                .FirstOrDefault(x => x.UserName == username);
 
             if (user == null)
             {
@@ -90,7 +94,8 @@ namespace Realdeal.Service.User
 
         public string GetUsernameById(string userId)
         {
-            var user = context.Users.FirstOrDefault(x => x.Id == userId);
+            var user = context.Users
+                .FirstOrDefault(x => x.Id == userId);
 
             if (user == null)
             {
@@ -101,12 +106,17 @@ namespace Realdeal.Service.User
         }
 
         public string GetUserProfilePhoto()
-       => context.Users.FirstOrDefault(x => x.Id == GetCurrentUserId()).ProfilePhotoUrl;
+       => context.Users
+            .FirstOrDefault(x => x.Id == GetCurrentUserId())
+            .ProfilePhotoUrl;
 
         public int GetUsersCount()
-       => context.Users.Count();
+       => context.Users
+            .Count();
 
         public bool IsUserAdmin()
-        => contextAccessor.HttpContext.User.IsInRole(adminRole);
+        => contextAccessor.HttpContext
+            .User
+            .IsInRole(adminRole);
     }
 }

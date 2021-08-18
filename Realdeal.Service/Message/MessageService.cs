@@ -11,7 +11,8 @@ namespace Realdeal.Service.Message
         private readonly IUserService userService;
         private readonly RealdealDbContext context;
 
-        public MessageService(IUserService userService,RealdealDbContext context)
+        public MessageService(IUserService userService,
+            RealdealDbContext context)
         {
             this.userService = userService;
             this.context = context;
@@ -20,6 +21,7 @@ namespace Realdeal.Service.Message
         public Data.Models.Message CreateMessage(string senderId, string recieverId, string advertId, string content)
         {
             var advers = context.Adverts.ToList();
+
             if (!advers.Any(x => x.Id == advertId))
             {
                 return null;
@@ -41,9 +43,11 @@ namespace Realdeal.Service.Message
 
         public void DeleteAllMessagesToAdvert(string advertId)
         {
-            if (context.Adverts.Any(x=>x.Id==advertId))
+            if (context.Adverts.Any(x => x.Id == advertId))
             {
-                var messages = context.Messages.Where(x => x.AdvertId == advertId).ToList();
+                var messages = context.Messages
+                    .Where(x => x.AdvertId == advertId)
+                    .ToList();
 
                 context.Messages.RemoveRange(messages);
 
@@ -58,11 +62,11 @@ namespace Realdeal.Service.Message
             var userId = userService.GetCurrentUserId();
 
             var adverts = context.Adverts
-                .Where(x=>x.IsАrchived==false && x.IsDeleted==false)
+                .Where(x => x.IsАrchived == false && x.IsDeleted == false)
                 .Where(x => x.Messages.Any(x => x.SenderId == userId || x.ReciverId == userId))
                 .ToList();
 
-            foreach (var advert in adverts.OrderByDescending(x=>x.CreatedOn))
+            foreach (var advert in adverts.OrderByDescending(x => x.CreatedOn))
             {
                 var lastMsg = this.context.Adverts
                .Where(x => x.Id == advert.Id)
@@ -73,13 +77,13 @@ namespace Realdeal.Service.Message
                 {
                     AdvertId = advert.Id,
                     AdvertName = advert.Name,
-                    Content=lastMsg.Content,
+                    Content = lastMsg.Content,
                     LastMessageDate = lastMsg.CreatedOn.ToString("MM/dd hh:mm tt"),
-                    Sender=userService.GetUsernameById(lastMsg.SenderId),
-                    SenderId=lastMsg.SenderId,
+                    Sender = userService.GetUsernameById(lastMsg.SenderId),
+                    SenderId = lastMsg.SenderId,
                     Resiever = userService.GetUsernameById(lastMsg.ReciverId),
-                    ResieverId=lastMsg.ReciverId,
-                    LastMessageSender=userService.GetUserFullName(lastMsg.SenderId),
+                    ResieverId = lastMsg.ReciverId,
+                    LastMessageSender = userService.GetUserFullName(lastMsg.SenderId),
                 };
 
                 inboxMessages.Add(inboxMessage);
@@ -107,7 +111,7 @@ namespace Realdeal.Service.Message
                     SenderName = userService.GetUserFullName(s.SenderId)
                 })
                 .ToList();
-           
+
             return messages;
         }
 

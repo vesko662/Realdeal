@@ -13,7 +13,7 @@
                 <input hidden asp-for="AdvertId" />
                 <div class="form-group">
                     <label asp-for="AdvertName" class="control-label"></label>
-                    <input asp-for="AdvertName" class="form-control" disabled/>
+                    <input asp-for="AdvertName" class="form-control" disabled />
                 </div>
                 <div class="form-group">
                     <label asp-for="Description" class="control-label"></label>
@@ -27,3 +27,6 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

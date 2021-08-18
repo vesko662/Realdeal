@@ -15,7 +15,7 @@
             <h2 class="text-center">@ViewData["Title"]</h2>
 
             <form method="post" enctype="multipart/form-data">
-                <input asp-for="Id" value="@Model.Id" type="hidden" readonly/>
+                <input asp-for="Id" value="@Model.Id" type="hidden" readonly />
                 <div class="form-group">
                     <label asp-for="Name"></label>
                     <input asp-for="Name" class="form-control" placeholder="Name of advert">
@@ -29,7 +29,7 @@
                             <optgroup label="@mainCat.Name">
                                 @foreach (var category in mainCat.SubCategories)
                                 {
-                                    <option value="@category.Id"  selected="@(category.Id==Model.CategoryId)")>@category.Name</option>
+                                    <option value="@category.Id" selected="@(category.Id==Model.CategoryId)" )>@category.Name</option>
                                 }
                             </optgroup>
                         }
@@ -58,3 +58,6 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
