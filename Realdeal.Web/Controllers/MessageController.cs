@@ -4,7 +4,6 @@ using Realdeal.Models.Message;
 using Realdeal.Service.Advert;
 using Realdeal.Service.Message;
 using Realdeal.Service.User;
-using System.Linq;
 
 namespace Realdeal.Web.Controllers
 {

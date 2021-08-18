@@ -1,7 +1,6 @@
 ﻿using Xunit;
 using System;
 using Realdeal.Service.User;
-using Microsoft.EntityFrameworkCore;
 using Moq;
 using Realdeal.Data;
 using Microsoft.AspNetCore.Http;

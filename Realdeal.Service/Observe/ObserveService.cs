@@ -46,12 +46,15 @@ namespace Realdeal.Service.Observe
         }
         public void RemoveAllObservingUsers(string advertId)
         {
-            var observedAdverts = context.ObservedAdverts.Where(x => x.AdvertId == advertId).ToList();
+            var observedAdverts = context.ObservedAdverts
+                .Where(x => x.AdvertId == advertId)
+                .ToList();
 
             if (observedAdverts == null)
                 return;
 
-            context.ObservedAdverts.RemoveRange(observedAdverts);
+            context.ObservedAdverts
+                .RemoveRange(observedAdverts);
 
             context.SaveChanges();
         }

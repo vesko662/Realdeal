@@ -136,10 +136,16 @@ namespace Realdeal.Service.Archive
         }
 
         private int GetFollowers(string advertId)
-        => context.Adverts.Find(advertId).ОbservedAdverts.Count;
+        => context.Adverts
+            .Find(advertId).ОbservedAdverts.Count;
 
         private int GetIntrestedPeople(string advertId)
-       => context.Adverts.Find(advertId).Messages.GroupBy(x => x.SenderId).ToList().Count;
+       => context.Adverts
+            .Find(advertId)
+            .Messages
+            .GroupBy(x => x.SenderId)
+            .ToList()
+            .Count;
 
     }
 }

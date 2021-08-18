@@ -6,10 +6,7 @@ using Realdeal.Models.Category;
 using Realdeal.Service.Category;
 using Realdeal.Service.CloudinaryCloud;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Realdeal.Test.Service

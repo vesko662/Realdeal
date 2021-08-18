@@ -6,7 +6,7 @@ namespace Realdeal.Service.Report
     public interface IReportService
     {
         public bool ReportAdvert(AdvertReportFormModel advertReport);
-        public void Feedback(FeedbackFormModel feedback);
+        public void CreateFeedback(FeedbackFormModel feedback);
 
         IEnumerable<FeedbackViewModel> GetAllFeedbacks();
         void FeedbackIsDone(string feedbackId);

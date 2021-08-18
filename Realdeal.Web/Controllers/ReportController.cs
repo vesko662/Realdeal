@@ -51,7 +51,7 @@ namespace Realdeal.Web.Controllers
                 return View(feedback);
             }
 
-            reportService.Feedback(feedback);
+            reportService.CreateFeedback(feedback);
 
             return Redirect("/");
         }

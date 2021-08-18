@@ -107,10 +107,7 @@ namespace Realdeal.Service.Message
                     SenderName = userService.GetUserFullName(s.SenderId)
                 })
                 .ToList();
-
-           // messages
-                //.ForEach(x => x.Content = HttpUtility.HtmlDecode(x.Content));
-
+           
             return messages;
         }
 

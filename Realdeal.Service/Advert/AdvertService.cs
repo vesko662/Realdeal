@@ -47,7 +47,11 @@ namespace Realdeal.Service.Advert
 
             foreach (var image in advertModel.Images)
             {
-                advert.AdvertImages.Add(new AdvertImage() { ImageUrl = cloudinary.UploadPhoto(image, cloudFolderForAdvertImages) });
+                advert.AdvertImages
+                    .Add(new AdvertImage()
+                    {
+                        ImageUrl = cloudinary.UploadPhoto(image, cloudFolderForAdvertImages)
+                    });
             }
 
             context.Adverts.Add(advert);
@@ -56,11 +60,16 @@ namespace Realdeal.Service.Advert
 
         public AllAdvertsQueryModel GetAllAdverts(AllAdvertsQueryModel queryAdverts)
         {
-            var adverQuery = context.Adverts.Where(x => x.IsDeleted == false && x.IsАrchived == false).AsQueryable();
+            var adverQuery = context.Adverts
+                .Where(x => x.IsDeleted == false && x.IsАrchived == false)
+                .AsQueryable();
 
             if (!string.IsNullOrEmpty(queryAdverts.Search))
             {
-                adverQuery = adverQuery.Where(x => x.Name.ToLower().Contains(queryAdverts.Search));
+                adverQuery = adverQuery
+                    .Where(x => x.Name
+                      .ToLower()
+                      .Contains(queryAdverts.Search));
             }
 
             if (!string.IsNullOrEmpty(queryAdverts.CategoryId))
@@ -105,7 +114,7 @@ namespace Realdeal.Service.Advert
                     Id = advertId,
                     Images = s.AdvertImages.Select(i => i.ImageUrl).ToList(),
                     Price = s.Price,
-                   
+
                 })
                 .FirstOrDefault();
 
@@ -251,7 +260,8 @@ namespace Realdeal.Service.Advert
                 Description = x.Description,
                 ImageURL = x.AdvertImages.FirstOrDefault().ImageUrl,
                 Price = x.Price
-            }).ToList();
+            })
+            .ToList();
 
         public int GetAllAdvertsCount()
         => context.Adverts

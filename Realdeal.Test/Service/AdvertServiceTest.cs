@@ -1,10 +1,8 @@
-﻿
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Moq;
 using Realdeal.Data;
 using Realdeal.Data.Models;
 using Realdeal.Models.Advert;
-using Realdeal.Models.User;
 using Realdeal.Service.Advert;
 using Realdeal.Service.CloudinaryCloud;
 using Realdeal.Service.Message;

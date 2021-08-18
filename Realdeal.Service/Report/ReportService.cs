@@ -18,7 +18,7 @@ namespace Realdeal.Service.Report
             this.context = context;
             this.userService = userService;
         }
-        public void Feedback(FeedbackFormModel feedbackModel)
+        public void CreateFeedback(FeedbackFormModel feedbackModel)
         {
             var feedback = new Feedback()
             {
